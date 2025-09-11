@@ -207,7 +207,7 @@
             document.getElementById('checkout-btn').addEventListener('click', function() {
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
                 if (cart.length > 0) {
-                    window.location.href = 'CHECKOUT.HTML';
+                    window.location.href = 'checkout.html';
                 } else {
                     alert('Your cart is empty!');
                 }
