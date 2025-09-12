@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#954C2E',  // Dark Brown
+                        primary: '#660B05',  // Dark Brown
                         secondary: '#4E1F00', // light brown
                            light: '#fef5f8',
                         dark: '#333333'
@@ -30,112 +30,12 @@
         }
     </script>
     <style type="text/tailwindcss">
-        @layer utilities {
-            .clip-ellipse {
-                clip-path: ellipse(75% 60% at 50% 35%);
-            }
-            .transform-perspective {
-                transform: perspective(1000px) rotateX(5deg);
-            }
-            .text-shadow {
-                text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-            }
-            .text-shadow-lg {
-                text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            }
-        }
-  :root {
-      /* Default text properties (fallback) */
-      --text-color: #ffffff;
-      --desc-color: #ffffff;
-      --text-position-x: center;
-      --text-position-y: center;
-      --text-offset-x: 0px;
-      --text-offset-y: 0px;
+   .scrollbar-hide::-webkit-scrollbar {
+      display: none;
     }
-
-    .square {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .square::before,
-    .square::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-size: 1200px 600px;
-      background-repeat: no-repeat;
-      will-change: transform, opacity;
-    }
-
-    .square::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .square::after {
-      opacity: 0;
-      transform: scale(1.1);
-    }
-
-    /* Minimal animation with smooth radial effect */
-    .square.animate::before {
-      animation: vanishOld 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .square.animate::after {
-      animation: appearNew 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes vanishOld {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.95); }
-    }
-
-    @keyframes appearNew {
-      0% { opacity: 0; transform: scale(1.1); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Text animation with elegant fade-in */
-    .fade-text {
-      animation: fadeInUp 0.8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Enhanced text shadow and customizable text styles */
-    .text-shadow-title {
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      color: var(--text-color);
-    }
-
-    .text-shadow-desc {
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      color: var(--desc-color);
-    }
-
-    /* Text overlay positioning */
-    #textOverlay {
-      justify-content: var(--text-position-y);
-      align-items: var(--text-position-x);
-      transform: translate(var(--text-offset-x), var(--text-offset-y));
-    }
-
-    /* Polished button styles */
-    button {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-      background-color: rgba(0, 0, 0, 0.8);
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
     </style>
 </head>
@@ -149,264 +49,367 @@
   <!-- Header will be loaded here -->
   <div id="header-container"></div>
 
-  <!-- Image Banner Carousel Section -->
-  <section class="relative h-[70vh] min-h-[600px] max-h-[1000px] bg-black overflow-hidden flex items-center justify-center">
-    <div class="relative w-full max-w-9xl overflow-hidden rounded-2xl shadow-lg">
-      
-      <!-- Image container -->
-      <div id="carousel" class="relative h-full">
-        <img id="mainImage" src="https://i.pinimg.com/1200x/e8/32/b7/e832b77fecd24e738c2fc95ea7a639b4.jpg" 
-             class="w-full h-full object-cover block rounded-2xl" alt="Slide">
+  <!-- Horizontal Scroll Section with Perfectly Sized Cards -->
+  <section class="px-2 py-2 max-w-9xl mx-auto relative">
+    <!-- Left Arrow -->
+    <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <!-- Right Arrow -->
+    <button id="nextBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
 
-        <!-- Text Overlay -->
-        <div id="textOverlay" class="absolute inset-0 flex flex-col z-20 px-6">
-          <h1 id="slideTitle" class="text-4xl md:text-5xl font-bold text-shadow-title mb-4 fade-text"></h1>
-          <p id="slideDesc" class="text-lg md:text-xl text-shadow-desc fade-text"></p>>
+    <div id="scrollContainer" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
+      
+
+
+            <!-- Card 4 - Muffins -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <img src="https://i.pinimg.com/originals/e3/8b/65/e38b65897bc08b931b873c26a8b49738.gif" 
+             alt="Fresh Muffins" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+              Cakes and Pastries
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+          Our signature cakes & delicate pastries
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+             ORDER NOW
+          </button>
         </div>
       </div>
 
-      <!-- Buttons -->
-      <button id="prev" 
-        class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full z-30 hover:bg-black/70">
-        &#10094;
-      </button>
-      <button id="next" 
-        class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full z-30 hover:bg-black/70">
-        &#10095;
-      </button>
+            <!-- Card 5 - Customise Your Own -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <video autoplay muted loop class="w-full h-full object-cover">
+          <source src="https://v1.pinimg.com/videos/mc/720p/11/89/87/118987931a0f57dd984c2926091d32cc.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+            Customise Your Own
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+            Flavours, colours, and themes the way you love them.
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+            START NOW
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Card 1 - Cakes and Pastries -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <video autoplay muted loop class="w-full h-full object-cover">
+          <source src="https://v1.pinimg.com/videos/mc/720p/4a/e2/0a/4ae20a4041f75ccaf21643adc75c8278.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+Croissant Coming Soon
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+            Buttery, flaky croissants are on their way!
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+            NOTIFY ME
+          </button>
+        </div>
+      </div>
+
+   
+
+      <!-- Card 3 - Cheesecakes -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <video autoplay muted loop class="w-full h-full object-cover">
+          <source src="https://v1.pinimg.com/videos/mc/720p/e4/4e/0b/e44e0b6567237c5c8fc0cdcb7e343896.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+            Cheesecakes
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+            Creamy, rich cheesecakes in various flavors
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+            EXPLORE
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 - Muffins -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <img src="https://i.pinimg.com/originals/8b/b7/38/8bb73899cd626a2ab1ac9c0a2ead2599.gif" 
+             alt="Fresh Muffins" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+            Muffins
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+            Freshly baked muffins with premium ingredients
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+            SHOP NOW
+          </button>
+        </div>
+      </div>
+
+
+
+      
+      <!-- Card 5 - Customise Your Own -->
+      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[500px] h-[250px] md:h-[350px] snap-start flex-shrink-0 rounded-xl">
+        <video autoplay muted loop class="w-full h-full object-cover">
+          <source src="https://v1.pinimg.com/videos/mc/720p/e6/2e/f7/e62ef72f55017d273496ff05f48aaca9.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
+             Bombolonis
+          </h2>
+          <p class="text-base md:text-lg mb-4 max-w-[80%]">
+            Italian filled donuts with delicious cream centers
+          </p>
+          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
+             TRY NOW
+          </button>
+        </div>
+      </div>
+
+
     </div>
   </section>
 
   <script>
-    const images = [
-      "https://i.pinimg.com/1200x/99/10/5f/99105fee5304ca146d378364c9e32421.jpg",
-      "https://i.pinimg.com/736x/8a/27/95/8a27958e74eafc8b22bde08b710b1362.jpg",
-      "https://i.pinimg.com/736x/42/72/80/42728065a1850acf4c6a9fb311739dc6.jpg"
-    ];
+    const scrollContainer = document.getElementById('scrollContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+    let autoScrollInterval;
+    let isUserInteracting = false;
+    let isScrolling = false;
 
-    const slideTexts = [
-      { 
-       
-        titleColor: "#ffffff", // White
-        descColor: "#e0e0e0", // Light gray
-        positionX: "center", // Options: left, center, right
-        positionY: "center", // Options: top, center, bottom
-        offsetX: "0px", // e.g., 20px or -20px
-        offsetY: "0px"  // e.g., 20px or -20px
-      },
-      { 
-        
-        titleColor: "#ffd700", // Gold
-        descColor: "#f0f0f0", // Off-white
-        positionX: "left",
-        positionY: "top",
-        offsetX: "20px",
-        offsetY: "20px"
-      },
-      { 
-        title: "Seasonal Specials", 
-        desc: "Try our limited edition treats available only this season",
-        titleColor: "#ff4500", // Orange-red
-        descColor: "#fffacd", // Lemon chiffon
-        positionX: "right",
-        positionY: "bottom",
-        offsetX: "-20px",
-        offsetY: "-20px"
+    // Get card width including gap
+    function getCardWidth() {
+      const firstCard = scrollContainer.children[0];
+      const cardWidth = firstCard.offsetWidth;
+      const gap = 24; // 6 * 4px (gap-6 in Tailwind)
+      return cardWidth + gap;
+    }
+
+    // Get current card index based on scroll position
+    function getCurrentCardIndex() {
+      const cardWidth = getCardWidth();
+      const scrollLeft = scrollContainer.scrollLeft;
+      return Math.round(scrollLeft / cardWidth);
+    }
+
+    // Scroll to specific card with perfect alignment
+    function scrollToCard(index) {
+      if (isScrolling) return;
+      
+      isScrolling = true;
+      const cardWidth = getCardWidth();
+      const scrollPosition = index * cardWidth;
+      
+      scrollContainer.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+
+      // Wait for scroll to complete
+      setTimeout(() => {
+        isScrolling = false;
+        currentIndex = index;
+      }, 600);
+    }
+
+    // Next card functionality
+    function nextCard() {
+      if (isScrolling) return;
+      
+      const totalCards = scrollContainer.children.length;
+      const nextIndex = (currentIndex + 1) % totalCards;
+      scrollToCard(nextIndex);
+    }
+
+    // Previous card functionality  
+    function prevCard() {
+      if (isScrolling) return;
+      
+      const totalCards = scrollContainer.children.length;
+      const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
+      scrollToCard(prevIndex);
+    }
+
+    // Start auto-scroll
+    function startAutoScroll() {
+      if (!isUserInteracting && !isScrolling) {
+        autoScrollInterval = setInterval(() => {
+          nextCard();
+        }, 6000); // Auto-scroll every 6 seconds
       }
-    ];
+    }
 
-    let index = 0;
-    const mainImage = document.getElementById("mainImage");
-    const carousel = document.getElementById("carousel");
-    const slideTitle = document.getElementById("slideTitle");
-    const slideDesc = document.getElementById("slideDesc");
-    const textOverlay = document.getElementById("textOverlay");
-    let autoSlide;
-
-    function createSquares(oldSrc, newSrc) {
-      const cols = 6; // Reduced for minimal effect
-      const rows = 4;
-      const total = cols * rows;
-
-      const container = document.createElement("div");
-      container.className = `absolute inset-0 grid grid-cols-${cols} grid-rows-${rows}`;
-      container.style.zIndex = 15;
-
-      // Calculate center of the grid
-      const centerX = cols / 2;
-      const centerY = rows / 2;
-
-      for (let i = 0; i < total; i++) {
-        const sq = document.createElement("div");
-        sq.className = "square animate";
-
-        let row = Math.floor(i / cols);
-        let col = i % cols;
-
-        // Calculate distance from center for radial delay
-        const distX = Math.abs(col - centerX);
-        const distY = Math.abs(row - centerY);
-        const distance = Math.sqrt(distX * distX + distY * distY);
-        const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
-        const delay = (distance / maxDistance * 0.4).toFixed(2) + "s";
-
-        sq.innerHTML = `
-          <style>
-            .square.animate:nth-child(${i+1})::before {
-              background-image: url(${oldSrc});
-              background-position: ${-col * (1200 / cols)}px ${-row * (600 / rows)}px;
-              animation-delay: ${delay};
-            }
-            .square.animate:nth-child(${i+1})::after {
-              background-image: url(${newSrc});
-              background-position: ${-col * (1200 / cols)}px ${-row * (600 / rows)}px;
-              animation-delay: ${delay};
-              transform: scale(1.1);
-            }
-          </style>
-        `;
-
-        container.appendChild(sq);
+    // Stop auto-scroll
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
       }
-
-      carousel.appendChild(container);
-      setTimeout(() => container.remove(), 1200);
     }
 
-    function showSlide(newIndex) {
-      const oldSrc = images[index];
-      index = (newIndex + images.length) % images.length;
-      const newSrc = images[index];
-
-      createSquares(oldSrc, newSrc);
-      mainImage.src = newSrc;
-
-      // Update text and styles
-      const slide = slideTexts[index];
-      slideTitle.textContent = slide.title;
-      slideDesc.textContent = slide.desc;
-
-      // Apply slide-specific styles
-      textOverlay.style.setProperty('--text-color', slide.titleColor);
-      textOverlay.style.setProperty('--desc-color', slide.descColor);
-      textOverlay.style.setProperty('--text-position-x', slide.positionX);
-      textOverlay.style.setProperty('--text-position-y', slide.positionY);
-      textOverlay.style.setProperty('--text-offset-x', slide.offsetX);
-      textOverlay.style.setProperty('--text-offset-y', slide.offsetY);
-
-      // Trigger text animation
-      slideTitle.classList.remove("fade-text");
-      slideDesc.classList.remove("fade-text");
-      void slideTitle.offsetWidth;
-      slideTitle.classList.add("fade-text");
-      slideDesc.classList.add("fade-text");
-
-      resetAutoSlide();
+    // Update current index when manually scrolling
+    function updateCurrentIndex() {
+      if (!isScrolling) {
+        currentIndex = getCurrentCardIndex();
+      }
     }
 
-    function startAutoSlide() {
-      autoSlide = setInterval(() => {
-        showSlide(index + 1);
-      }, 5000);
-    }
+    // Event listeners for arrows
+    nextBtn.addEventListener('click', () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+      nextCard();
+      
+      // Resume auto-scroll after 6 seconds of inactivity
+      setTimeout(() => {
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 6000);
+    });
 
-    function resetAutoSlide() {
-      clearInterval(autoSlide);
-      startAutoSlide();
-    }
+    prevBtn.addEventListener('click', () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+      prevCard();
+      
+      // Resume auto-scroll after 6 seconds of inactivity
+      setTimeout(() => {
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 6000);
+    });
 
-    document.getElementById("prev").onclick = () => showSlide(index - 1);
-    document.getElementById("next").onclick = () => showSlide(index + 1);
+    // Pause auto-scroll on hover
+    scrollContainer.addEventListener('mouseenter', () => {
+      stopAutoScroll();
+    });
 
-    // Initialize first slide styles
-    const initialSlide = slideTexts[0];
-    textOverlay.style.setProperty('--text-color', initialSlide.titleColor);
-    textOverlay.style.setProperty('--desc-color', initialSlide.descColor);
-    textOverlay.style.setProperty('--text-position-x', initialSlide.positionX);
-    textOverlay.style.setProperty('--text-position-y', initialSlide.positionY);
-    textOverlay.style.setProperty('--text-offset-x', initialSlide.offsetX);
-    textOverlay.style.setProperty('--text-offset-y', initialSlide.offsetY);
+    scrollContainer.addEventListener('mouseleave', () => {
+      if (!isUserInteracting) {
+        startAutoScroll();
+      }
+    });
 
-    startAutoSlide();
+    // Handle manual scrolling with debounce
+    let scrollTimeout;
+    scrollContainer.addEventListener('scroll', () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+      
+      // Clear existing timeout
+      clearTimeout(scrollTimeout);
+      
+      // Update current index after scroll ends
+      scrollTimeout = setTimeout(() => {
+        updateCurrentIndex();
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 1500);
+    });
+
+    // Initialize on page load
+    window.addEventListener('load', () => {
+      currentIndex = 0;
+      scrollToCard(0);
+      setTimeout(() => {
+        startAutoScroll();
+      }, 1000);
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        scrollToCard(currentIndex);
+      }, 100);
+    });
   </script>
 
 
-
-
-   <!-- Product Categories Section -->
-<section class="py-12 bg-white">
+<!-- Product Categories Section -->
+<section class="py-1 bg-white">
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Online Cake Delivery
-            </h2>
-            <p class="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
-                Baked Fresh, Delivered Fresh
-            </p>
-        </div>
-
         <!-- Category Grid -->
         <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-            <!-- All Cakes -->
-            <a href="cakes1.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+
+            <!-- PREMIUM CAKES -->
+            <a href="premium-cakes.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/chocolate 4.jpg" alt="All Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/premium.jpg" alt="Premium Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">All Cakes</h3>
+                    <h3 class="font-medium text-gray-900">PREMIUM CAKES</h3>
                 </div>
             </a>
 
-            <!-- Birthday Cakes -->
-            <a href="/products?category=birthday-cakes" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <!-- COLD COFFEE -->
+            <a href="cold-coffee.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/cheese cake.jpg" alt="Birthday Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/cold-coffee.jpg" alt="Cold Coffee" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">Birthday Cakes</h3>
+                    <h3 class="font-medium text-gray-900">COLD COFFEE</h3>
                 </div>
             </a>
 
-            <!-- Designer Cakes -->
-            <a href="/products?category=designer-cakes" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <!-- FRENCH FRIES -->
+            <a href="french-fries.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/BISCOFF.jpg" alt="Designer Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/french-fries.jpg" alt="French Fries" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">Designer Cakes</h3>
+                    <h3 class="font-medium text-gray-900">FRENCH FRIES</h3>
                 </div>
             </a>
 
-            <!-- Anniversary Cakes -->
-            <a href="/products?category=anniversary-cakes" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <!-- TEA TIMES CAKES -->
+            <a href="tea-time-cakes.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/MANGO.jpg" alt="Anniversary Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/tea-time.jpg" alt="Tea Time Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">Anniversary Cakes</h3>
+                    <h3 class="font-medium text-gray-900">TEA TIMES CAKES</h3>
                 </div>
             </a>
 
-            <!-- Mango Cakes -->
-            <a href="/products?category=mango-cakes" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <!-- CAKESICLES -->
+            <a href="cakesicles.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/HEART.jpg" alt="Mango Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/cakesicles.jpg" alt="Cakesicles" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">Mango Cakes</h3>
+                    <h3 class="font-medium text-gray-900">CAKESICLES</h3>
                 </div>
             </a>
 
-            <!-- Photo Cakes -->
-            <a href="/products?category=photo-cakes" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <!-- COOKIES -->
+            <a href="cookies.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/yellow cake.jpg" alt="Photo Cakes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="IMG/cookies.jpg" alt="Cookies" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-4 text-center">
-                    <h3 class="font-medium text-gray-900">Photo Cakes</h3>
+                    <h3 class="font-medium text-gray-900">COOKIES</h3>
                 </div>
             </a>
+
         </div>
     </div>
 </section>
