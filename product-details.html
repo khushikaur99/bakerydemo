@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#A53860',
-                        secondary: '#c2185b',
+                        primary: '#660B05', // Dark Brown
+                        secondary: '#4E1F00', // Light Brown
                         light: '#fef5f8',
                         dark: '#2d2d2d',
                         accent: '#f8e1e9'
@@ -22,7 +22,7 @@
                         'main-nav': '0 2px 15px rgba(0, 0, 0, 0.05)',
                         'dropdown': '0 15px 30px rgba(0,0,0,0.12)',
                         'card': '0 6px 12px rgba(0,0,0,0.08)',
-                        'btn': '0 4px 15px rgba(165, 56, 96, 0.3)',
+                        'btn': '0 4px 15px rgba(102, 11, 5, 0.3)', // Adjusted for primary color
                         'image': '0 8px 24px rgba(0,0,0,0.1)'
                     },
                     borderRadius: {
@@ -45,33 +45,33 @@
                 text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             }
             .floral-badge {
-                background: linear-gradient(135deg, #A53860 0%, #670D2F 100%);
+                background: linear-gradient(135deg, #660B05 0%, #4E1F00 100%);
             }
             .floral-btn {
-                background: linear-gradient(135deg, #A53860 0%, #670D2F 100%);
+                background: linear-gradient(135deg, #660B05 0%, #4E1F00 100%);
                 transition: all 0.3s ease;
             }
             .floral-btn:hover {
-                background: linear-gradient(135deg, #c2185b 0%, #7a1c3f 100%);
-                box-shadow: 0 6px 20px rgba(165, 56, 96, 0.4);
+                background: linear-gradient(135deg, #4E1F00 0%, #3A1700 100%);
+                box-shadow: 0 6px 20px rgba(102, 11, 5, 0.4);
             }
             .floweraura-btn {
-                background: #A53860;
+                background: #660B05;
                 transition: all 0.3s ease;
             }
             .floweraura-btn:hover {
-                background: #7a1c3f;
+                background: #4E1F00;
                 transform: translateY(-1px);
             }
             .floweraura-tab-active {
-                border-bottom: 3px solid #A53860;
-                color: #A53860;
+                border-bottom: 3px solid #660B05;
+                color: #660B05;
                 font-weight: 600;
             }
             .floweraura-option-active {
-                border: 2px solid #A53860;
-                background-color: #fff1f4;
-                color: #A53860;
+                border: 2px solid #660B05;
+                background-color: #f8e1e9;
+                color: #660B05;
             }
         }
 
@@ -80,7 +80,7 @@
         }
         .wishlist-btn.active svg {
             fill: currentColor;
-            color: #A53860;
+            color: #660B05;
         }
         .tab-content {
             transition: opacity 0.3s ease;
@@ -99,7 +99,7 @@
             box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
         }
         .floweraura-price {
-            color: #A53860;
+            color: #660B05;
         }
         .floweraura-delivery-badge {
             background-color: #f0fdf4;
@@ -107,13 +107,13 @@
             border: 1px solid #dcfce7;
         }
         .floweraura-highlight {
-            background-color: #fff1f4;
-            border-left: 4px solid #A53860;
+            background-color: #f8e1e9;
+            border-left: 4px solid #660B05;
         }
         
         .loading-spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #A53860;
+            border-top: 4px solid #660B05;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -153,7 +153,7 @@
         }
         .addon-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(165, 56, 96, 0.2);
+            box-shadow: 0 8px 16px rgba(102, 11, 5, 0.2);
         }
         .addon-card img {
             transition: transform 0.3s ease;
@@ -168,8 +168,8 @@
             line-height: 1.2;
         }
         .addon-card.floweraura-option-active {
-            box-shadow: 0 4px 12px rgba(165, 56, 96, 0.3);
-            border-color: #A53860;
+            box-shadow: 0 4px 12px rgba(102, 11, 5, 0.3);
+            border-color: #660B05;
         }
     </style>
 </head>
@@ -247,7 +247,7 @@
                         <!-- Badge and Share -->
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center">
-                                <span id="productBadge" class="px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white">
+                                <span id="productBadge" class="px-3 py-1 rounded-full text-xs font-medium mr-2 bg-primary text-white">
                                     Veg
                                 </span>
                                 <span id="orderCount" class="text-xs text-gray-500 font-medium"></span>
@@ -351,10 +351,10 @@
                         </div>
                         
                         <!-- Delivery Info -->
-                        <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <div class="mb-6 p-4 bg-accent rounded-lg border border-primary">
                             <div class="flex items-start">
-                                <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                    <i class="fas fa-truck text-blue-600 text-sm"></i>
+                                <div class="bg-primary p-2 rounded-full mr-3">
+                                    <i class="fas fa-truck text-white text-sm"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-medium text-gray-900 mb-1 text-sm">Delivery Information</h4>
@@ -367,12 +367,12 @@
                         <!-- Quantity Selector -->
                         <div class="mb-6">
                             <h3 class="text-lg font-semibold text-gray-900 mb-3">Quantity</h3>
-                            <div class="flex items-center w-32 bg-gray-100 rounded-lg overflow-hidden">
-                                <button id="decreaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-gray-200 transition-colors">
+                            <div class="flex items-center w-32 bg-accent rounded-lg overflow-hidden">
+                                <button id="decreaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-primary hover:text-white transition-colors">
                                     <i class="fas fa-minus"></i>
                                 </button>
                                 <span id="quantity" class="flex-1 py-2 text-gray-900 font-medium text-center">1</span>
-                                <button id="increaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-gray-200 transition-colors">
+                                <button id="increaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-primary hover:text-white transition-colors">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -433,11 +433,11 @@
                 <div id="ingredients" class="tab-content hidden">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Ingredients</h3>
                     <div id="ingredientsList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-                    <div id="allergenInfo" class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                        <h4 class="font-medium text-yellow-800 mb-2 flex items-center">
+                    <div id="allergenInfo" class="mt-6 p-4 bg-accent rounded-lg border border-primary">
+                        <h4 class="font-medium text-gray-900 mb-2 flex items-center">
                             <i class="fas fa-exclamation-triangle mr-2"></i>Allergen Information
                         </h4>
-                        <p id="allergenText" class="text-yellow-700 text-sm"></p>
+                        <p id="allergenText" class="text-gray-700 text-sm"></p>
                     </div>
                 </div>
                 
@@ -451,7 +451,7 @@
                     </div>
                     
                     <!-- Rating Summary -->
-                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                    <div class="bg-accent rounded-lg p-6 mb-6">
                         <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
                             <div class="text-center">
                                 <div class="text-4xl font-bold text-gray-900">4.9</div>
@@ -536,7 +536,7 @@
                         <div class="border border-gray-200 rounded-lg p-5">
                             <div class="flex items-center justify-between mb-3">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white text-sm font-medium">
                                         R
                                     </div>
                                     <div class="ml-3">
@@ -558,7 +558,7 @@
                         <div class="border border-gray-200 rounded-lg p-5">
                             <div class="flex items-center justify-between mb-3">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-primary text-sm font-medium">
                                         P
                                     </div>
                                     <div class="ml-3">
@@ -950,7 +950,7 @@
                 
                 // Set badge to Veg only
                 document.getElementById('productBadge').textContent = 'Veg';
-                document.getElementById('productBadge').className = 'px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white';
+                document.getElementById('productBadge').className = 'px-3 py-1 rounded-full text-xs font-medium mr-2 bg-primary text-white';
                 
                 document.getElementById('orderCount').textContent = product.orderCount ? `${product.orderCount} orders` : '';
                 document.getElementById('productTitle').textContent = product.name;
@@ -1022,7 +1022,7 @@
                 const sizesHtml = product.sizes.map(size => `
                     <button onclick="productManager.selectSize('${size.value}')" 
                             class="size-option p-4 border rounded-lg text-center text-sm transition-all
-                                   ${this.selectedSize?.value === size.value ? 'floweraura-option-active' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'}">
+                                   ${this.selectedSize?.value === size.value ? 'floweraura-option-active' : 'border-gray-200 hover:border-gray-300 hover:bg-accent'}">
                         <div class="font-semibold">${size.label}</div>
                         <div class="text-primary font-bold mt-1">₹${size.price}</div>
                     </button>
@@ -1065,7 +1065,7 @@
                 // Specifications
                 if (product.specifications) {
                     const specsHtml = Object.entries(product.specifications).map(([category, specs]) => `
-                        <div class="bg-gray-50 p-5 rounded-lg">
+                        <div class="bg-accent p-5 rounded-lg">
                             <h4 class="font-semibold text-gray-900 mb-3">${category}</h4>
                             ${Object.entries(specs).map(([key, value]) => `
                                 <div class="flex justify-between py-2 border-b border-gray-200 last:border-0">
@@ -1087,7 +1087,7 @@
                             <ul class="space-y-2">
                                 ${items.map(item => `
                                     <li class="flex items-center text-gray-700">
-                                        <i class="fas fa-leaf text-green-500 mr-2 text-sm"></i>
+                                        <i class="fas fa-leaf text-primary mr-2 text-sm"></i>
                                         ${item}
                                     </li>
                                 `).join('')}
@@ -1142,11 +1142,11 @@
                     }
                 });
                 
-                document.getElementById('increaseQty').addEventListener('click', () => {
+                 document.getElementById('increaseQty').addEventListener('click', () => {
                     this.currentQuantity++;
                     document.getElementById('quantity').textContent = this.currentQuantity;
                     const currentPrice = this.selectedSize ? this.selectedSize.price : this.currentProduct.price;
-                    this.updatePriceDisplay(currentPrice * this.currentQuantity);
+                    this.updatePriceDisplay(currentPrice);
                     this.renderMainInfo(); // Update original price and discount
                 });
                 
@@ -1216,13 +1216,7 @@
                     image: this.currentProduct.images[0]
                 };
                 
-                // Add add-ons to cart
-                const addonsArray = Array.from(this.selectedAddons).map(addon => ({
-                    item: addon,
-                    price: parseInt(document.querySelector(`[data-item="${addon}"]`).dataset.price),
-                    quantity: this.currentQuantity
-                }));
-
+                // Add to cart logic (localStorage, API call, etc.)
                 const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
                 const existingItemIndex = existingCart.findIndex(item => 
                     item.productId === cartItem.productId && item.size === cartItem.size
@@ -1234,32 +1228,16 @@
                     existingCart.push(cartItem);
                 }
                 
-                // Add or update add-ons
-                addonsArray.forEach(addon => {
-                    const existingAddonIndex = existingCart.findIndex(item => item.productId === `addon-${addon.item}`);
-                    if (existingAddonIndex > -1) {
-                        existingCart[existingAddonIndex].quantity += addon.quantity;
-                    } else {
-                        existingCart.push({
-                            productId: `addon-${addon.item}`,
-                            name: addon.item.charAt(0).toUpperCase() + addon.item.slice(1).replace(/([A-Z])/g, ' $1'),
-                            price: addon.price,
-                            quantity: addon.quantity,
-                            image: document.querySelector(`[data-item="${addon.item}"] img`).src
-                        });
-                    }
-                });
-                
                 localStorage.setItem('cart', JSON.stringify(existingCart));
                 
                 // Show success message
-                this.showNotification('Product and add-ons added to cart!', 'success');
+                this.showNotification('Product added to cart!', 'success');
             }
 
-            buyNow() {
-                this.addToCart();
-                window.location.href = 'checkout.html';
-            }
+           buyNow() {
+    this.addToCart();
+    window.location.href = 'checkout.html';
+}
 
             toggleWishlist() {
                 const wishlistBtn = document.getElementById('wishlistBtn');
@@ -1278,7 +1256,7 @@
                 }
             }
 
-              shareProduct() {
+            shareProduct() {
                 if (navigator.share) {
                     navigator.share({
                         title: this.currentProduct.name,
