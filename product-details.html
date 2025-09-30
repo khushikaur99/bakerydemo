@@ -144,6 +144,33 @@
                 max-height: 400px;
             }
         }
+        
+        /* Enhanced Add-on Card Styles */
+        .addon-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #fff 0%, #f8e1e9 100%);
+        }
+        .addon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(165, 56, 96, 0.2);
+        }
+        .addon-card img {
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+        }
+        .addon-card:hover img {
+            transform: scale(1.05);
+        }
+        .addon-card p:first-of-type {
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+        .addon-card.floweraura-option-active {
+            box-shadow: 0 4px 12px rgba(165, 56, 96, 0.3);
+            border-color: #A53860;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -220,8 +247,8 @@
                         <!-- Badge and Share -->
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center">
-                                <span id="productBadge" class="floral-badge text-white px-3 py-1 rounded-full text-xs font-medium mr-2">
-                                    <!-- Badge will be populated -->
+                                <span id="productBadge" class="px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white">
+                                    Veg
                                 </span>
                                 <span id="orderCount" class="text-xs text-gray-500 font-medium"></span>
                             </div>
@@ -266,6 +293,61 @@
                         <div id="sizeSelection" class="mb-6 hidden">
                             <h3 class="text-lg font-semibold text-gray-900 mb-3">Select Size</h3>
                             <div id="sizeOptions" class="grid grid-cols-3 gap-3"></div>
+                        </div>
+                        
+                        <!-- Party Add-ons Selection -->
+                        <div id="addonsSelection" class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Party Add-ons</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                <!-- Balloons Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="balloons" data-price="200">
+                                    <img src="https://m.media-amazon.com/images/I/718GYW6AbsL._UF894,1000_QL80_.jpg?width=200" alt="Foil, latex, number balloons" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Balloons (Foil, Latex, Number)</p>
+                                    <p class="text-primary font-bold text-lg">₹200</p>
+                                </div>
+                                
+                                <!-- Birthday Banner Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="banner" data-price="150">
+                                    <img src="https://m.media-amazon.com/images/I/71733njDQcL.jpg?width=200" alt="Happy Birthday banner" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Birthday Banner ("Happy Birthday")</p>
+                                    <p class="text-primary font-bold text-lg">₹150</p>
+                                </div>
+                                
+                                <!-- Candles Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="candles" data-price="100">
+                                    <img src="https://m.media-amazon.com/images/I/518QtDcb90L._UF1000,1000_QL80_.jpg?width=200" alt="Themed birthday candles" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Candles (Themed, Number)</p>
+                                    <p class="text-primary font-bold text-lg">₹100</p>
+                                </div>
+                                
+                                <!-- Cake Topper Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="topper" data-price="250">
+                                    <img src="https://i.etsystatic.com/9461176/r/il/f088a4/3296536351/il_570xN.3296536351_5x3n.jpg?width=200" alt="Fun cake topper" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Cake Topper (Fun Designs)</p>
+                                    <p class="text-primary font-bold text-lg">₹250</p>
+                                </div>
+                                
+                                <!-- Party Hats Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="hats" data-price="300">
+                                    <img src="https://m.media-amazon.com/images/I/71dbckuVLXL._UY1000_.jpg?width=200" alt="Party hats, crowns, tiaras" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Party Hats / Crowns / Tiaras</p>
+                                    <p class="text-primary font-bold text-lg">₹300</p>
+                                </div>
+                                
+                                <!-- Confetti Poppers Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="confetti" data-price="150">
+                                    <img src="https://m.media-amazon.com/images/I/81n5rMOb0nL.jpg?width=200" alt="Confetti poppers" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Confetti / Poppers</p>
+                                    <p class="text-primary font-bold text-lg">₹150</p>
+                                </div>
+                                
+                                <!-- Streamers & Ribbons Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="streamers" data-price="200">
+                                    <img src="https://m.media-amazon.com/images/I/81aa2vj1nkL.jpg?width=200" alt="Streamers and ribbons" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Streamers & Ribbons</p>
+                                    <p class="text-primary font-bold text-lg">₹200</p>
+                                </div>
+                            </div>
                         </div>
                         
                         <!-- Delivery Info -->
@@ -560,7 +642,7 @@
     </footer>
     
     <script>
-        // Product data structure - replace with API calls
+        // Product data structure - updated to remove non-veg ingredients
         const productDatabase = {
             '1': {
                 id: '1',
@@ -618,21 +700,20 @@
                     'Cake Base': [
                         'Premium dark chocolate',
                         'All-purpose flour',
-                        'Fresh eggs',
-                        'Unsalted butter',
+                        'Plant-based butter',
                         'Pure vanilla extract',
                         'Baking powder'
                     ],
                     'Truffle & Frosting': [
                         'Dark chocolate ganache',
-                        'Heavy cream',
-                        'Chocolate mousse',
+                        'Coconut cream',
+                        'Chocolate mousse (plant-based)',
                         'Cocoa powder',
                         'Chocolate shavings',
                         'Powdered sugar'
                     ]
                 },
-                allergens: 'Contains: Eggs, Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
                 deliveryTime: 'Today, In 3 hours',
                 deliveryOffer: 'Free Delivery on orders above ₹500',
                 discountInfo: {
@@ -662,9 +743,9 @@
                     'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
                 ],
                 highlights: [
-                    'Rich chocolate truffle cake with dark chocolate ganache',
-                    'Velvety chocolate mousse layers',
-                    'Topped with premium chocolate shavings',
+                    'Tropical pineapple flavor with creamy frosting',
+                    'Layered with fresh pineapple chunks',
+                    'Topped with toasted coconut flakes',
                     'Serves 8-10 people'
                 ],
                 sizes: [
@@ -673,15 +754,14 @@
                     { label: '1.5kg (12-15 People)', value: '1.5kg', price: 995 }
                 ],
                 description: `
-                    <p class="mb-4">Indulge in the ultimate chocolate experience with our Truffle Bliss Birthday Cake. This decadent masterpiece features multiple layers of rich chocolate sponge, each separated by a genero
-us helping of dark chocolate ganache and velvety chocolate mousse.</p>
-                    <p class="mb-4">Every bite delivers an explosion of chocolate flavors with the perfect balance of sweetness, making it ideal for true chocolate connoisseurs.</p>
+                    <p class="mb-4">Enjoy the tropical delight of our Pineapple Cake, featuring layers of moist vanilla sponge infused with fresh pineapple chunks and topped with a creamy frosting.</p>
+                    <p class="mb-4">The perfect balance of sweet and tangy, ideal for summer celebrations or any special occasion.</p>
                     <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
-                    <p class="mb-4">Perfect for birthdays, anniversaries, celebrations, or just when you need a chocolate fix.</p>
+                    <p class="mb-4">Perfect for birthdays, anniversaries, or tropical-themed parties.</p>
                 `,
                 specifications: {
                     'Cake Details': {
-                        'Flavor': 'Chocolate Truffle',
+                        'Flavor': 'Pineapple',
                         'Shape': 'Round',
                         'Weight': '1 kg (serves 8-10 people)',
                         'Layers': '3 layers'
@@ -695,23 +775,20 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 },
                 ingredients: {
                     'Cake Base': [
-                        'Premium dark chocolate',
                         'All-purpose flour',
-                        'Fresh eggs',
-                        'Unsalted butter',
+                        'Plant-based butter',
+                        'Pineapple puree',
                         'Pure vanilla extract',
                         'Baking powder'
                     ],
-                    'Truffle & Frosting': [
-                        'Dark chocolate ganache',
-                        'Heavy cream',
-                        'Chocolate mousse',
-                        'Cocoa powder',
-                        'Chocolate shavings',
+                    'Frosting & Topping': [
+                        'Vegan whipped cream',
+                        'Fresh pineapple chunks',
+                        'Toasted coconut flakes',
                         'Powdered sugar'
                     ]
                 },
-                allergens: 'Contains: Eggs, Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
                 deliveryTime: 'Today, In 3 hours',
                 deliveryOffer: 'Free Delivery on orders above ₹500',
                 discountInfo: {
@@ -741,9 +818,9 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
                 ],
                 highlights: [
-                    'Rich chocolate truffle cake with dark chocolate ganache',
-                    'Velvety chocolate mousse layers',
-                    'Topped with premium chocolate shavings',
+                    'Velvety red velvet layers with cream cheese frosting',
+                    'Infused with natural beetroot extract',
+                    'Topped with edible rose petals',
                     'Serves 8-10 people'
                 ],
                 sizes: [
@@ -752,14 +829,14 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     { label: '1.5kg (12-15 People)', value: '1.5kg', price: 995 }
                 ],
                 description: `
-                    <p class="mb-4">Indulge in the ultimate chocolate experience with our Truffle Bliss Birthday Cake. This decadent masterpiece features multiple layers of rich chocolate sponge, each separated by a generous helping of dark chocolate ganache and velvety chocolate mousse.</p>
-                    <p class="mb-4">Every bite delivers an explosion of chocolate flavors with the perfect balance of sweetness, making it ideal for true chocolate connoisseurs.</p>
+                    <p class="mb-4">Savor the elegance of our Decadent Red Velvet Cake, featuring soft red velvet layers made with natural beetroot extract and topped with creamy vegan frosting.</p>
+                    <p class="mb-4">A visually stunning and delicious treat perfect for any celebration.</p>
                     <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
-                    <p class="mb-4">Perfect for birthdays, anniversaries, celebrations, or just when you need a chocolate fix.</p>
+                    <p class="mb-4">Ideal for birthdays, weddings, or special gatherings.</p>
                 `,
                 specifications: {
                     'Cake Details': {
-                        'Flavor': 'Chocolate Truffle',
+                        'Flavor': 'Red Velvet',
                         'Shape': 'Round',
                         'Weight': '1 kg (serves 8-10 people)',
                         'Layers': '3 layers'
@@ -773,23 +850,19 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 },
                 ingredients: {
                     'Cake Base': [
-                        'Premium dark chocolate',
                         'All-purpose flour',
-                        'Fresh eggs',
-                        'Unsalted butter',
+                        'Plant-based butter',
+                        'Beetroot extract',
                         'Pure vanilla extract',
                         'Baking powder'
                     ],
-                    'Truffle & Frosting': [
-                        'Dark chocolate ganache',
-                        'Heavy cream',
-                        'Chocolate mousse',
-                        'Cocoa powder',
-                        'Chocolate shavings',
+                    'Frosting & Topping': [
+                        'Vegan cream cheese frosting',
+                        'Edible rose petals',
                         'Powdered sugar'
                     ]
                 },
-                allergens: 'Contains: Eggs, Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
                 deliveryTime: 'Today, In 3 hours',
                 deliveryOffer: 'Free Delivery on orders above ₹500',
                 discountInfo: {
@@ -806,6 +879,7 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 this.currentQuantity = 1;
                 this.selectedSize = null;
                 this.currentImageIndex = 0;
+                this.selectedAddons = new Set(); // Track selected add-ons
                 this.init();
             }
 
@@ -860,20 +934,23 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 this.renderMainInfo();
                 this.renderImages();
                 this.renderSizes();
+                this.renderAddons();
                 this.renderTabs();
                 this.renderRelatedProducts();
             }
 
             renderMainInfo() {
                 const product = this.currentProduct;
-                const currentPrice = this.selectedSize ? this.selectedSize.price : product.price;
+                const currentPrice = (this.selectedSize ? this.selectedSize.price : product.price) * this.currentQuantity;
+                let totalAddonsPrice = 0;
+                this.selectedAddons.forEach(addon => {
+                    totalAddonsPrice += parseInt(document.querySelector(`[data-item="${addon}"]`).dataset.price) * this.currentQuantity;
+                });
+                const totalPrice = currentPrice + totalAddonsPrice;
                 
-                // Update badge based on ingredients
-                const isNonVeg = Object.values(product.ingredients).some(ingredients => 
-                    ingredients.some(item => item.toLowerCase().includes('egg'))
-                );
-                document.getElementById('productBadge').textContent = isNonVeg ? 'Non-Veg' : 'Veg';
-                document.getElementById('productBadge').className = `px-3 py-1 rounded-full text-xs font-medium mr-2 ${isNonVeg ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`;
+                // Set badge to Veg only
+                document.getElementById('productBadge').textContent = 'Veg';
+                document.getElementById('productBadge').className = 'px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white';
                 
                 document.getElementById('orderCount').textContent = product.orderCount ? `${product.orderCount} orders` : '';
                 document.getElementById('productTitle').textContent = product.name;
@@ -884,15 +961,15 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 document.getElementById('reviewCount').textContent = `(${product.reviewCount} reviews)`;
                 
                 // Price
-                this.updatePriceDisplay(currentPrice);
+                this.updatePriceDisplay(totalPrice);
                 
-                if (product.originalPrice && product.originalPrice > currentPrice) {
+                if (product.originalPrice && product.originalPrice > (this.selectedSize ? this.selectedSize.price : product.price)) {
                     document.getElementById('originalPrice').textContent = `₹${product.originalPrice * this.currentQuantity}`;
                     document.getElementById('originalPrice').classList.remove('hidden');
                     
-                    const discount = Math.round(((product.originalPrice - currentPrice) / product.originalPrice) * 100);
+                    const discount = Math.round(((product.originalPrice - (this.selectedSize ? this.selectedSize.price : product.price)) / product.originalPrice) * 100);
                     document.getElementById('discountInfo').innerHTML = `
-                        <i class="fas fa-tag mr-1"></i>Save ${discount}% (₹${(product.originalPrice - currentPrice) * this.currentQuantity})
+                        <i class="fas fa-tag mr-1"></i>Save ${discount}% (₹${(product.originalPrice - (this.selectedSize ? this.selectedSize.price : product.price)) * this.currentQuantity})
                     `;
                 }
                 
@@ -909,8 +986,7 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 document.getElementById('deliveryOffer').textContent = product.deliveryOffer || 'Free delivery available';
             }
 
-            updatePriceDisplay(basePrice) {
-                const totalPrice = basePrice * this.currentQuantity;
+            updatePriceDisplay(totalPrice) {
                 document.getElementById('productPrice').textContent = `₹${totalPrice}`;
                 document.getElementById('mobilePrice').textContent = `₹${totalPrice}`;
             }
@@ -953,6 +1029,30 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                 `).join('');
                 
                 document.getElementById('sizeOptions').innerHTML = sizesHtml;
+            }
+
+            renderAddons() {
+                const addons = document.querySelectorAll('.addon-card');
+                addons.forEach(addon => {
+                    addon.addEventListener('click', () => this.toggleAddon(addon.dataset.item));
+                    if (this.selectedAddons.has(addon.dataset.item)) {
+                        addon.classList.add('floweraura-option-active');
+                        addon.classList.remove('border-gray-200', 'hover:border-primary');
+                    } else {
+                        addon.classList.remove('floweraura-option-active');
+                        addon.classList.add('border-gray-200', 'hover:border-primary');
+                    }
+                });
+            }
+
+            toggleAddon(itemId) {
+                if (this.selectedAddons.has(itemId)) {
+                    this.selectedAddons.delete(itemId);
+                } else {
+                    this.selectedAddons.add(itemId);
+                }
+                this.renderAddons();
+                this.renderMainInfo(); // Recalculate total price
             }
 
             renderTabs() {
@@ -1037,7 +1137,7 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                         this.currentQuantity--;
                         document.getElementById('quantity').textContent = this.currentQuantity;
                         const currentPrice = this.selectedSize ? this.selectedSize.price : this.currentProduct.price;
-                        this.updatePriceDisplay(currentPrice);
+                        this.updatePriceDisplay(currentPrice * this.currentQuantity);
                         this.renderMainInfo(); // Update original price and discount
                     }
                 });
@@ -1046,7 +1146,7 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     this.currentQuantity++;
                     document.getElementById('quantity').textContent = this.currentQuantity;
                     const currentPrice = this.selectedSize ? this.selectedSize.price : this.currentProduct.price;
-                    this.updatePriceDisplay(currentPrice);
+                    this.updatePriceDisplay(currentPrice * this.currentQuantity);
                     this.renderMainInfo(); // Update original price and discount
                 });
                 
@@ -1116,7 +1216,13 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     image: this.currentProduct.images[0]
                 };
                 
-                // Add to cart logic (localStorage, API call, etc.)
+                // Add add-ons to cart
+                const addonsArray = Array.from(this.selectedAddons).map(addon => ({
+                    item: addon,
+                    price: parseInt(document.querySelector(`[data-item="${addon}"]`).dataset.price),
+                    quantity: this.currentQuantity
+                }));
+
                 const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
                 const existingItemIndex = existingCart.findIndex(item => 
                     item.productId === cartItem.productId && item.size === cartItem.size
@@ -1128,16 +1234,32 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     existingCart.push(cartItem);
                 }
                 
+                // Add or update add-ons
+                addonsArray.forEach(addon => {
+                    const existingAddonIndex = existingCart.findIndex(item => item.productId === `addon-${addon.item}`);
+                    if (existingAddonIndex > -1) {
+                        existingCart[existingAddonIndex].quantity += addon.quantity;
+                    } else {
+                        existingCart.push({
+                            productId: `addon-${addon.item}`,
+                            name: addon.item.charAt(0).toUpperCase() + addon.item.slice(1).replace(/([A-Z])/g, ' $1'),
+                            price: addon.price,
+                            quantity: addon.quantity,
+                            image: document.querySelector(`[data-item="${addon.item}"] img`).src
+                        });
+                    }
+                });
+                
                 localStorage.setItem('cart', JSON.stringify(existingCart));
                 
                 // Show success message
-                this.showNotification('Product added to cart!', 'success');
+                this.showNotification('Product and add-ons added to cart!', 'success');
             }
 
-           buyNow() {
-    this.addToCart();
-    window.location.href = 'checkout.html';
-}
+            buyNow() {
+                this.addToCart();
+                window.location.href = 'checkout.html';
+            }
 
             toggleWishlist() {
                 const wishlistBtn = document.getElementById('wishlistBtn');
@@ -1155,8 +1277,7 @@ us helping of dark chocolate ganache and velvety chocolate mousse.</p>
                     this.showNotification('Removed from wishlist!', 'info');
                 }
             }
-
-            shareProduct() {
+    shareProduct() {
                 if (navigator.share) {
                     navigator.share({
                         title: this.currentProduct.name,
