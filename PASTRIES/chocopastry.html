@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Bakery Delights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                          primary: '#954C2E',
+            secondary: '#4E1F00',
+            'maroon-800': '#4E1F00'
+                    },
+                    boxShadow: {
+                        'nav': '0 2px 5px rgba(0, 0, 0, 0.05)',
+                        'main-nav': '0 2px 15px rgba(0, 0, 0, 0.05)',
+                        'dropdown': '0 15px 30px rgba(0,0,0,0.12)',
+                        'card': '0 4px 10px rgba(0,0,0,0.1)',
+                        'btn': '0 4px 15px rgba(233, 30, 99, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .clip-ellipse {
+                clip-path: ellipse(75% 60% at 50% 35%);
+            }
+            .transform-perspective {
+                transform: perspective(1000px) rotateX(5deg);
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            }
+            .text-shadow-lg {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            }
+        }
+        .image-carousel {
+            scroll-behavior: smooth;
+        }
+        .dot-indicator {
+            transition: all 0.3s ease;
+        }
+        .dot-indicator.active {
+            background-color: #3B82F6;
+        }
+        .wishlist-btn {
+            transition: all 0.3s ease;
+        }
+        .wishlist-btn:hover {
+            transform: scale(1.1);
+        }
+        .wishlist-btn.active {
+            color: #EF4444;
+        }
+        .star-rating {
+            display: flex;
+            align-items: center;
+        }
+       .dot-indicator.active {
+            background-color: #3B82F6; /* blue-500 */
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+        .wishlist-btn.active svg {
+            fill: currentColor;
+            color: #EF4444; /* red-500 */
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+ 
+</head>
+<body class="bg-white">
+ <div id="header-container"></div>
+
+ 
+
+
+<!-- Image-Only Slideshow with Rounded Corners -->
+<section class="relative w-full overflow-hidden group py-4">
+  <!-- Slides Container -->
+  <div id="imageSlideshow" class="flex transition-transform duration-700 ease-in-out ">
+    <!-- Slide 1 -->
+    <div class="w-full flex-shrink-0 " >
+      <img 
+        src="../IMG/anniversary-cake-homepage-fa-desktop.avif" 
+        alt="Anniversary Cake"
+        class="w-full h-[400px] sm:h-[450px] md:h-[370px] object-cover rounded-[16px]"
+      >
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="w-full flex-shrink-0">
+      <img 
+        src="../IMG/birthday-landingpage-fa-desktop.avif" 
+        alt="Birthday Cake"
+               class="w-full h-[400px] sm:h-[450px] md:h-[370px] object-cover rounded-[16px]"
+
+      >
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="w-full flex-shrink-0">
+      <img 
+        src="../IMG/cake-birthday-homepage-fa-desktop_1.avif" 
+        alt="Chocolate Cake"
+               class="w-full h-[400px] sm:h-[450px] md:h-[370px] object-cover rounded-[16px]"
+
+      >
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="w-full flex-shrink-0">
+      <img 
+        src="../IMG/chocolate-cake-landingpage-fa-desktop.avif" 
+        alt="Mango Cake"
+               class="w-full h-[400px] sm:h-[450px] md:h-[370px] object-cover rounded-[16px]"
+
+      >
+    </div>
+  </div>
+  
+  <!-- Navigation Dots (hidden until hover) -->
+  <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+    <button class="image-slide-dot w-2 h-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition" data-index="0"></button>
+    <button class="image-slide-dot w-2 h-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition" data-index="1"></button>
+    <button class="image-slide-dot w-2 h-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition" data-index="2"></button>
+    <button class="image-slide-dot w-2 h-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition" data-index="3"></button>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slideshow = document.getElementById('imageSlideshow');
+    const slides = document.querySelectorAll('#imageSlideshow > div');
+    const dots = document.querySelectorAll('.image-slide-dot');
+    
+    let currentIndex = 0;
+    const slideCount = slides.length;
+    
+    function updateSlideshow() {
+      slideshow.style.transform = `translateX(-${currentIndex * 100}%)`;
+      
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('bg-opacity-100', index === currentIndex);
+        dot.classList.toggle('w-3', index === currentIndex);
+        dot.classList.toggle('h-3', index === currentIndex);
+      });
+    }
+    
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slideCount;
+      updateSlideshow();
+    }
+    
+    // Auto slide every 4 seconds
+    setInterval(nextSlide, 4000);
+    
+    // Dot navigation
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        currentIndex = parseInt(dot.getAttribute('data-index'));
+        updateSlideshow();
+      });
+    });
+    
+    // Initialize
+    updateSlideshow();
+  });
+</script>
+
+  <!-- Bestsellers Section -->
+  <div class="container mx-auto px-4 py-12">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-900">Bestsellers</h2>
+      <div class="relative">
+        <select id="sortSelect" class="appearance-none bg-white border border-gray-300 rounded-lg px-6 py-2 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <option value="">Sort by</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="popular">Most Popular</option>
+          <option value="newest">Newest</option>
+        </select>
+        <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Product 1 - ID 4 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group" data-id="4">
+        <div class="relative">
+          <span class="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">Best Seller</span>
+          <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md transition-colors z-10">
+            <i class="far fa-heart text-red-500"></i>
+          </button>
+          <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=300&fit=crop" 
+               alt="Death by Chocolate Pastry" 
+               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Death by Chocolate Pastry</h3>
+          <p class="text-2xl font-bold text-gray-900 mb-3">₹ 395</p>
+          <div class="flex items-center mb-3">
+            <span class="bg-green-600 text-white px-2 py-1 rounded text-sm font-semibold flex items-center">
+              <i class="fas fa-star text-xs mr-1"></i> 4.9
+            </span>
+            <span class="text-gray-500 text-sm ml-2">(245 Reviews)</span>
+          </div>
+          <p class="text-gray-600 text-sm flex items-center">
+            <i class="far fa-clock mr-1"></i> Earliest Delivery: In 3 hours
+          </p>
+        </div>
+      </div>
+
+      <!-- Product 2 - ID 5 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group" data-id="5">
+        <div class="relative">
+          <span class="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">Best Seller</span>
+          <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md transition-colors z-10">
+            <i class="far fa-heart text-red-500"></i>
+          </button>
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&h=300&fit=crop" 
+               alt="Chocolate Truffle Pastry" 
+               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Chocolate Truffle Pastry</h3>
+          <p class="text-2xl font-bold text-gray-900 mb-3">₹ 345</p>
+          <div class="flex items-center mb-3">
+            <span class="bg-green-600 text-white px-2 py-1 rounded text-sm font-semibold flex items-center">
+              <i class="fas fa-star text-xs mr-1"></i> 4.8
+            </span>
+            <span class="text-gray-500 text-sm ml-2">(198 Reviews)</span>
+          </div>
+          <p class="text-gray-600 text-sm flex items-center">
+            <i class="far fa-clock mr-1"></i> Earliest Delivery: In 3 hours
+          </p>
+        </div>
+      </div>
+
+      <!-- Product 3 - ID 6 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group" data-id="6">
+        <div class="relative">
+          <span class="absolute top-3 left-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">30-Min Delivery</span>
+          <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md transition-colors z-10">
+            <i class="far fa-heart text-red-500"></i>
+          </button>
+          <img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400&h=300&fit=crop" 
+               alt="Chocolate Fudge Pastry" 
+               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Chocolate Fudge Pastry</h3>
+          <p class="text-2xl font-bold text-gray-900 mb-3">₹ 425</p>
+          <div class="flex items-center mb-3">
+            <span class="bg-green-600 text-white px-2 py-1 rounded text-sm font-semibold flex items-center">
+              <i class="fas fa-star text-xs mr-1"></i> 4.7
+            </span>
+            <span class="text-gray-500 text-sm ml-2">(176 Reviews)</span>
+          </div>
+          <p class="text-gray-600 text-sm flex items-center">
+            <i class="far fa-clock mr-1"></i> Earliest Delivery: In 3 hours
+          </p>
+        </div>
+      </div>
+
+      <!-- Product 4 - ID 7 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group" data-id="7">
+        <div class="relative">
+          <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md transition-colors z-10">
+            <i class="far fa-heart text-red-500"></i>
+          </button>
+          <img src="https://images.unsplash.com/photo-1586985289906-406988974504?w=400&h=300&fit=crop" 
+               alt="Dark Chocolate Mousse Pastry" 
+               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Dark Chocolate Mousse</h3>
+          <p class="text-2xl font-bold text-gray-900 mb-3">₹ 475</p>
+          <div class="flex items-center mb-3">
+            <span class="bg-green-600 text-white px-2 py-1 rounded text-sm font-semibold flex items-center">
+              <i class="fas fa-star text-xs mr-1"></i> 4.9
+            </span>
+            <span class="text-gray-500 text-sm ml-2">(215 Reviews)</span>
+          </div>
+          <p class="text-gray-600 text-sm flex items-center">
+            <i class="far fa-clock mr-1"></i> Earliest Delivery: In 3 hours
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sortSelect = document.getElementById("sortSelect");
+    const grid = document.getElementById("productGrid");
+    let products = Array.from(grid.children);
+
+    // Extract data
+    function getProductData(card) {
+      return {
+        element: card,
+        id: card.dataset.id,
+        price: parseInt(card.querySelector("p.text-2xl").textContent.replace(/[^0-9]/g, "")),
+        reviews: parseInt(card.querySelector("span.text-gray-500").textContent.replace(/[^0-9]/g, "")) || 0,
+        name: card.querySelector("h3").textContent.trim()
+      };
+    }
+
+    // Sorting logic
+    sortSelect.addEventListener("change", function () {
+      let sorted;
+
+      if (this.value === "low-high") {
+        sorted = products.sort((a, b) => getProductData(a).price - getProductData(b).price);
+      } else if (this.value === "high-low") {
+        sorted = products.sort((a, b) => getProductData(b).price - getProductData(a).price);
+      } else if (this.value === "popular") {
+        sorted = products.sort((a, b) => getProductData(b).reviews - getProductData(a).reviews);
+      } else if (this.value === "newest") {
+        sorted = products.sort(() => Math.random() - 0.5); // shuffle demo
+      } else {
+        sorted = products;
+      }
+
+      grid.innerHTML = "";
+      sorted.forEach(p => grid.appendChild(p));
+    });
+
+    // Wishlist toggle
+    grid.addEventListener("click", function (e) {
+      if (e.target.closest("button")) {
+        const icon = e.target.closest("button").querySelector("i");
+        icon.classList.toggle("fas"); // solid heart
+        icon.classList.toggle("far"); // outline heart
+        e.target.closest("button").classList.toggle("bg-red-500");
+        icon.classList.toggle("text-white");
+        icon.classList.toggle("text-red-500");
+      }
+    });
+
+    // Product click to details page
+    const productCards = document.querySelectorAll('#productGrid > div');
+    productCards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('button')) return; // Prevent navigation on heart click
+        const id = getProductData(card).id;
+        const url = `productdetails1.html?id=${id}`;
+        window.location.href = url;
+      });
+    });
+
+    // Re-attach click listeners after sorting (since sorting recreates the grid)
+    sortSelect.addEventListener('change', function() {
+      setTimeout(() => {
+        const updatedCards = document.querySelectorAll('#productGrid > div');
+        updatedCards.forEach(card => {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('button')) return;
+            const id = getProductData(card).id;
+            const url = `productdetails1.html?id=${id}`;
+            window.location.href = url;
+          });
+        });
+      }, 0);
+    });
+  });
+  </script>
+
+  <script>
+    // Load header content and initialize functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load header HTML
+        fetch('Mainheader.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+                
+                // Initialize all header functionality
+                initializeHeader();
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        function initializeHeader() {
+            // ==================== DELIVERY LOCATION ====================
+            const puneDeliveryAreas = [
+                'Koregaon Park', 'Baner', 'Wakad', 'Hinjewadi', 'FC Road', 'Viman Nagar',
+                'Kothrud', 'Aundh', 'Shivaji Nagar', 'Camp', 'Deccan', 'Karve Nagar',
+                'Pune Station', 'Swargate', 'Katraj', 'Kondhwa', 'Bibwewadi', 'Fursungi',
+                'Magarpatta', 'Hadapsar', 'Kharadi', 'Wagholi', 'Chinchwad', 'Pimpri',
+                'Warje', 'Bavdhan', 'Pashan', 'Sus', 'Balewadi', 'Nigdi', 'Akurdi',
+                'Ravet', 'Tathawade', 'Vishrantwadi', 'Yerawada', 'Kalyani Nagar',
+                'Nagar Road', 'Dhanori', 'Lohegaon', 'Mundwa', 'Ghorpadi', 'Wanowrie',
+                'Fatima Nagar', 'Salisbury Park', 'Parvati', 'Dhankawadi', 'Balaji Nagar',
+                'Bhavani Peth', 'Budhwar Peth', 'Kasba Peth', 'Rasta Peth', 'Sadashiv Peth'
+            ];
+
+            const punePincodes = [
+                '411001', '411002', '411003', '411004', '411005', '411006', '411007', '411008', 
+                '411009', '411010', '411011', '411012', '411013', '411014', '411015', '411016'
+            ];
+
+            // Get all elements
+            const modal = document.getElementById('deliveryModal');
+            const deliveryLocationBtn = document.getElementById('deliveryLocationBtn');
+            const mobileDeliveryBtn = document.getElementById('mobileDeliveryBtn');
+            const closeModal = document.getElementById('closeModal');
+            const locationInput = document.getElementById('locationInput');
+            const confirmLocationBtn = document.getElementById('confirmLocation');
+            const useCurrentLocationBtn = document.getElementById('useCurrentLocation');
+            const locationOptions = document.querySelectorAll('.location-option');
+            const selectedLocationSpan = document.getElementById('selectedLocation');
+            const mobileSelectedLocationSpan = document.getElementById('mobileSelectedLocation');
+            const locationError = document.getElementById('locationError');
+            const locationSuccess = document.getElementById('locationSuccess');
+
+            let selectedLocation = '';
+            let isValidLocation = false;
+
+            // Delivery location functions
+            function openModal() {
+                if (modal) modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModalFunc() {
+                if (modal) modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+
+            function validateLocation(location) {
+                const isAreaValid = puneDeliveryAreas.some(area => 
+                    area.toLowerCase().includes(location.toLowerCase())
+                );
+                const isPincodeValid = punePincodes.includes(location);
+                return isAreaValid || isPincodeValid;
+            }
+
+            function updateLocationUI(isValid, location = '') {
+                if (isValid) {
+                    if (locationError) locationError.classList.add('hidden');
+                    if (locationSuccess) {
+                        locationSuccess.classList.remove('hidden');
+                        locationSuccess.textContent = `Great! We deliver to ${location}.`;
+                    }
+                    if (confirmLocationBtn) confirmLocationBtn.disabled = false;
+                    isValidLocation = true;
+                    selectedLocation = location;
+                } else {
+                    if (locationError) {
+                        locationError.classList.remove('hidden');
+                        locationError.textContent = location ? "We don't deliver to this location yet." : "Please enter a valid location.";
+                    }
+                    if (locationSuccess) locationSuccess.classList.add('hidden');
+                    if (confirmLocationBtn) confirmLocationBtn.disabled = true;
+                    isValidLocation = false;
+                }
+            }
+
+            function saveLocation(location) {
+                localStorage.setItem('deliveryLocation', location);
+            }
+
+            // Event listeners
+            if (deliveryLocationBtn) {
+                deliveryLocationBtn.addEventListener('click', openModal);
+            }
+
+            if (mobileDeliveryBtn) {
+                mobileDeliveryBtn.addEventListener('click', openModal);
+            }
+
+            if (closeModal) {
+                closeModal.addEventListener('click', closeModalFunc);
+            }
+
+            if (locationInput) {
+                locationInput.addEventListener('input', function(e) {
+                    const location = e.target.value.trim();
+                    if (location.length > 2) {
+                        updateLocationUI(validateLocation(location), location);
+                    } else {
+                        updateLocationUI(false);
+                    }
+                });
+            }
+
+            if (locationOptions) {
+                locationOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const location = this.textContent.trim().replace(/^.*?\s/, '').trim();
+                        if (locationInput) locationInput.value = location;
+                        updateLocationUI(true, location);
+                    });
+                });
+            }
+
+            if (confirmLocationBtn) {
+                confirmLocationBtn.addEventListener('click', function() {
+                    if (isValidLocation && selectedLocation) {
+                        if (selectedLocationSpan) selectedLocationSpan.textContent = selectedLocation;
+                        if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = selectedLocation;
+                        saveLocation(selectedLocation);
+                        closeModalFunc();
+                    }
+                });
+            }
+
+            if (useCurrentLocationBtn) {
+                useCurrentLocationBtn.addEventListener('click', function() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function() {
+                                const demoLocation = "Koregaon Park";
+                                if (locationInput) locationInput.value = demoLocation;
+                                updateLocationUI(true, demoLocation);
+                            },
+                            function(error) {
+                                if (locationError) {
+                                    locationError.classList.remove('hidden');
+                                    locationError.textContent = "Unable to get your location. Please enter manually.";
+                                }
+                                console.error("Geolocation error:", error);
+                            }
+                        );
+                    } else if (locationError) {
+                        locationError.classList.remove('hidden');
+                        locationError.textContent = "Geolocation is not supported by your browser.";
+                    }
+                });
+            }
+
+            // ==================== MOBILE MENU ====================
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // ==================== SEARCH FUNCTIONALITY ====================
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const suggestions = document.getElementById('suggestions');
+
+            if (searchInput && suggestions) {
+                const searchData = [
+                    // Cake Types
+                    'Chocolate Cake', 'Vanilla Cake', 'Cheesecake', 'Red Velvet Cake', 'Fruit Cake',
+                    'Mango Cake', 'Butterscotch Cake', 'Black Forest Cake', 'Pineapple Cake',
+                    'Strawberry Cake', 'Photo Cake', 'Bento Cake', 'Heart Shaped Cake',
+                    'Pull Me Up Cake', 'Pinata Cake', 'Bomb Cake', 'Fondant Cake', 'Multi Tier Cake',
+                    
+                    // Cake Occasions
+                    'Birthday Cake', 'Anniversary Cake', 'Wedding Cake', 'Graduation Cake',
+                    'Baby Shower Cake', 'Engagement Cake', 'Retirement Cake', 'Farewell Cake',
+                    
+                    // Kids Cakes
+                    'Barbie Cake', 'Car Theme Cake', 'Cartoon Cake', 'Spiderman Cake',
+                    'Superhero Cake', 'Cricket Cake',
+                    
+                    // Pastry Types
+                    'Cupcake', 'Muffin', 'Donut', 'Macaron', 'Croissant', 'Danish Pastry',
+                    
+                    // Pastry Flavors
+                    'Chocolate Pastry', 'Vanilla Pastry', 'Strawberry Pastry', 'Blueberry Pastry',
+                    'Lemon Pastry', 'Matcha Pastry',
+                    
+                    // Specialty Pastries
+                    'Gluten-Free Pastry', 'Sugar-Free Pastry', 'Vegan Pastry', 'Keto-Friendly Pastry',
+                    'Seasonal Special Pastry', 'Mini Pastry Box', 'Eggless Cake',
+                    
+                 
+                ];
+
+                // Show search suggestions
+                function showSuggestions(matches) {
+                    suggestions.innerHTML = '';
+                    
+                    if (matches.length === 0) {
+                        suggestions.classList.add('hidden');
+                        return;
+                    }
+                    
+                    matches.forEach(match => {
+                        const li = document.createElement('li');
+                        li.className = 'px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors text-sm';
+                        li.textContent = match;
+                        
+                        li.addEventListener('click', function() {
+                            searchInput.value = match;
+                            suggestions.classList.add('hidden');
+                            performSearch(match);
+                        });
+                        
+                        suggestions.appendChild(li);
+                    });
+                    
+                    suggestions.classList.remove('hidden');
+                }
+
+                // Get matching suggestions
+                function getSuggestions(input) {
+                    if (input.length < 2) return [];
+                    
+                    const inputLower = input.toLowerCase();
+                    return searchData.filter(item => 
+                        item.toLowerCase().includes(inputLower)
+                    ).slice(0, 8); // Limit to 8 suggestions
+                }
+
+                // Perform search (redirect to search page)
+                function performSearch(query) {
+                    // In a real implementation, this would redirect to a search results page
+                    console.log('Searching for:', query);
+                    // window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+                }
+
+                // Event listeners for search
+                searchInput.addEventListener('input', function(e) {
+                    const input = e.target.value.trim();
+                    const matches = getSuggestions(input);
+                    showSuggestions(matches);
+                });
+                
+                searchInput.addEventListener('focus', function() {
+                    if (searchInput.value.trim().length > 1) {
+                        const matches = getSuggestions(searchInput.value.trim());
+                        showSuggestions(matches);
+                    }
+                });
+                
+                searchInput.addEventListener('blur', function() {
+                    // Hide suggestions after a small delay to allow click events to register
+                    setTimeout(() => {
+                        suggestions.classList.add('hidden');
+                    }, 200);
+                });
+
+                searchButton.addEventListener('click', function() {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        performSearch(query);
+                    }
+                });
+
+                // Handle Enter key press
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const query = searchInput.value.trim();
+                        if (query) {
+                            performSearch(query);
+                        }
+                    }
+                });
+
+                // Close suggestions when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!searchInput.contains(e.target)) {
+                        suggestions.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Load saved location
+            const savedLocation = localStorage.getItem('deliveryLocation');
+            if (savedLocation) {
+                if (selectedLocationSpan) selectedLocationSpan.textContent = savedLocation;
+                if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = savedLocation;
+                selectedLocation = savedLocation;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

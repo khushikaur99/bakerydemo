@@ -1,0 +1,1994 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Product Detail | Artisan Bakery Delights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A53860',
+                        secondary: '#c2185b',
+                        light: '#fef5f8',
+                        dark: '#2d2d2d',
+                        accent: '#f8e1e9'
+                    },
+                    boxShadow: {
+                        'nav': '0 2px 5px rgba(0, 0, 0, 0.05)',
+                        'main-nav': '0 2px 15px rgba(0, 0, 0, 0.05)',
+                        'dropdown': '0 15px 30px rgba(0,0,0,0.12)',
+                        'card': '0 6px 12px rgba(0,0,0,0.08)',
+                        'btn': '0 4px 15px rgba(165, 56, 96, 0.3)',
+                        'image': '0 8px 24px rgba(0,0,0,0.1)'
+                    },
+                    borderRadius: {
+                        'xl': '1rem'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .clip-ellipse {
+                clip-path: ellipse(75% 60% at 50% 35%);
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            }
+            .floral-badge {
+                background: linear-gradient(135deg, #A53860 0%, #670D2F 100%);
+            }
+            .floral-btn {
+                background: linear-gradient(135deg, #A53860 0%, #670D2F 100%);
+                transition: all 0.3s ease;
+            }
+            .floral-btn:hover {
+                background: linear-gradient(135deg, #c2185b 0%, #7a1c3f 100%);
+                box-shadow: 0 6px 20px rgba(165, 56, 96, 0.4);
+            }
+            .floweraura-btn {
+                background: #A53860;
+                transition: all 0.3s ease;
+            }
+            .floweraura-btn:hover {
+                background: #7a1c3f;
+                transform: translateY(-1px);
+            }
+            .floweraura-tab-active {
+                border-bottom: 3px solid #A53860;
+                color: #A53860;
+                font-weight: 600;
+            }
+            .floweraura-option-active {
+                border: 2px solid #A53860;
+                background-color: #fff1f4;
+                color: #A53860;
+            }
+        }
+
+        .image-carousel {
+            scroll-behavior: smooth;
+        }
+        .wishlist-btn.active svg {
+            fill: currentColor;
+            color: #A53860;
+        }
+        .tab-content {
+            transition: opacity 0.3s ease;
+        }
+        .product-image {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .product-image:hover {
+            transform: scale(1.05);
+            opacity: 0.95;
+        }
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+        .floating-cta {
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+        }
+        .floweraura-price {
+            color: #A53860;
+        }
+        .floweraura-delivery-badge {
+            background-color: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #dcfce7;
+        }
+        .floweraura-highlight {
+            background-color: #fff1f4;
+            border-left: 4px solid #A53860;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #A53860;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Improved Image Section */
+        .product-image-container {
+            aspect-ratio: 4/3;
+            max-height: 500px;
+            background-color: #fff;
+        }
+        .thumbnail-container {
+            transition: all 0.2s ease;
+        }
+        .thumbnail-container:hover {
+            transform: translateY(-2px);
+        }
+        @media (max-width: 640px) {
+            .product-image-container {
+                aspect-ratio: 1/1;
+                max-height: 400px;
+            }
+        }
+        
+        /* Enhanced Add-on Card Styles */
+        .addon-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #fff 0%, #f8e1e9 100%);
+        }
+        .addon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(165, 56, 96, 0.2);
+        }
+        .addon-card img {
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+        }
+        .addon-card:hover img {
+            transform: scale(1.05);
+        }
+        .addon-card p:first-of-type {
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+        .addon-card.floweraura-option-active {
+            box-shadow: 0 4px 12px rgba(165, 56, 96, 0.3);
+            border-color: #A53860;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Loading State -->
+    <div id="loadingState" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="loading-spinner"></div>
+            <p class="text-gray-600 mt-4 font-medium">Loading product details...</p>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
+            <i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Product Not Found</h2>
+            <p class="text-gray-600 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+            <a href="/" class="floweraura-btn text-white px-6 py-3 rounded-lg inline-block font-medium">
+                <i class="fas fa-home mr-2"></i>Go to Homepage
+            </a>
+        </div>
+    </div>
+
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-white py-3 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto">
+            <nav class="flex text-sm" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="/" class="text-gray-700 hover:text-primary font-medium">Home</a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 text-xs mx-2"></i>
+                            <a href="/categories" id="categoryBreadcrumb" class="text-gray-700 hover:text-primary font-medium">Products</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 text-xs mx-2"></i>
+                            <span id="productBreadcrumb" class="text-primary font-semibold">Loading...</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Product Section -->
+    <main id="productContent" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Product Images -->
+            <div class="lg:w-1/2">
+                <!-- Main Image -->
+                <div class="product-image-container bg-white rounded-xl shadow-image overflow-hidden mb-6">
+                    <img id="mainProductImage" src="" 
+                         alt="" class="w-full h-full object-contain product-image p-4">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div id="thumbnailGallery" class="grid grid-cols-4 gap-4">
+                    <!-- Thumbnails will be populated dynamically -->
+                </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-xl shadow-card p-6 sticky top-6">
+                    <div class="max-h-[70vh] overflow-y-auto pr-2">
+                        <!-- Badge and Share -->
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center">
+                                <span id="productBadge" class="px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white">
+                                    Veg
+                                </span>
+                                <span id="orderCount" class="text-xs text-gray-500 font-medium"></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button id="shareBtn" class="text-gray-500 hover:text-primary text-sm flex items-center font-medium">
+                                    <i class="fas fa-share-alt mr-1"></i> Share
+                                </button>
+                                <button id="wishlistBtn" class="text-gray-500 hover:text-primary text-sm flex items-center font-medium">
+                                    <i class="far fa-heart mr-1"></i> Wishlist
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Title -->
+                        <h1 id="productTitle" class="text-3xl font-bold text-gray-900 mb-3"></h1>
+                        
+                        <!-- Rating -->
+                        <div class="flex items-center mb-4">
+                            <div id="ratingStars" class="flex items-center text-yellow-400 text-sm mr-2"></div>
+                            <span id="reviewCount" class="text-gray-600 text-sm font-medium"></span>
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="mb-6">
+                            <div class="flex items-end gap-3">
+                                <p id="productPrice" class="text-4xl font-bold floweraura-price"></p>
+                                <p id="originalPrice" class="text-lg text-gray-500 line-through mb-1 hidden"></p>
+                                <p class="text-sm text-gray-500 mb-1">Inclusive of all taxes</p>
+                            </div>
+                            <div id="discountInfo" class="text-green-600 text-sm mt-2 flex items-center">
+                                <!-- Discount info will be populated -->
+                            </div>
+                        </div>
+                        
+                        <!-- Key Highlights -->
+                        <div class="mb-6 p-4 floweraura-highlight rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Highlights</h3>
+                            <ul id="keyHighlights" class="text-gray-700 space-y-2 text-sm"></ul>
+                        </div>
+                        
+                        <!-- Weight/Size Selection -->
+                        <div id="sizeSelection" class="mb-6 hidden">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Select Size</h3>
+                            <div id="sizeOptions" class="grid grid-cols-3 gap-3"></div>
+                        </div>
+                        
+                        <!-- Party Add-ons Selection -->
+                        <div id="addonsSelection" class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Party Add-ons</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                <!-- Balloons Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="balloons" data-price="200">
+                                    <img src="https://m.media-amazon.com/images/I/718GYW6AbsL._UF894,1000_QL80_.jpg?width=200" alt="Foil, latex, number balloons" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Balloons (Foil, Latex, Number)</p>
+                                    <p class="text-primary font-bold text-lg">₹200</p>
+                                </div>
+                                
+                                <!-- Birthday Banner Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="banner" data-price="150">
+                                    <img src="https://m.media-amazon.com/images/I/71733njDQcL.jpg?width=200" alt="Happy Birthday banner" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Birthday Banner ("Happy Birthday")</p>
+                                    <p class="text-primary font-bold text-lg">₹150</p>
+                                </div>
+                                
+                                <!-- Candles Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="candles" data-price="100">
+                                    <img src="https://m.media-amazon.com/images/I/518QtDcb90L._UF1000,1000_QL80_.jpg?width=200" alt="Themed birthday candles" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Candles (Themed, Number)</p>
+                                    <p class="text-primary font-bold text-lg">₹100</p>
+                                </div>
+                                
+                                <!-- Cake Topper Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="topper" data-price="250">
+                                    <img src="https://i.etsystatic.com/9461176/r/il/f088a4/3296536351/il_570xN.3296536351_5x3n.jpg?width=200" alt="Fun cake topper" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Cake Topper (Fun Designs)</p>
+                                    <p class="text-primary font-bold text-lg">₹250</p>
+                                </div>
+                                
+                                <!-- Party Hats Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="hats" data-price="300">
+                                    <img src="https://m.media-amazon.com/images/I/71dbckuVLXL._UY1000_.jpg?width=200" alt="Party hats, crowns, tiaras" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Party Hats / Crowns / Tiaras</p>
+                                    <p class="text-primary font-bold text-lg">₹300</p>
+                                </div>
+                                
+                                <!-- Confetti Poppers Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="confetti" data-price="150">
+                                    <img src="https://m.media-amazon.com/images/I/81n5rMOb0nL.jpg?width=200" alt="Confetti poppers" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Confetti / Poppers</p>
+                                    <p class="text-primary font-bold text-lg">₹150</p>
+                                </div>
+                                
+                                <!-- Streamers & Ribbons Card -->
+                                <div class="rounded-lg bg-accent p-3 text-center border border-gray-200 addon-card cursor-pointer" data-item="streamers" data-price="200">
+                                    <img src="https://m.media-amazon.com/images/I/81aa2vj1nkL.jpg?width=200" alt="Streamers and ribbons" class="w-full h-32 object-cover rounded-lg mb-2 shadow-sm">
+                                    <p class="text-sm font-semibold text-gray-800">Streamers & Ribbons</p>
+                                    <p class="text-primary font-bold text-lg">₹200</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Delivery Info -->
+                        <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-truck text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-1 text-sm">Delivery Information</h4>
+                                    <p id="deliveryTime" class="text-sm text-gray-600 mb-1"></p>
+                                    <p id="deliveryOffer" class="text-sm text-gray-600"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quantity Selector -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Pieces</h3>
+                            <div class="flex items-center w-32 bg-gray-100 rounded-lg overflow-hidden">
+                                <button id="decreaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-gray-200 transition-colors">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span id="quantity" class="flex-1 py-2 text-gray-900 font-medium text-center">2</span>
+                                <button id="increaseQty" class="quantity-btn px-4 py-2 text-gray-600 hover:bg-gray-200 transition-colors">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Sold in pairs (minimum 2 pieces)</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                        <button id="addToCartBtn" class="floral-btn flex-1 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                            <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                        </button>
+                        <button id="buyNowBtn" class="flex-1 border-2 border-primary text-primary hover:bg-accent font-semibold py-3 px-6 rounded-lg transition-all">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating CTA (Mobile) -->
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 z-10">
+            <div class="flex justify-between items-center max-w-7xl mx-auto">
+                <div>
+                    <p id="mobilePrice" class="text-xl font-bold floweraura-price"></p>
+                </div>
+                <button id="mobileAddToCart" class="floral-btn text-white font-semibold py-2.5 px-6 rounded-lg">
+                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                </button>
+            </div>
+        </div>
+        
+        <!-- Product Details Tabs -->
+        <div class="mt-12 bg-white rounded-xl shadow-card overflow-hidden">
+            <div class="border-b border-gray-200">
+                <nav class="flex -mb-px overflow-x-auto">
+                    <button onclick="openTab('details')" class="tab-btn whitespace-nowrap py-4 px-6 text-center border-b-2 font-semibold text-sm floweraura-tab-active">
+                        Product Details
+                    </button>
+                    <button onclick="openTab('ingredients')" class="tab-btn whitespace-nowrap py-4 px-6 text-center border-b-2 font-semibold text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        Ingredients
+                    </button>
+                    <button onclick="openTab('reviews')" class="tab-btn whitespace-nowrap py-4 px-6 text-center border-b-2 font-semibold text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        <span>Reviews (<span id="tabReviewCount">0</span>)</span>
+                    </button>
+                </nav>
+            </div>
+            
+            <!-- Tab Contents -->
+            <div class="p-6">
+                <!-- Product Details -->
+                <div id="details" class="tab-content">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4" id="detailsTitle">About This Product</h3>
+                    <div id="productDescription" class="prose max-w-none text-gray-700"></div>
+                    <div id="productSpecs" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>
+                </div>
+                
+                <!-- Ingredients -->
+                <div id="ingredients" class="tab-content hidden">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ingredients</h3>
+                    <div id="ingredientsList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                    <div id="allergenInfo" class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                        <h4 class="font-medium text-yellow-800 mb-2 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Allergen Information
+                        </h4>
+                        <p id="allergenText" class="text-yellow-700 text-sm"></p>
+                    </div>
+                </div>
+                
+                <!-- Reviews -->
+                <div id="reviews" class="tab-content hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900">Customer Reviews</h3>
+                        <button class="floral-btn text-white px-4 py-2 rounded-lg text-sm font-medium">
+                            Write a Review
+                        </button>
+                    </div>
+                    
+                    <!-- Rating Summary -->
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-gray-900">4.9</div>
+                                <div class="flex items-center justify-center text-yellow-400 mt-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="text-gray-600 mt-1">165 reviews</div>
+                            </div>
+                            <div class="flex-1 w-full">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-sm text-gray-600 w-3">5</span>
+                                    <i class="fas fa-star text-yellow-400 text-xs mx-2"></i>
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">70%</span>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <span class="text-sm text-gray-600 w-3">4</span>
+                                    <i class="fas fa-star text-yellow-400 text-xs mx-2"></i>
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 20%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">20%</span>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <span class="text-sm text-gray-600 w-3">3</span>
+                                    <i class="fas fa-star text-yellow-400 text-xs mx-2"></i>
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 5%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">5%</span>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <span class="text-sm text-gray-600 w-3">2</span>
+                                    <i class="fas fa-star text-yellow-400 text-xs mx-2"></i>
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 3%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">3%</span>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <span class="text-sm text-gray-600 w-3">1</span>
+                                    <i class="fas fa-star text-yellow-400 text-xs mx-2"></i>
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 2%"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Individual Reviews -->
+                    <div class="space-y-6">
+                        <div class="border border-gray-200 rounded-lg p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">
+                                        A
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="font-semibold text-gray-900">Ananya S.</p>
+                                        <div class="flex items-center text-yellow-400 text-sm">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-500 text-sm">2 days ago</span>
+                            </div>
+                            <p class="text-gray-700">Absolutely delicious! The choco pastry was fresh, beautifully decorated, and tasted amazing. Will definitely order again.</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                                        R
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="font-semibold text-gray-900">Rahul K.</p>
+                                        <div class="flex items-center text-yellow-400 text-sm">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-500 text-sm">1 week ago</span>
+                            </div>
+                            <p class="text-gray-700">The choco pastry was good but delivery was delayed by an hour. Taste was excellent though.</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                                        P
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="font-semibold text-gray-900">Priya M.</p>
+                                        <div class="flex items-center text-yellow-400 text-sm">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-500 text-sm">3 weeks ago</span>
+                            </div>
+                            <p class="text-gray-700">Perfect for my daughter's birthday! Everyone loved it. The chocolate flavor was rich but not too sweet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">You May Also Like</h2>
+            <div id="relatedProducts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Artisan Bakery</h3>
+                    <p class="text-gray-300 text-sm">
+                        Crafting delicious moments with premium quality pastries and baked goods since 2015.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Track Order</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Categories</h4>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">Birthday Pastries</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Anniversary Pastries</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Custom Pastries</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cupcakes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="text-gray-300 text-sm space-y-2">
+                        <p><i class="fas fa-phone mr-2"></i>+91 98765 43210</p>
+                        <p><i class="fas fa-envelope mr-2"></i>info@artisanbakery.com</p>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Artisan Bakery Delights. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Product data structure - focused on Choco Pastry and extended for Chocolate category
+        const productDatabase = {
+            '1': {
+                id: '1',
+                name: 'Choco Pastry',
+                category: 'Pastries',
+                price: 65,
+                originalPrice: 85,
+                rating: 4.9,
+                reviewCount: 165,
+                orderCount: '500+',
+                images: [
+                    '/pastries/IMG/choco-pastry.jpg',
+                    '/pastries/IMG/choco-pastry-2.jpg',
+                    '/pastries/IMG/choco-pastry-3.jpg',
+                    '/pastries/IMG/choco-pastry-4.jpg'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Rich chocolate sponge with creamy frosting',
+                    'Topped with chocolate ganache and sprinkles',
+                    'Decadent chocolate flavor in every bite',
+                    'Single serving delight - Sold in pairs for sharing'
+                ],
+                sizes: [
+                    { label: '2 Pieces', value: '2pieces', price: 130, default: true },
+                    { label: '4 Pieces', value: '4pieces', price: 240 },
+                    { label: '6 Pieces', value: '6pieces', price: 360 }
+                ],
+                description: `
+                    <p class="mb-4">Dive into pure indulgence with our Choco Pastry, a heavenly treat featuring moist chocolate sponge layered with silky chocolate frosting and crowned with a glossy ganache drizzle.</p>
+                    <p class="mb-4">This classic favorite delivers intense chocolate satisfaction in a convenient single-serve size, perfect for satisfying sweet cravings anytime. Available in even numbers of pieces for easy sharing.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Ideal for daily treats, parties, or gifting to chocolate enthusiasts.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Chocolate',
+                        'Shape': 'Round',
+                        'Size': 'Single serving',
+                        'Layers': '2 layers',
+                        'Pieces per Pack': 'Even numbers (2, 4, 6)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '2 days',
+                        'Best Served': 'Room temperature',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'All-purpose flour',
+                        'Cocoa powder',
+                        'Plant-based butter',
+                        'Pure vanilla extract',
+                        'Baking powder'
+                    ],
+                    'Frosting & Topping': [
+                        'Chocolate frosting (coconut cream, cocoa)',
+                        'Chocolate ganache',
+                        'Sprinkles',
+                        'Powdered sugar'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '2': {
+                id: '2',
+                name: 'Vanilla Pastry',
+                category: 'Pastries',
+                price: 55,
+                originalPrice: 75,
+                rating: 4.8,
+                reviewCount: 120,
+                orderCount: '400+',
+                images: [
+                    '/pastries/IMG/vanilla-pastry.jpg',
+                    '/pastries/IMG/vanilla-pastry.jpg',
+                    '/pastries/IMG/vanilla-pastry.jpg',
+                    '/pastries/IMG/vanilla-pastry.jpg'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Light vanilla sponge with whipped cream',
+                    'Topped with fresh fruits',
+                    'Delicate and fluffy texture',
+                    'Single serving delight - Sold in pairs for sharing'
+                ],
+                sizes: [
+                    { label: '2 Pieces', value: '2pieces', price: 110, default: true },
+                    { label: '4 Pieces', value: '4pieces', price: 200 },
+                    { label: '6 Pieces', value: '6pieces', price: 300 }
+                ],
+                description: `
+                    <p class="mb-4">Enjoy the subtle sweetness of our Vanilla Pastry, made with fluffy vanilla sponge and topped with light whipped cream and seasonal fresh fruits.</p>
+                    <p class="mb-4">A refreshing and elegant choice for any occasion. Available in even numbers of pieces for easy sharing.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Perfect for tea time or light desserts.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Vanilla',
+                        'Shape': 'Round',
+                        'Size': 'Single serving',
+                        'Layers': '2 layers',
+                        'Pieces per Pack': 'Even numbers (2, 4, 6)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '2 days',
+                        'Best Served': 'Chilled',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'All-purpose flour',
+                        'Plant-based butter',
+                        'Pure vanilla extract',
+                        'Baking powder'
+                    ],
+                    'Frosting & Topping': [
+                        'Whipped cream (coconut based)',
+                        'Fresh fruits',
+                        'Powdered sugar'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '3': {
+                id: '3',
+                name: 'Strawberry Pastry',
+                category: 'Pastries',
+                price: 70,
+                originalPrice: 90,
+                rating: 4.9,
+                reviewCount: 200,
+                orderCount: '600+',
+                images: [
+                    '/pastries/IMG/strawberry-pastry.jpg',
+                    '/pastries/IMG/strawberry-pastry.jpg',
+                    '/pastries/IMG/strawberry-pastry.jpg',
+                    '/pastries/IMG/strawberry-pastry.jpg'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Vanilla base with strawberry cream',
+                    'Fresh strawberry slices on top',
+                    'Tangy and sweet balance',
+                    'Single serving delight - Sold in pairs for sharing'
+                ],
+                sizes: [
+                    { label: '2 Pieces', value: '2pieces', price: 140, default: true },
+                    { label: '4 Pieces', value: '4pieces', price: 260 },
+                    { label: '6 Pieces', value: '6pieces', price: 390 }
+                ],
+                description: `
+                    <p class="mb-4">A burst of summer in every bite with our Strawberry Pastry, combining soft vanilla layers with strawberry-infused cream and topped with fresh strawberries.</p>
+                    <p class="mb-4">Light, fruity, and utterly delightful. Available in even numbers of pieces for easy sharing.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Great for celebrations or casual snacking.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Strawberry',
+                        'Shape': 'Round',
+                        'Size': 'Single serving',
+                        'Layers': '2 layers',
+                        'Pieces per Pack': 'Even numbers (2, 4, 6)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '2 days',
+                        'Best Served': 'Chilled',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'All-purpose flour',
+                        'Plant-based butter',
+                        'Strawberry puree',
+                        'Pure vanilla extract'
+                    ],
+                    'Frosting & Topping': [
+                        'Strawberry cream',
+                        'Fresh strawberries',
+                        'Powdered sugar'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of nuts.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '4': {
+                id: '4',
+                name: 'Death by Chocolate Pastry',
+                category: 'Chocolate Pastries',
+                price: 395,
+                originalPrice: 450,
+                rating: 4.9,
+                reviewCount: 245,
+                orderCount: '300+',
+                images: [
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&h=600&fit=crop&crop=entropy',
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&h=600&fit=crop&crop=bottom',
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&h=600&fit=crop&crop=left'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Triple layer chocolate indulgence',
+                    'Layers of brownie, mousse, and ganache',
+                    'Ultimate chocolate lover\'s dream',
+                    'Serves 6-8 people - Available in sets of 2 pastries'
+                ],
+                sizes: [
+                    { label: '2 Pastries ', value: '2pastries', price: 790, default: true },
+                    { label: '4 Pastries ', value: '4pastries', price: 1500 }
+                ],
+                description: `
+                    <p class="mb-4">Experience the ultimate chocolate ecstasy with our Death by Chocolate Pastry. This decadent masterpiece features three sinful layers: fudgy brownie base, velvety chocolate mousse, and a glossy ganache topping.</p>
+                    <p class="mb-4">Every bite is a journey through chocolate heaven, perfect for celebrations or when you need to satisfy the deepest chocolate cravings. Sold in sets of 2 pastries for larger gatherings.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Ideal for birthday parties, anniversaries, or chocolate-themed events.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Triple Chocolate',
+                        'Shape': 'Round',
+                        'Size': '8-inch diameter',
+                        'Layers': '3 layers',
+                        'Pieces per Set': 'Even numbers (2, 4)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '3 days',
+                        'Best Served': 'Room temperature',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'All-purpose flour',
+                        'Dark cocoa powder',
+                        'Unsweetened chocolate',
+                        'Butter',
+                        'Brown sugar',
+                        'Eggs'
+                    ],
+                    'Frosting & Topping': [
+                        'Chocolate mousse (cream, dark chocolate)',
+                        'Ganache (heavy cream, dark chocolate)',
+                        'Chocolate shards',
+                        'Cocoa nibs'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Eggs, Gluten (Wheat). May contain traces of nuts.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '5': {
+                id: '5',
+                name: 'Chocolate Truffle Pastry',
+                category: 'Chocolate Pastries',
+                price: 345,
+                originalPrice: 400,
+                rating: 4.8,
+                reviewCount: 198,
+                orderCount: '250+',
+                images: [
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&h=600&fit=crop&crop=entropy',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&h=600&fit=crop&crop=bottom',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&h=600&fit=crop&crop=left'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Silky smooth truffle center',
+                    'Dark chocolate exterior',
+                    'Rich and intense flavor',
+                    'Serves 4-6 people - Available in sets of 2 pastries'
+                ],
+                sizes: [
+                    { label: '2 Pastries ', value: '2pastries', price: 690, default: true },
+                    { label: '4 Pastries ', value: '4pastries', price: 1300 }
+                ],
+                description: `
+                    <p class="mb-4">Indulge in the luxurious texture of our Chocolate Truffle Pastry, featuring a melt-in-your-mouth truffle filling enveloped in a crisp dark chocolate shell.</p>
+                    <p class="mb-4">This sophisticated treat balances intense cocoa notes with subtle sweetness, making it a favorite among chocolate connoisseurs. Sold in sets of 2 pastries.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Perfect for dinner parties, romantic evenings, or as a premium gift.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Dark Chocolate Truffle',
+                        'Shape': 'Round',
+                        'Size': '6-inch diameter',
+                        'Layers': '2 layers',
+                        'Pieces per Set': 'Even numbers (2, 4)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '4 days',
+                        'Best Served': 'Chilled',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'Dark chocolate (70% cocoa)',
+                        'Heavy cream',
+                        'Butter',
+                        'Cocoa powder',
+                        'Sea salt'
+                    ],
+                    'Frosting & Topping': [
+                        'Truffle ganache',
+                        'Chocolate glaze',
+                        'Gold leaf accents',
+                        'Cocoa dust'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). May contain traces of soy.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '6': {
+                id: '6',
+                name: 'Chocolate Fudge Pastry',
+                category: 'Chocolate Pastries',
+                price: 425,
+                originalPrice: 480,
+                rating: 4.7,
+                reviewCount: 176,
+                orderCount: '200+',
+                images: [
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&h=600&fit=crop&crop=entropy',
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&h=600&fit=crop&crop=bottom',
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&h=600&fit=crop&crop=left'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Dense and fudgy texture',
+                    'Pure chocolate bliss',
+                    'Handmade with premium cocoa',
+                    'Serves 6-8 people - Available in sets of 2 pastries'
+                ],
+                sizes: [
+                    { label: '2 Pastries ', value: '2pastries', price: 850, default: true },
+                    { label: '4 Pastries ', value: '4pastries', price: 1600 }
+                ],
+                description: `
+                    <p class="mb-4">Satisfy your deepest chocolate desires with our Chocolate Fudge Pastry. This dense, moist fudge is crafted from single-origin cocoa beans for an authentic, rich flavor profile.</p>
+                    <p class="mb-4">No frills, just pure, unadulterated chocolate perfection in every decadent slice. Sold in sets of 2 pastries for sharing.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Great for chocolate tasting events or as a comforting treat.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Pure Fudge',
+                        'Shape': 'Square',
+                        'Size': '8x8 inch',
+                        'Layers': '1 layer',
+                        'Pieces per Set': 'Even numbers (2, 4)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Room temperature (up to 2 days) or refrigerate',
+                        'Shelf Life': '5 days',
+                        'Best Served': 'Room temperature',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'Single-origin cocoa powder',
+                        'Dark chocolate couverture',
+                        'Condensed milk',
+                        'Butter',
+                        'Vanilla beans'
+                    ],
+                    'Frosting & Topping': [
+                        'Fudge icing',
+                        'Chocolate curls',
+                        'Sea salt flakes'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Gluten (Wheat). Processed in facility with nuts.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            },
+            '7': {
+                id: '7',
+                name: 'Dark Chocolate Mousse Pastry',
+                category: 'Chocolate Pastries',
+                price: 475,
+                originalPrice: 520,
+                rating: 4.9,
+                reviewCount: 215,
+                orderCount: '280+',
+                images: [
+                    'https://images.unsplash.com/photo-1586985289906-406988974504?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1586985289906-406988974504?w=800&h=600&fit=crop&crop=entropy',
+                    'https://images.unsplash.com/photo-1586985289906-406988974504?w=800&h=600&fit=crop&crop=bottom',
+                    'https://images.unsplash.com/photo-1586985289906-406988974504?w=800&h=600&fit=crop&crop=left'
+                ],
+                thumbnails: [
+                    'https://images.unsplash.com/photo-1586985289906-406988974504?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&h=150&fit=crop',
+                    'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=200&h=150&fit=crop'
+                ],
+                highlights: [
+                    'Airy and light mousse texture',
+                    '70% dark chocolate intensity',
+                    'Balanced with subtle sweetness',
+                    'Serves 4-6 people - Available in sets of 2 pastries'
+                ],
+                sizes: [
+                    { label: '2 Pastries (8-12 servings)', value: '2pastries', price: 950, default: true },
+                    { label: '4 Pastries (16-24 servings)', value: '4pastries', price: 1800 }
+                ],
+                description: `
+                    <p class="mb-4">Elevate your dessert experience with our Dark Chocolate Mousse Pastry. Whipped to airy perfection, this mousse captures the essence of premium dark chocolate with notes of berry and spice.</p>
+                    <p class="mb-4">Light yet intensely flavorful, it's the sophisticated choice for those who appreciate nuanced chocolate profiles. Sold in sets of 2 pastries.</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mt-6 mb-3">Occasions</h4>
+                    <p class="mb-4">Excellent for elegant dinners, corporate events, or as a refined gift.</p>
+                `,
+                specifications: {
+                    'Pastry Details': {
+                        'Flavor': 'Dark Chocolate Mousse',
+                        'Shape': 'Round',
+                        'Size': '7-inch diameter',
+                        'Layers': '2 layers',
+                        'Pieces per Set': 'Even numbers (2, 4)'
+                    },
+                    'Storage & Care': {
+                        'Storage': 'Refrigerate (0-5°C)',
+                        'Shelf Life': '2 days',
+                        'Best Served': 'Chilled',
+                        'Preparation': 'Ready to eat'
+                    }
+                },
+                ingredients: {
+                    'Pastry Base': [
+                        'Dark chocolate (70% cocoa)',
+                        'Egg whites',
+                        'Heavy whipping cream',
+                        'Sugar',
+                        'Gelatin'
+                    ],
+                    'Frosting & Topping': [
+                        'Chocolate mousse',
+                        'Whipped cream rosettes',
+                        'Chocolate tempering',
+                        'Fresh berries'
+                    ]
+                },
+                allergens: 'Contains: Dairy (Milk), Eggs, Gluten (Wheat). May contain alcohol traces.',
+                deliveryTime: 'Today, In 3 hours',
+                deliveryOffer: 'Free Delivery on orders above ₹500',
+                discountInfo: {
+                    freeDelivery: true,
+                    offer: 'Get 10% off on orders above ₹1000'
+                }
+            }
+        };
+
+        // Generic product loading system
+        class ProductDetailManager {
+            constructor() {
+                this.currentProduct = null;
+                this.currentQuantity = 2; // Default to 2 pieces
+                this.selectedSize = null;
+                this.currentImageIndex = 0;
+                this.selectedAddons = new Set(); // Track selected add-ons
+                this.init();
+            }
+
+            init() {
+                this.loadProduct();
+                this.setupEventListeners();
+            }
+
+            // Get product ID from URL parameters
+            getProductId() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('id') || urlParams.get('product') || '1'; // fallback to choco pastry
+            }
+
+            // Load product from API or database
+            async loadProduct() {
+                try {
+                    const productId = this.getProductId();
+                    
+                    // In a real application, this would be an API call
+                    // const response = await fetch(`/api/products/${productId}`);
+                    // const product = await response.json();
+                    
+                    // For now, using local database
+                    const product = productDatabase[productId];
+                    
+                    if (!product) {
+                        this.showError();
+                        return;
+                    }
+
+                    this.currentProduct = product;
+                    this.selectedSize = product.sizes?.find(s => s.default) || product.sizes?.[0];
+                    this.renderProduct();
+                    this.hideLoading();
+                    
+                } catch (error) {
+                    console.error('Error loading product:', error);
+                    this.showError();
+                }
+            }
+
+            renderProduct() {
+                const product = this.currentProduct;
+                
+                // Update page title and breadcrumb
+                document.getElementById('pageTitle').textContent = `${product.name} | Artisan Bakery Delights`;
+                document.getElementById('productBreadcrumb').textContent = product.name;
+                document.getElementById('categoryBreadcrumb').textContent = product.category;
+                
+                // Main product info
+                this.renderMainInfo();
+                this.renderImages();
+                this.renderSizes();
+                this.renderAddons();
+                this.renderTabs();
+                this.renderRelatedProducts();
+            }
+
+            renderMainInfo() {
+                const product = this.currentProduct;
+                const basePrice = this.selectedSize ? this.selectedSize.price : product.price;
+                const currentPrice = basePrice * this.currentQuantity / 2; // Since sizes are now priced for packs of 2, adjust for quantity
+                let totalAddonsPrice = 0;
+                this.selectedAddons.forEach(addon => {
+                    totalAddonsPrice += parseInt(document.querySelector(`[data-item="${addon}"]`).dataset.price) * (this.currentQuantity / 2);
+                });
+                const totalPrice = currentPrice + totalAddonsPrice;
+                
+                // Set badge to Veg only
+                document.getElementById('productBadge').textContent = 'Veg';
+                document.getElementById('productBadge').className = 'px-3 py-1 rounded-full text-xs font-medium mr-2 bg-green-500 text-white';
+                
+                document.getElementById('orderCount').textContent = product.orderCount ? `${product.orderCount} orders` : '';
+                document.getElementById('productTitle').textContent = product.name;
+                
+                // Rating
+                const ratingHtml = this.generateRatingStars(product.rating);
+                document.getElementById('ratingStars').innerHTML = ratingHtml;
+                document.getElementById('reviewCount').textContent = `(${product.reviewCount} reviews)`;
+                
+                // Price
+                this.updatePriceDisplay(totalPrice);
+                
+                if (product.originalPrice && product.originalPrice > (this.selectedSize ? this.selectedSize.price / 2 : product.price)) {
+                    const origBase = (this.selectedSize ? this.selectedSize.price / 2 : product.price) * 2; // Original for pack of 2
+                    document.getElementById('originalPrice').textContent = `₹${origBase * (this.currentQuantity / 2)}`;
+                    document.getElementById('originalPrice').classList.remove('hidden');
+                    
+                    const discount = Math.round(((product.originalPrice - (this.selectedSize ? this.selectedSize.price / 2 : product.price)) / product.originalPrice) * 100);
+                    document.getElementById('discountInfo').innerHTML = `
+                        <i class="fas fa-tag mr-1"></i>Save ${discount}% (₹${(product.originalPrice - (this.selectedSize ? this.selectedSize.price / 2 : product.price)) * (this.currentQuantity / 2)})
+                    `;
+                }
+                
+                // Highlights
+                if (product.highlights) {
+                    const highlightsHtml = product.highlights.map(highlight => 
+                        `<li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i>${highlight}</li>`
+                    ).join('');
+                    document.getElementById('keyHighlights').innerHTML = highlightsHtml;
+                }
+                
+                // Delivery info
+                document.getElementById('deliveryTime').textContent = product.deliveryTime || 'Same day delivery';
+                document.getElementById('deliveryOffer').textContent = product.deliveryOffer || 'Free delivery available';
+            }
+
+            updatePriceDisplay(totalPrice) {
+                document.getElementById('productPrice').textContent = `₹${totalPrice}`;
+                document.getElementById('mobilePrice').textContent = `₹${totalPrice}`;
+            }
+
+            renderImages() {
+                const product = this.currentProduct;
+                if (!product.images || product.images.length === 0) return;
+                
+                // Main image
+                document.getElementById('mainProductImage').src = product.images[0];
+                document.getElementById('mainProductImage').alt = product.name;
+                
+                // Thumbnails
+                const thumbnailsHtml = product.images.map((image, index) => `
+                    <div class="thumbnail-container rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary' : 'border-gray-200'} shadow-sm" 
+                         onclick="productManager.changeMainImage(${index})">
+                        <img src="${image}" alt="${product.name}" class="w-full h-24 object-cover hover:opacity-90 transition-all">
+                    </div>
+                `).join('');
+                
+                document.getElementById('thumbnailGallery').innerHTML = thumbnailsHtml;
+            }
+
+            renderSizes() {
+                const product = this.currentProduct;
+                if (!product.sizes || product.sizes.length === 0) {
+                    document.getElementById('sizeSelection').classList.add('hidden');
+                    return;
+                }
+                
+                document.getElementById('sizeSelection').classList.remove('hidden');
+                
+                const sizesHtml = product.sizes.map(size => `
+                    <button onclick="productManager.selectSize('${size.value}')" 
+                            class="size-option p-4 border rounded-lg text-center text-sm transition-all
+                                   ${this.selectedSize?.value === size.value ? 'floweraura-option-active' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'}">
+                        <div class="font-semibold">${size.label}</div>
+                        <div class="text-primary font-bold mt-1">₹${size.price}</div>
+                    </button>
+                `).join('');
+                
+                document.getElementById('sizeOptions').innerHTML = sizesHtml;
+            }
+
+            renderAddons() {
+                const addons = document.querySelectorAll('.addon-card');
+                addons.forEach(addon => {
+                    addon.addEventListener('click', () => this.toggleAddon(addon.dataset.item));
+                    if (this.selectedAddons.has(addon.dataset.item)) {
+                        addon.classList.add('floweraura-option-active');
+                        addon.classList.remove('border-gray-200', 'hover:border-primary');
+                    } else {
+                        addon.classList.remove('floweraura-option-active');
+                        addon.classList.add('border-gray-200', 'hover:border-primary');
+                    }
+                });
+            }
+
+            toggleAddon(itemId) {
+                if (this.selectedAddons.has(itemId)) {
+                    this.selectedAddons.delete(itemId);
+                } else {
+                    this.selectedAddons.add(itemId);
+                }
+                this.renderAddons();
+                this.renderMainInfo(); // Recalculate total price
+            }
+
+            renderTabs() {
+                const product = this.currentProduct;
+                
+                // Product Details
+                document.getElementById('productDescription').innerHTML = product.description || '';
+                document.getElementById('tabReviewCount').textContent = product.reviewCount || 0;
+                
+                // Specifications
+                if (product.specifications) {
+                    const specsHtml = Object.entries(product.specifications).map(([category, specs]) => `
+                        <div class="bg-gray-50 p-5 rounded-lg">
+                            <h4 class="font-semibold text-gray-900 mb-3">${category}</h4>
+                            ${Object.entries(specs).map(([key, value]) => `
+                                <div class="flex justify-between py-2 border-b border-gray-200 last:border-0">
+                                    <span class="text-gray-600">${key}</span>
+                                    <span class="font-medium">${value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('productSpecs').innerHTML = specsHtml;
+                }
+                
+                // Ingredients
+                if (product.ingredients) {
+                    const ingredientsHtml = Object.entries(product.ingredients).map(([category, items]) => `
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-3">${category}</h4>
+                            <ul class="space-y-2">
+                                ${items.map(item => `
+                                    <li class="flex items-center text-gray-700">
+                                        <i class="fas fa-leaf text-green-500 mr-2 text-sm"></i>
+                                        ${item}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('ingredientsList').innerHTML = ingredientsHtml;
+                }
+                
+                if (product.allergens) {
+                    document.getElementById('allergenText').textContent = product.allergens;
+                }
+            }
+
+            renderRelatedProducts() {
+                // Get other products as related (excluding current)
+                const relatedProducts = Object.values(productDatabase)
+                    .filter(p => p.id !== this.currentProduct.id)
+                    .slice(0, 4);
+                
+                const relatedHtml = relatedProducts.map(product => `
+                    <div class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-lg transition-all cursor-pointer"
+                         onclick="window.location.href='?id=${product.id}'">
+                        <div class="relative aspect-square overflow-hidden">
+                            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">${product.name}</h3>
+                            <div class="flex items-center justify-between">
+                                <span class="text-primary font-bold">₹${product.price}</span>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    ${this.generateRatingStars(product.rating)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('relatedProducts').innerHTML = relatedHtml;
+            }
+
+            setupEventListeners() {
+                // Quantity controls - now in steps of 2, min 2
+                document.getElementById('decreaseQty').addEventListener('click', () => {
+                    if (this.currentQuantity > 2) {
+                        this.currentQuantity -= 2;
+                        document.getElementById('quantity').textContent = this.currentQuantity;
+                        const basePrice = this.selectedSize ? this.selectedSize.price / 2 : this.currentProduct.price;
+                        this.updatePriceDisplay(basePrice * this.currentQuantity);
+                        this.renderMainInfo(); // Update original price and discount
+                    }
+                });
+                
+                document.getElementById('increaseQty').addEventListener('click', () => {
+                    this.currentQuantity += 2;
+                    document.getElementById('quantity').textContent = this.currentQuantity;
+                    const basePrice = this.selectedSize ? this.selectedSize.price / 2 : this.currentProduct.price;
+                    this.updatePriceDisplay(basePrice * this.currentQuantity);
+                    this.renderMainInfo(); // Update original price and discount
+                });
+                
+                // Add to cart
+                document.getElementById('addToCartBtn').addEventListener('click', () => this.addToCart());
+                document.getElementById('mobileAddToCart').addEventListener('click', () => this.addToCart());
+                
+                // Buy now
+                document.getElementById('buyNowBtn').addEventListener('click', () => this.buyNow());
+                
+                // Wishlist
+                document.getElementById('wishlistBtn').addEventListener('click', () => this.toggleWishlist());
+                
+                // Share
+                document.getElementById('shareBtn').addEventListener('click', () => this.shareProduct());
+            }
+
+            // Helper methods
+            generateRatingStars(rating) {
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 !== 0;
+                let starsHtml = '';
+                
+                for (let i = 0; i < fullStars; i++) {
+                    starsHtml += '<i class="fas fa-star"></i>';
+                }
+                
+                if (hasHalfStar) {
+                    starsHtml += '<i class="fas fa-star-half-alt"></i>';
+                }
+                
+                const emptyStars = 5 - Math.ceil(rating);
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHtml += '<i class="far fa-star"></i>';
+                }
+                
+                return starsHtml;
+            }
+
+            changeMainImage(index) {
+                const product = this.currentProduct;
+                document.getElementById('mainProductImage').src = product.images[index];
+                
+                // Update thumbnail selection
+                const thumbnails = document.querySelectorAll('#thumbnailGallery > div');
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('border-primary', i === index);
+                    thumb.classList.toggle('border-gray-200', i !== index);
+                });
+                
+                this.currentImageIndex = index;
+            }
+
+            selectSize(sizeValue) {
+                this.selectedSize = this.currentProduct.sizes.find(s => s.value === sizeValue);
+                this.renderMainInfo();
+                this.renderSizes();
+            }
+
+            addToCart() {
+                const basePrice = this.selectedSize ? this.selectedSize.price / 2 : this.currentProduct.price;
+                const cartItem = {
+                    productId: this.currentProduct.id,
+                    name: this.currentProduct.name,
+                    price: basePrice,
+                    quantity: this.currentQuantity,
+                    size: this.selectedSize ? this.selectedSize.value : null,
+                    image: this.currentProduct.images[0]
+                };
+                
+                // Add add-ons to cart
+                const addonsArray = Array.from(this.selectedAddons).map(addon => ({
+                    item: addon,
+                    price: parseInt(document.querySelector(`[data-item="${addon}"]`).dataset.price),
+                    quantity: this.currentQuantity / 2
+                }));
+
+                const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+                const existingItemIndex = existingCart.findIndex(item => 
+                    item.productId === cartItem.productId && item.size === cartItem.size
+                );
+                
+                if (existingItemIndex > -1) {
+                    existingCart[existingItemIndex].quantity += cartItem.quantity;
+                } else {
+                    existingCart.push(cartItem);
+                }
+                
+                // Add or update add-ons
+                addonsArray.forEach(addon => {
+                    const existingAddonIndex = existingCart.findIndex(item => item.productId === `addon-${addon.item}`);
+                    if (existingAddonIndex > -1) {
+                        existingCart[existingAddonIndex].quantity += addon.quantity;
+                    } else {
+                        existingCart.push({
+                            productId: `addon-${addon.item}`,
+                            name: addon.item.charAt(0).toUpperCase() + addon.item.slice(1).replace(/([A-Z])/g, ' $1'),
+                            price: addon.price,
+                            quantity: addon.quantity,
+                            image: document.querySelector(`[data-item="${addon.item}"] img`).src
+                        });
+                    }
+                });
+                
+                localStorage.setItem('cart', JSON.stringify(existingCart));
+                
+                // Show success message
+                this.showNotification(`${this.currentQuantity} pieces and add-ons added to cart!`, 'success');
+            }
+
+            buyNow() {
+                this.addToCart();
+                window.location.href = 'checkout.html';
+            }
+
+            toggleWishlist() {
+                const wishlistBtn = document.getElementById('wishlistBtn');
+                const icon = wishlistBtn.querySelector('i');
+                
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    wishlistBtn.classList.add('text-primary');
+                    this.showNotification('Added to wishlist!', 'success');
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    wishlistBtn.classList.remove('text-primary');
+                    this.showNotification('Removed from wishlist!', 'info');
+                }
+            }
+    shareProduct() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: this.currentProduct.name,
+                        text: `Check out this amazing ${this.currentProduct.name}!`,
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback - copy to clipboard
+                    navigator.clipboard.writeText(window.location.href);
+                    this.showNotification('Product link copied to clipboard!', 'success');
+                }
+            }
+
+            showNotification(message, type = 'info') {
+                // Create and show notification
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${
+                    type === 'success' ? 'bg-green-500' : 
+                    type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+                }`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            hideLoading() {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('productContent').classList.remove('hidden');
+            }
+
+            showError() {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('errorState').classList.remove('hidden');
+            }
+        }
+
+        // Tab functionality
+        function openTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('floweraura-tab-active');
+                btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('floweraura-tab-active');
+            event.target.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+        }
+
+        // Initialize the product manager
+        let productManager;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            productManager = new ProductDetailManager();
+        });
+
+        // API Integration Helper (for when you connect to real backend)
+        class ProductAPI {
+            static baseURL = '/api'; // Change this to your API base URL
+            
+            static async getProduct(productId) {
+                try {
+                    const response = await fetch(`${this.baseURL}/products/${productId}`);
+                    if (!response.ok) throw new Error('Product not found');
+                    return await response.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    throw error;
+                }
+            }
+            
+            static async getRelatedProducts(productId, category) {
+                try {
+                    const response = await fetch(`${this.baseURL}/products/${productId}/related?category=${category}`);
+                    return await response.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                }
+            }
+            
+            static async getReviews(productId) {
+                try {
+                    const response = await fetch(`${this.baseURL}/products/${productId}/reviews`);
+                    return await response.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                }
+            }
+        }
+
+        // Load header content and initialize functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header HTML
+            fetch('Mainheader.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-container').innerHTML = html;
+                    
+                    // Initialize all header functionality
+                    initializeHeader();
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            function initializeHeader() {
+                // ==================== DELIVERY LOCATION ====================
+                const puneDeliveryAreas = [
+                    'Koregaon Park', 'Baner', 'Wakad', 'Hinjewadi', 'FC Road', 'Viman Nagar',
+                    'Kothrud', 'Aundh', 'Shivaji Nagar', 'Camp', 'Deccan', 'Karve Nagar',
+                    'Pune Station', 'Swargate', 'Katraj', 'Kondhwa', 'Bibwewadi', 'Fursungi',
+                    'Magarpatta', 'Hadapsar', 'Kharadi', 'Wagholi', 'Chinchwad', 'Pimpri',
+                    'Warje', 'Bavdhan', 'Pashan', 'Sus', 'Balewadi', 'Nigdi', 'Akurdi',
+                    'Ravet', 'Tathawade', 'Vishrantwadi', 'Yerawada', 'Kalyani Nagar',
+                    'Nagar Road', 'Dhanori', 'Lohegaon', 'Mundwa', 'Ghorpadi', 'Wanowrie',
+                    'Fatima Nagar', 'Salisbury Park', 'Parvati', 'Dhankawadi', 'Balaji Nagar',
+                    'Bhavani Peth', 'Budhwar Peth', 'Kasba Peth', 'Rasta Peth', 'Sadashiv Peth'
+                ];
+
+                const punePincodes = [
+                    '411001', '411002', '411003', '411004', '411005', '411006', '411007', '411008', 
+                    '411009', '411010', '411011', '411012', '411013', '411014', '411015', '411016'
+                ];
+
+                // Get all elements
+                const modal = document.getElementById('deliveryModal');
+                const deliveryLocationBtn = document.getElementById('deliveryLocationBtn');
+                const mobileDeliveryBtn = document.getElementById('mobileDeliveryBtn');
+                const closeModal = document.getElementById('closeModal');
+                const locationInput = document.getElementById('locationInput');
+                const confirmLocationBtn = document.getElementById('confirmLocation');
+                const useCurrentLocationBtn = document.getElementById('useCurrentLocation');
+                const locationOptions = document.querySelectorAll('.location-option');
+                const selectedLocationSpan = document.getElementById('selectedLocation');
+                const mobileSelectedLocationSpan = document.getElementById('mobileSelectedLocation');
+                const locationError = document.getElementById('locationError');
+                const locationSuccess = document.getElementById('locationSuccess');
+
+                let selectedLocation = '';
+                let isValidLocation = false;
+
+                // Delivery location functions
+                function openModal() {
+                    if (modal) modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeModalFunc() {
+                    if (modal) modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+
+                function validateLocation(location) {
+                    const isAreaValid = puneDeliveryAreas.some(area => 
+                        area.toLowerCase().includes(location.toLowerCase())
+                    );
+                    const isPincodeValid = punePincodes.includes(location);
+                    return isAreaValid || isPincodeValid;
+                }
+
+                function updateLocationUI(isValid, location = '') {
+                    if (isValid) {
+                        if (locationError) locationError.classList.add('hidden');
+                        if (locationSuccess) {
+                            locationSuccess.classList.remove('hidden');
+                            locationSuccess.textContent = `Great! We deliver to ${location}.`;
+                        }
+                        if (confirmLocationBtn) confirmLocationBtn.disabled = false;
+                        isValidLocation = true;
+                        selectedLocation = location;
+                    } else {
+                        if (locationError) {
+                            locationError.classList.remove('hidden');
+                            locationError.textContent = location ? "We don't deliver to this location yet." : "Please enter a valid location.";
+                        }
+                        if (locationSuccess) locationSuccess.classList.add('hidden');
+                        if (confirmLocationBtn) confirmLocationBtn.disabled = true;
+                        isValidLocation = false;
+                    }
+                }
+
+                function saveLocation(location) {
+                    localStorage.setItem('deliveryLocation', location);
+                }
+
+                // Event listeners
+                if (deliveryLocationBtn) {
+                    deliveryLocationBtn.addEventListener('click', openModal);
+                }
+
+                if (mobileDeliveryBtn) {
+                    mobileDeliveryBtn.addEventListener('click', openModal);
+                }
+
+                if (closeModal) {
+                    closeModal.addEventListener('click', closeModalFunc);
+                }
+
+                if (locationInput) {
+                    locationInput.addEventListener('input', function(e) {
+                        const location = e.target.value.trim();
+                        if (location.length > 2) {
+                            updateLocationUI(validateLocation(location), location);
+                        } else {
+                            updateLocationUI(false);
+                        }
+                    });
+                }
+
+                if (locationOptions) {
+                    locationOptions.forEach(option => {
+                        option.addEventListener('click', function() {
+                            const location = this.textContent.trim().replace(/^.*?\s/, '').trim();
+                            if (locationInput) locationInput.value = location;
+                            updateLocationUI(true, location);
+                        });
+                    });
+                }
+
+                if (confirmLocationBtn) {
+                    confirmLocationBtn.addEventListener('click', function() {
+                        if (isValidLocation && selectedLocation) {
+                            if (selectedLocationSpan) selectedLocationSpan.textContent = selectedLocation;
+                            if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = selectedLocation;
+                            saveLocation(selectedLocation);
+                            closeModalFunc();
+                        }
+                    });
+                }
+
+                if (useCurrentLocationBtn) {
+                    useCurrentLocationBtn.addEventListener('click', function() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                                function() {
+                                    const demoLocation = "Koregaon Park";
+                                    if (locationInput) locationInput.value = demoLocation;
+                                    updateLocationUI(true, demoLocation);
+                                },
+                                function(error) {
+                                    if (locationError) {
+                                        locationError.classList.remove('hidden');
+                                        locationError.textContent = "Unable to get your location. Please enter manually.";
+                                    }
+                                    console.error("Geolocation error:", error);
+                                }
+                            );
+                        } else if (locationError) {
+                            locationError.classList.remove('hidden');
+                            locationError.textContent = "Geolocation is not supported by your browser.";
+                        }
+                    });
+                }
+
+                // ==================== MOBILE MENU ====================
+                const mobileMenuButton = document.getElementById('mobileMenuButton');
+                const mobileMenu = document.getElementById('mobileMenu');
+                
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+
+                // ==================== SEARCH FUNCTIONALITY ====================
+                const searchInput = document.getElementById('searchInput');
+                const searchButton = document.getElementById('searchButton');
+                const suggestions = document.getElementById('suggestions');
+
+                if (searchInput && suggestions) {
+                    const searchData = [
+                        // Pastry Types
+                        'Chocolate Pastry', 'Vanilla Pastry', 'Cheesecake', 'Red Velvet Pastry', 'Fruit Pastry',
+                        'Mango Pastry', 'Butterscotch Pastry', 'Black Forest Pastry', 'Pineapple Pastry',
+                        'Strawberry Pastry', 'Photo Pastry', 'Bento Pastry', 'Heart Shaped Pastry',
+                        'Pull Me Up Pastry', 'Pinata Pastry', 'Bomb Pastry', 'Fondant Pastry', 'Multi Tier Pastry',
+                        
+                        // Pastry Occasions
+                        'Birthday Pastry', 'Anniversary Pastry', 'Wedding Pastry', 'Graduation Pastry',
+                        'Baby Shower Pastry', 'Engagement Pastry', 'Retirement Pastry', 'Farewell Pastry',
+                        
+                        // Kids Pastries
+                        'Barbie Pastry', 'Car Theme Pastry', 'Cartoon Pastry', 'Spiderman Pastry',
+                        'Superhero Pastry', 'Cricket Pastry',
+                        
+                        // Pastry Types
+                        'Cupcake', 'Muffin', 'Donut', 'Macaron', 'Croissant', 'Danish Pastry',
+                        
+                        // Pastry Flavors
+                        'Chocolate Éclair', 'Strawberry Tart', 'Almond Croissant', 'Blueberry Pastry',
+                        'Lemon Pastry', 'Matcha Pastry',
+                        
+                        // Specialty Pastries
+                        'Gluten-Free Pastry', 'Sugar-Free Pastry', 'Vegan Pastry', 'Keto-Friendly Pastry',
+                        'Seasonal Special Pastry', 'Mini Pastry Box', 'Eggless Pastry',
+                    ];
+
+                    // Show search suggestions
+                    function showSuggestions(matches) {
+                        suggestions.innerHTML = '';
+                        
+                        if (matches.length === 0) {
+                            suggestions.classList.add('hidden');
+                            return;
+                        }
+                        
+                        matches.forEach(match => {
+                            const li = document.createElement('li');
+                            li.className = 'px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors text-sm';
+                            li.textContent = match;
+                            
+                            li.addEventListener('click', function() {
+                                searchInput.value = match;
+                                suggestions.classList.add('hidden');
+                                performSearch(match);
+                            });
+                            
+                            suggestions.appendChild(li);
+                        });
+                        
+                        suggestions.classList.remove('hidden');
+                    }
+
+                    // Get matching suggestions
+                    function getSuggestions(input) {
+                        if (input.length < 2) return [];
+                        
+                        const inputLower = input.toLowerCase();
+                        return searchData.filter(item => 
+                            item.toLowerCase().includes(inputLower)
+                        ).slice(0, 8); // Limit to 8 suggestions
+                    }
+
+                    // Perform search (redirect to search page)
+                    function performSearch(query) {
+                        // In a real implementation, this would redirect to a search results page
+                        console.log('Searching for:', query);
+                        // window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+                    }
+
+                    // Event listeners for search
+                    searchInput.addEventListener('input', function(e) {
+                        const input = e.target.value.trim();
+                        const matches = getSuggestions(input);
+                        showSuggestions(matches);
+                    });
+                    
+                    searchInput.addEventListener('focus', function() {
+                        if (searchInput.value.trim().length > 1) {
+                            const matches = getSuggestions(searchInput.value.trim());
+                            showSuggestions(matches);
+                        }
+                    });
+                    
+                    searchInput.addEventListener('blur', function() {
+                        // Hide suggestions after a small delay to allow click events to register
+                        setTimeout(() => {
+                            suggestions.classList.add('hidden');
+                        }, 200);
+                    });
+
+                    searchButton.addEventListener('click', function() {
+                        const query = searchInput.value.trim();
+                        if (query) {
+                            performSearch(query);
+                        }
+                    });
+
+                    // Handle Enter key press
+                    searchInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            const query = searchInput.value.trim();
+                            if (query) {
+                                performSearch(query);
+                            }
+                        }
+                    });
+
+                    // Close suggestions when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!searchInput.contains(e.target)) {
+                            suggestions.classList.add('hidden');
+                        }
+                    });
+                }
+
+                // Load saved location
+                const savedLocation = localStorage.getItem('deliveryLocation');
+                if (savedLocation) {
+                    if (selectedLocationSpan) selectedLocationSpan.textContent = savedLocation;
+                    if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = savedLocation;
+                    selectedLocation = savedLocation;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
