@@ -10,32 +10,33 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         :root {
-            --primary: #8B4513;
-            --primary-dark: #6B3410;
-            --secondary: #A0522D;
-            --background: #FFF8F0;
+            --primary: #660B05;
+            --secondary: #4E1F00;
+            --light: #fef5f8;
+            --dark: #333333;
+            --background: var(--light);
             --card-bg: #FFFFFF;
-            --text: #2D1810;
-            --text-light: #8B7355;
-            --border: #E8D5C4;
-            --accent: #CD853F;
+            --text: var(--dark);
+            --text-light: #666666;
+            --border: #E0C9C0;
         }
         
         body {
-            background: linear-gradient(135deg, #FFF8F0 0%, #F5E8D8 100%);
+            background: var(--background);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
         }
         
         .card {
             background: var(--card-bg);
             border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(139, 69, 19, 0.1);
+            box-shadow: 0 4px 16px rgba(102, 11, 5, 0.1);
             border: 1px solid var(--border);
             transition: all 0.3s ease;
         }
         
         .card:hover {
-            box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15);
+            box-shadow: 0 8px 24px rgba(102, 11, 5, 0.15);
             transform: translateY(-1px);
         }
         
@@ -53,7 +54,7 @@
         .form-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 11, 5, 0.1);
             background: white;
         }
         
@@ -66,7 +67,7 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--primary);
             color: white;
             border: none;
             border-radius: 10px;
@@ -78,9 +79,9 @@
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            background: #550904;
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 6px 16px rgba(102, 11, 5, 0.3);
         }
         
         .btn-secondary {
@@ -100,6 +101,17 @@
             color: white;
         }
         
+        .btn-selected {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
         .address-card {
             background: var(--card-bg);
             border: 2px solid var(--border);
@@ -111,12 +123,12 @@
         
         .address-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 3px 12px rgba(139, 69, 19, 0.1);
+            box-shadow: 0 3px 12px rgba(102, 11, 5, 0.1);
         }
         
         .address-card.selected {
             border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.03) 0%, rgba(160, 82, 45, 0.03) 100%);
+            background: rgba(102, 11, 5, 0.03);
         }
         
         .modal {
@@ -143,6 +155,7 @@
             animation: modalSlide 0.3s ease;
             max-height: 85vh;
             overflow-y: auto;
+            border: 1px solid var(--border);
         }
         
         @keyframes modalSlide {
@@ -201,7 +214,7 @@
             left: 0;
             width: 30px;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--primary);
             border-radius: 1px;
         }
         
@@ -225,25 +238,13 @@
             gap: 12px;
         }
         
-        @media (max-width: 640px) {
-            .form-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .modal-content {
-                width: 95%;
-                margin: 10% auto;
-                padding: 15px;
-            }
-        }
-        
         .select-wrapper {
             position: relative;
         }
         
         .select-wrapper select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238B4513' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23660B05' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
             background-position: right 10px center;
             background-repeat: no-repeat;
             background-size: 14px;
@@ -270,12 +271,274 @@
         .container {
             max-width: 1200px;
         }
+
+        /* Coupon Card Styles */
+        .coupon-card {
+            background: rgba(102, 11, 5, 0.05);
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .coupon-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(102, 11, 5, 0.15);
+        }
+
+        .coupon-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .coupon-icon i {
+            color: white;
+            font-size: 20px;
+        }
+
+        .coupon-details {
+            flex: 1;
+        }
+
+        .coupon-title {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .coupon-description {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .coupons-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .coupons-modal-content {
+            background: var(--card-bg);
+            margin: 5% auto;
+            padding: 24px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+            animation: modalSlide 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .modal-content, .coupons-modal-content {
+                width: 95%;
+                margin: 8% auto;
+                padding: 16px;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 16px !important;
+            }
+
+            .address-card {
+                padding: 10px;
+            }
+
+            .address-card .btn-secondary {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .btn-primary, .btn-secondary {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+
+            .form-input {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .form-label {
+                font-size: 12px;
+            }
+
+            .coupon-card {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+
+            .coupon-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .coupon-icon i {
+                font-size: 18px;
+            }
+
+            .coupon-title {
+                font-size: 13px;
+            }
+
+            .coupon-description {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+
+            .card {
+                border-radius: 12px;
+                padding: 12px !important;
+            }
+
+            .modal-content, .coupons-modal-content {
+                margin: 10% auto;
+                padding: 12px;
+                border-radius: 12px;
+            }
+
+            .section-title {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+
+            .btn-primary {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            #addMoreItems, #addNewAddress {
+                width: auto !important;
+                padding: 8px 14px;
+            }
+
+            #addMoreItems i, #addNewAddress i {
+                margin-right: 4px;
+            }
+
+            /* Cart Item Responsive */
+            .cart-item-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cart-item-container img {
+                width: 100%;
+                max-width: 150px;
+                height: auto;
+                margin: 0 auto;
+            }
+
+            .cart-item-details {
+                text-align: center;
+            }
+
+            .cart-item-price {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            /* Sticky summary on mobile */
+            .summary-card {
+                position: sticky;
+                top: 10px;
+            }
+
+            /* Delivery buttons */
+            .delivery-btn-group {
+                flex-direction: column;
+            }
+
+            .delivery-btn-group button {
+                width: 100%;
+            }
+
+            /* Order type buttons */
+            .order-type-group {
+                flex-direction: column;
+            }
+
+            .order-type-group button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quantity-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+
+            .form-input {
+                font-size: 12px;
+                padding: 7px;
+            }
+
+            .icon-input input {
+                padding-left: 32px;
+            }
+
+            .icon-input i {
+                font-size: 12px;
+                left: 8px;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Header Container -->
-    <div id="header"></div>
-
     <div class="container mx-auto px-4 py-8">
         <div class="grid lg:grid-cols-3 gap-8">
             <!-- Left Column: Cart Items and Form Fields -->
@@ -286,26 +549,24 @@
                     <div id="cartItems" class="space-y-4">
                         <!-- Items will be populated by script -->
                     </div>
-           <div class="flex justify-end mt-6">
-    <button id="addMoreItems" class="btn-primary w-1/4">
-        <i class="fas fa-plus mr-2"></i>ADD MORE ITEMS
-    </button>
-</div>
-
-
+                    <div class="flex justify-end mt-6">
+                        <button id="addMoreItems" class="btn-primary" style="width: auto; min-width: 150px;">
+                            <i class="fas fa-plus mr-2"></i>ADD MORE ITEMS
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Select Delivery Date and Time -->
                 <div class="card p-6">
                     <h3 class="section-title">Delivery Schedule</h3>
                     <div class="space-y-4">
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 delivery-btn-group">
                             <button id="today" class="btn-secondary flex-1">Today</button>
                             <button id="customDate" class="btn-secondary flex-1">Custom Date</button>
                         </div>
-                        <div id="dateTimeDisplay" class="flex items-center justify-between bg-gray-50 p-4 rounded-xl">
-                            <span id="selectedDate" class="font-semibold text-gray-700">Today, September 23, 2025, 02:45 PM IST</span>
-                            <select id="deliveryTime" class="form-input min-w-[160px]">
+                        <div id="dateTimeDisplay" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gray-50 p-4 rounded-xl gap-3">
+                            <span id="selectedDate" class="font-semibold text-gray-700 text-sm sm:text-base">Today, September 23, 2025, 02:45 PM IST</span>
+                            <select id="deliveryTime" class="form-input w-full sm:w-auto sm:min-w-[160px]">
                                 <option value="1:00PM to 3:00PM">1:00PM to 3:00PM</option>
                                 <option value="3:00PM to 5:00PM">3:00PM to 5:00PM</option>
                                 <option value="5:00PM to 7:00PM">5:00PM to 7:00PM</option>
@@ -347,22 +608,10 @@
                                 <div id="addressOptions" class="space-y-3 mb-3">
                                     <!-- Addresses will be populated -->
                                 </div>
-                          <div class="flex justify-end mt-4">
-    <button id="addNewAddress" class="btn-primary w-1/4">
-        <i class="fas fa-plus mr-2"></i>Add New Address
-    </button>
-</div>
-
-                            </div>
-                        </div>
-
-                        <!-- Alternate Mobile No. -->
-                        <div class="form-row-single">
-                            <div>
-                                <label class="form-label">Alternate Mobile No.</label>
-                                <div class="icon-input">
-                                    <i class="fas fa-phone-alt"></i>
-                                    <input type="tel" id="altPhone" placeholder="Enter alternate mobile no." class="form-input w-full" pattern="[0-9]{10}" maxlength="10">
+                                <div class="flex justify-end mt-4">
+                                    <button id="addNewAddress" class="btn-primary" style="width: auto; min-width: 150px;">
+                                        <i class="fas fa-plus mr-2"></i>Add New Address
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -371,14 +620,18 @@
                         <div class="form-row">
                             <div>
                                 <label class="form-label">Payment Method</label>
-                                <button id="paymentMethod" class="btn-primary w-full">
-                                    <i class="fas fa-credit-card mr-2"></i>Online Payment
-                                </button>
+                                <div class="select-wrapper">
+                                    <select id="paymentMethod" class="form-input w-full">
+                                        <option value="online">Pay Online</option>
+                                        <option value="cod">Cash on Delivery</option>
+                                        <option value="pickup">Pickup by Store</option>
+                                    </select>
+                                </div>
                             </div>
                             <div>
                                 <label class="form-label">Order Type</label>
-                                <div class="flex gap-2">
-                                    <button id="ownOrder" class="btn-secondary flex-1">Own Order</button>
+                                <div class="flex gap-2 order-type-group">
+                                    <button id="ownOrder" class="btn-selected flex-1">Own Order</button>
                                     <button id="giftOrder" class="btn-secondary flex-1">Gift Order</button>
                                 </div>
                             </div>
@@ -389,7 +642,7 @@
 
             <!-- Right Column: Discount and Summary -->
             <div class="space-y-6">
-                <div class="card p-6 sticky top-6">
+                <div class="card p-6 sticky top-6 summary-card">
                     <!-- Discount -->
                     <h3 class="section-title">Apply Discount</h3>
                     <div class="space-y-4">
@@ -397,7 +650,7 @@
                             <input type="text" id="discountCode" placeholder="Enter discount code" class="form-input flex-1 rounded-r-none">
                             <button id="applyDiscount" class="btn-primary rounded-l-none">APPLY</button>
                         </div>
-                        <a href="#" class="text-primary flex items-center text-sm font-semibold hover:text-primary-dark transition-colors">
+                        <a href="#" id="viewCoupons" class="text-primary flex items-center text-sm font-semibold hover:text-primary-dark transition-colors">
                             <i class="fas fa-percentage mr-2"></i>View Available Coupons
                         </a>
                     </div>
@@ -411,9 +664,48 @@
                     </div>
 
                     <!-- Place Order Button -->
-                    <button id="placeOrder" class="btn-primary w-full mt-6 py-4 text-lg font-bold">
+                    <button id="placeOrder" class="btn-primary w-full mt-6 py-4 text-base sm:text-lg font-bold">
                         <i class="fas fa-shopping-cart mr-2"></i>PLACE ORDER
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupons Modal -->
+    <div id="couponsModal" class="coupons-modal">
+        <div class="coupons-modal-content">
+            <span class="close" id="closeCouponsModal">&times;</span>
+            <h3 class="section-title mb-4">Available Coupons</h3>
+            <div id="couponsList">
+                <div class="coupon-card" onclick="applyCouponFromCard('SAVE25')">
+                    <div class="coupon-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="coupon-details">
+                        <div class="coupon-title">FLAT 15% Off on Silver Jewellery above ₹3499</div>
+                        <div class="coupon-description">Use code: SAVE25</div>
+                    </div>
+                </div>
+
+                <div class="coupon-card" onclick="applyCouponFromCard('WELCOME10')">
+                    <div class="coupon-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="coupon-details">
+                        <div class="coupon-title">FLAT 20% Off on Silver Jewellery above ₹6999</div>
+                        <div class="coupon-description">Use code: WELCOME10</div>
+                    </div>
+                </div>
+
+                <div class="coupon-card" onclick="applyCouponFromCard('BUY1GET2')">
+                    <div class="coupon-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="coupon-details">
+                        <div class="coupon-title">Buy 1 get 2nd at 25% off</div>
+                        <div class="coupon-description">Use code: BUY1GET2</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -422,7 +714,7 @@
     <!-- Address Modal -->
     <div id="addressModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="closeAddressModal">&times;</span>
             <h3 class="section-title mb-4">Add New Address</h3>
             <div class="form-grid">
                 <div class="form-row">
@@ -498,7 +790,7 @@
     <!-- Gift Order Modal -->
     <div id="giftModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="closeGiftModal">&times;</span>
             <h3 class="section-title mb-6">Gift Order Details</h3>
             <div class="form-grid">
                 <div>
@@ -540,15 +832,15 @@
             cartItems.forEach((item, index) => {
                 if (item.quantity > 0) {
                     const itemDiv = document.createElement('div');
-                    itemDiv.className = 'flex items-center gap-4 p-4 bg-gray-50 rounded-xl';
+                    itemDiv.className = 'flex items-center gap-4 p-4 bg-gray-50 rounded-xl cart-item-container';
                     itemDiv.innerHTML = `
                         <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-lg" style="color: var(--text)">${item.name}</h3>
-                            <p class="text-sm" style="color: var(--text-light)">${item.description || 'Delicious bakery item'}</p>
+                        <div class="flex-1 cart-item-details">
+                            <h3 class="font-semibold text-base sm:text-lg" style="color: var(--text)">${item.name}</h3>
+                            <p class="text-xs sm:text-sm" style="color: var(--text-light)">${item.description || 'Delicious bakery item'}</p>
                         </div>
-                        <div class="text-right">
-                            <p class="font-bold text-lg" style="color: var(--text)">₹${(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                        <div class="text-right cart-item-price">
+                            <p class="font-bold text-base sm:text-lg" style="color: var(--text)">₹${(item.price * item.quantity).toLocaleString('en-IN')}</p>
                             <div class="flex items-center gap-2 mt-2">
                                 <button class="quantity-btn qty-minus" data-index="${index}">-</button>
                                 <span class="w-8 text-center font-semibold" style="color: var(--text)">${item.quantity}</span>
@@ -556,7 +848,7 @@
                             </div>
                         </div>
                         <button class="remove-item text-red-500 hover:text-red-700 ml-2" data-index="${index}">
-                            <i class="fas fa-trash text-lg"></i>
+                            <i class="fas fa-trash text-base sm:text-lg"></i>
                         </button>
                     `;
                     cartItemsDiv.appendChild(itemDiv);
@@ -574,15 +866,15 @@
                 const div = document.createElement('div');
                 div.className = 'address-card';
                 div.innerHTML = `
-                    <label class="flex items-center justify-between cursor-pointer">
-                        <div class="flex items-start gap-3">
+                    <label class="flex flex-col sm:flex-row items-start justify-between cursor-pointer gap-2">
+                        <div class="flex items-start gap-3 w-full">
                             <input type="radio" name="address" value="${addressStr}" class="mt-1" ${index === 0 ? 'checked' : ''}>
-                            <div>
-                                <div class="font-semibold" style="color: var(--text)">${addr.type}</div>
-                                <div class="text-sm" style="color: var(--text-light)">${addressStr}</div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base" style="color: var(--text)">${addr.type}</div>
+                                <div class="text-xs sm:text-sm" style="color: var(--text-light)">${addressStr}</div>
                             </div>
                         </div>
-                        <button class="edit-address btn-secondary text-sm" data-index="${index}">
+                        <button class="edit-address btn-secondary text-xs sm:text-sm w-full sm:w-auto mt-2 sm:mt-0" data-index="${index}">
                             <i class="fas fa-edit mr-1"></i>Edit
                         </button>
                     </label>
@@ -601,6 +893,22 @@
             document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+
+        // Coupons Modal Functions
+        function closeCouponsModal() {
+            closeModal('couponsModal');
+        }
+
+        function applyCouponFromCard(code) {
+            document.getElementById('discountCode').value = code;
+            closeCouponsModal();
+            document.getElementById('applyDiscount').click();
+        }
+
+        document.getElementById('viewCoupons').addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('couponsModal');
+        });
 
         // Delivery Date and Time
         let datePickerInstance;
@@ -635,10 +943,6 @@
 
         // Phone validation
         document.getElementById('orderPhone').addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
-        });
-
-        document.getElementById('altPhone').addEventListener('input', function(e) {
             this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
         });
 
@@ -726,30 +1030,19 @@
         let orderType = 'own';
         document.getElementById('ownOrder').addEventListener('click', function() {
             orderType = 'own';
-            this.classList.add('btn-secondary');
-            this.classList.remove('btn-primary');
-            document.getElementById('giftOrder').classList.add('btn-secondary');
-            document.getElementById('giftOrder').classList.remove('btn-primary');
+            this.className = 'btn-selected flex-1';
+            document.getElementById('giftOrder').className = 'btn-secondary flex-1';
             closeModal('giftModal');
         });
 
         document.getElementById('giftOrder').addEventListener('click', function() {
             orderType = 'gift';
-            this.classList.add('btn-primary');
-            this.classList.remove('btn-secondary');
-            document.getElementById('ownOrder').classList.add('btn-secondary');
-            document.getElementById('ownOrder').classList.remove('btn-primary');
+            this.className = 'btn-selected flex-1';
+            document.getElementById('ownOrder').className = 'btn-secondary flex-1';
             openModal('giftModal');
         });
 
         // Gift Modal Controls
-        document.querySelectorAll('.close').forEach(closeBtn => {
-            closeBtn.addEventListener('click', function() {
-                const modal = this.closest('.modal');
-                closeModal(modal.id);
-            });
-        });
-
         document.getElementById('saveGiftDetails').addEventListener('click', () => {
             const recipientName = document.getElementById('recipientName').value;
             const recipientPhone = document.getElementById('recipientPhone').value;
@@ -775,8 +1068,12 @@
                 discount = 10;
                 alert('Welcome discount of ₹10 applied!');
                 document.getElementById('discountCode').value = code;
+            } else if (code === 'BUY1GET2') {
+                discount = 50;
+                alert('Buy 1 Get 2nd at 25% off - ₹50 discount applied!');
+                document.getElementById('discountCode').value = code;
             } else if (code) {
-                alert('Invalid discount code! Try SAVE25 or WELCOME10');
+                alert('Invalid discount code! Try SAVE25, WELCOME10, or BUY1GET2');
                 discount = 0;
             } else {
                 alert('Please enter a discount code!');
@@ -820,11 +1117,6 @@
             window.location.href = '/shop';
         });
 
-        // Payment Method
-        document.getElementById('paymentMethod').addEventListener('click', () => {
-            alert('Payment method: Online Payment selected');
-        });
-
         // Update Summary
         function updateSummary() {
             const subTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -856,8 +1148,8 @@
                 ` : ''}
                 <div class="border-t border-gray-200 my-3"></div>
                 <div class="flex justify-between items-center py-2">
-                    <span class="text-lg font-bold" style="color: var(--text)">Total Amount</span>
-                    <span class="text-xl font-bold" style="color: var(--primary)">₹${total.toLocaleString('en-IN')}</span>
+                    <span class="text-base sm:text-lg font-bold" style="color: var(--text)">Total Amount</span>
+                    <span class="text-lg sm:text-xl font-bold" style="color: var(--primary)">₹${total.toLocaleString('en-IN')}</span>
                 </div>
                 ${subTotal <= 500 ? `
                 <div class="text-xs text-center mt-2 p-2 bg-orange-50 rounded-lg" style="color: var(--text-light)">
@@ -871,9 +1163,9 @@
         document.getElementById('placeOrder').addEventListener('click', () => {
             const name = document.getElementById('orderName').value.trim();
             const phone = document.getElementById('orderPhone').value.trim();
-            const altPhone = document.getElementById('altPhone').value.trim();
             const selectedAddress = document.querySelector('input[name="address"]:checked');
             const address = selectedAddress ? selectedAddress.value : '';
+            const paymentMethod = document.getElementById('paymentMethod').value;
 
             // Validation
             if (!name) {
@@ -908,8 +1200,8 @@
                 orderId: 'ORD' + Date.now(),
                 customerName: name,
                 phone: phone,
-                altPhone: altPhone,
                 address: address,
+                paymentMethod: paymentMethod,
                 orderType: orderType,
                 items: cartItems,
                 subTotal: subTotal,
@@ -932,7 +1224,8 @@
             console.log('Order placed:', orderDetails);
             
             // Show success message
-            alert(`🎉 Order placed successfully!\n\nOrder ID: ${orderDetails.orderId}\nTotal: ₹${total.toLocaleString('en-IN')}\n\nThank you for your order, ${name}!`);
+            let paymentMethodText = paymentMethod === 'online' ? 'Pay Online' : paymentMethod === 'cod' ? 'Cash on Delivery' : 'Pickup by Store';
+            alert(`🎉 Order placed successfully!\n\nOrder ID: ${orderDetails.orderId}\nTotal: ₹${total.toLocaleString('en-IN')}\nPayment: ${paymentMethodText}\n\nThank you for your order, ${name}!`);
             
             // Clear cart and redirect
             localStorage.removeItem('cart');
@@ -944,7 +1237,7 @@
 
         // Close modal when clicking outside
         window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('coupons-modal')) {
                 closeModal(e.target.id);
             }
         });
@@ -966,8 +1259,8 @@
             })} IST`;
 
             // Set default order type styling
-            document.getElementById('ownOrder').classList.add('btn-secondary');
-            document.getElementById('giftOrder').classList.add('btn-secondary');
+            document.getElementById('ownOrder').className = 'btn-selected flex-1';
+            document.getElementById('giftOrder').className = 'btn-secondary flex-1';
             
             // Initialize with empty cart message if no items
             if (cartItems.length === 0) {
@@ -984,17 +1277,18 @@
             }
         }
 
-        // Load header and initialize
-        fetch('../Mainheader.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error loading header:', error);
-                // Initialize even if header fails to load
-                initializePage();
-            });
+        // Add event listeners for close buttons
+        document.getElementById('closeCouponsModal').addEventListener('click', () => {
+            closeModal('couponsModal');
+        });
+
+        document.getElementById('closeAddressModal').addEventListener('click', () => {
+            closeModal('addressModal');
+        });
+
+        document.getElementById('closeGiftModal').addEventListener('click', () => {
+            closeModal('giftModal');
+        });
 
         // Initialize page
         initializePage();

@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMO 
-        
-    </title>
+    <title>The Home Bakery -INDEX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#660B05',  // Dark Brown
-                        secondary: '#4E1F00', // light brown
-                           light: '#fef5f8',
+                        primary: '#660B05',
+                        secondary: '#4E1F00',
+                        light: '#fef5f8',
                         dark: '#333333'
                     },
                     boxShadow: {
@@ -30,481 +28,516 @@
         }
     </script>
     <style type="text/tailwindcss">
-   .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
+        .delay-3 { animation-delay: 1.5s; }
+        .delay-4 { animation-delay: 2s; }
     </style>
 </head>
 <body class="bg-white">
-    <!-- Header will be loaded here -->
-    <div id="header-container"></div>
 
-  
-</head>
-<body class="bg-white">
-  <!-- Header will be loaded here -->
-  <div id="header-container"></div>
-
-  <!-- Horizontal Scroll Section with Perfectly Sized Cards -->
-  <section class="px-2 py-2 max-w-9xl mx-auto relative">
-    <!-- Left Arrow -->
-    <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </button>
-    
-    <!-- Right Arrow -->
-    <button id="nextBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-    </button>
-
-    <div id="scrollContainer" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
-      
-
-
-            <!-- Card 4 - Muffins -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[200px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <img src="https://i.pinimg.com/originals/e3/8b/65/e38b65897bc08b931b873c26a8b49738.gif" 
-             alt="Fresh Muffins" 
-             class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-              Cakes and Pastries
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-          Our signature cakes & delicate pastries
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-             ORDER NOW
-          </button>
+<!-- First Navbar (Top) -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-3 py-2 md:px-8 md:py-4 text-white bg-primary">
+    <div class="flex items-center">
+        <span class="text-xs sm:text-sm md:text-base">Welcome To The Home Bakery</span>
+    </div>
+    <div class="flex items-center space-x-2">
+        <i class="fas fa-map-marker-alt text-white text-xs sm:text-sm"></i>
+        <div class="flex flex-col">
+            <span class="text-[10px] sm:text-xs text-white">Deliver to</span>
+            <button id="deliveryLocationBtn" class="text-xs sm:text-sm font-medium text-white hover:text-gray-300 transition-colors duration-300 flex items-center">
+                <span id="selectedLocation" class="max-w-[80px] sm:max-w-none truncate">Select Location</span>
+                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
         </div>
-      </div>
+    </div>
+</nav>
 
-            <!-- Card 5 - Customise Your Own -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[200px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <video autoplay muted loop class="w-full h-full object-cover">
-          <source src="https://v1.pinimg.com/videos/mc/720p/11/89/87/118987931a0f57dd984c2926091d32cc.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-            Customise Your Own
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-            Flavours, colours, and themes the way you love them.
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-            START NOW
-          </button>
+<!-- Second Navbar (Main) -->
+<nav class="sticky top-12 sm:top-14 md:top-16 z-40 bg-white shadow-lg border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        <div class="flex justify-between items-center h-16 sm:h-20 md:h-24">
+            
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <img src="/IMG/nohat_bg_removed_8c9aa728.png" alt="The Home Bakery Logo" class="h-10 w-12 sm:h-12 sm:w-14 md:h-16 md:w-18 transition-transform duration-300 hover:scale-105">
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="../index.html" class="px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200">Home</a>
+                
+                <!-- Cakes Dropdown -->
+                <div class="relative group">
+                    <a href="/cakes/Allcakes.html" class="flex items-center px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200">
+                        Cakes
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                    </a>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[650px] bg-white shadow-dropdown rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] border border-gray-100">
+                        <div class="p-6 grid grid-cols-4 gap-6">
+                            <div>
+                                <h3 class="flex items-center text-primary font-semibold text-sm mb-3">
+                                    <i class="fas fa-utensils mr-2"></i>By Type
+                                </h3>
+                                <ul class="space-y-1">
+                                    <li><a href="./CAKES/allcakes.html" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">All Cakes</a></li>
+                                    <li><a href="./cakes/choco.html" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Chocolate Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Vanilla Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Red Velvet</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Fruit Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Black Forest</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="flex items-center text-primary font-semibold text-sm mb-3">
+                                    <i class="fas fa-calendar-alt mr-2"></i>By Occasion
+                                </h3>
+                                <ul class="space-y-1">
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Birthday Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Anniversary Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Wedding Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Graduation Cakes</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="flex items-center text-primary font-semibold text-sm mb-3">
+                                    <i class="fas fa-child mr-2"></i>Kids Cakes
+                                </h3>
+                                <ul class="space-y-1">
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Barbie Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Car Theme</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Cartoon Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Spiderman</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="flex items-center text-primary font-semibold text-sm mb-3">
+                                    <i class="fas fa-star mr-2"></i>Specialty
+                                </h3>
+                                <ul class="space-y-1">
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Photo Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Bento Cakes</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Pull Me Up</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Pinata Cakes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastries Dropdown -->
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200">
+                        Pastries
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                    </a>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[220px] bg-white shadow-dropdown rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] border border-gray-100">
+                        <div class="p-6">
+                            <div>
+                                <h3 class="flex items-center text-primary font-semibold text-sm mb-3">
+                                    <i class="fas fa-ice-cream mr-2"></i>By Flavours
+                                </h3>
+                                <ul class="space-y-1">
+                                    <li><a href="./PASTRIES/chocopastry.html" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Chocolate</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Vanilla</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Strawberry</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Blueberry</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Lemon</a></li>
+                                    <li><a href="#" class="block px-3 py-2 text-sm text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md">Matcha</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="./CUSTOM/custom.html" class="px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg">Customisation</a>
+                <a href="#" class="px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg">Track Order</a>
+                <a href="../contact.html" class="px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg">Contact Us</a>
+                <a href="../about.html" class="px-4 py-2 text-base font-medium text-black hover:text-primary hover:bg-gray-50 rounded-lg">About Us</a>
+            </div>
+
+            <!-- Right Side Icons -->
+            <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-5">
+                <!-- Wishlist -->
+                <a href="wishlist.html" class="relative flex flex-col items-center p-1 text-black hover:text-primary">
+                    <i class="fas fa-heart text-base sm:text-lg"></i>
+                    <span class="hidden sm:block text-xs mt-1">Wishlist</span>
+                    <span id="wishlist-count" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">0</span>
+                </a>
+
+                <!-- Cart -->
+                <a href="cart.html" class="relative flex flex-col items-center p-1 text-black hover:text-primary">
+                    <i class="fas fa-shopping-cart text-base sm:text-lg"></i>
+                    <span class="hidden sm:block text-xs mt-1">Cart</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">0</span>
+                </a>
+
+                <!-- Login - Hidden on very small screens -->
+                <a href="login.html" class="hidden sm:flex flex-col items-center p-1 text-black hover:text-primary">
+                    <i class="fas fa-user text-base sm:text-lg"></i>
+                    <span class="text-xs mt-1">Login</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="menuToggle" class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-bars text-lg sm:text-xl"></i>
+                </button>
+            </div>
         </div>
-      </div>
+    </div>
 
+    <!-- Mobile Menu -->
+    <div id="navLinks" class="md:hidden hidden bg-white border-t border-gray-100">
+        <div class="px-4 py-4 space-y-2 max-h-[70vh] overflow-y-auto">
+            <a href="../index.html" class="block px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">Home</a>
+            
+            <!-- Mobile Cakes Dropdown -->
+            <div class="space-y-0">
+                <button id="mobileCakesToggle" class="w-full flex items-center justify-between px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">
+                    Cakes
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div id="mobileCakesMenu" class="hidden bg-gray-50 border border-gray-200 rounded-lg overflow-hidden mt-1">
+                    <div class="p-4 space-y-2">
+                        <div>
+                            <h4 class="flex items-center text-primary font-semibold text-xs mb-2">
+                                <i class="fas fa-utensils mr-1"></i>By Type
+                            </h4>
+                            <ul class="space-y-1 text-xs">
+                                <li><a href="/CAKES/allcakes.html" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">All Cakes</a></li>
+                                <li><a href="/cakes/choco.html" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Chocolate Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Vanilla Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Red Velvet</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Fruit Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Black Forest</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="flex items-center text-primary font-semibold text-xs mb-2">
+                                <i class="fas fa-calendar-alt mr-1"></i>By Occasion
+                            </h4>
+                            <ul class="space-y-1 text-xs">
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Birthday Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Anniversary Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Wedding Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Graduation Cakes</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="flex items-center text-primary font-semibold text-xs mb-2">
+                                <i class="fas fa-child mr-1"></i>Kids Cakes
+                            </h4>
+                            <ul class="space-y-1 text-xs">
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Barbie Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Car Theme</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Cartoon Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Spiderman</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="flex items-center text-primary font-semibold text-xs mb-2">
+                                <i class="fas fa-star mr-1"></i>Specialty
+                            </h4>
+                            <ul class="space-y-1 text-xs">
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Photo Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Bento Cakes</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Pull Me Up</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Pinata Cakes</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Mobile Pastries Dropdown -->
+            <div class="space-y-0">
+                <button id="mobilePastriesToggle" class="w-full flex items-center justify-between px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">
+                    Pastries
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div id="mobilePastriesMenu" class="hidden bg-gray-50 border border-gray-200 rounded-lg overflow-hidden mt-1">
+                    <div class="p-4 space-y-2">
+                        <div>
+                            <h4 class="flex items-center text-primary font-semibold text-xs mb-2">
+                                <i class="fas fa-ice-cream mr-1"></i>By Flavours
+                            </h4>
+                            <ul class="space-y-1 text-xs">
+                                <li><a href="./PASTRIES/chocopastry.html" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Chocolate</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Vanilla</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Strawberry</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Blueberry</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Lemon</a></li>
+                                <li><a href="#" class="block px-3 py-2 text-gray-800 hover:text-primary hover:bg-white rounded-md">Matcha</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-   <!-- Card - Donuts -->
-<div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[200px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-  <video autoplay muted loop class="w-full h-full object-cover">
-    <source src="video/donut.mp4" type="video/mp4">
-  </video>
-  <div class="absolute inset-0 bg-black/30 flex flex-col justify-center text-left text-white px-8">
-    <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-      Sweet Donuts
-    </h2>
-    <p class="text-base md:text-lg mb-4 max-w-[80%]">
-      Soft, fluffy donuts with a variety of delicious toppings and fillings
-    </p>
-    <button class="bg-yellow-400 hover:bg-pink-500 text-white font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-      ORDER NOW
-    </button>
-  </div>
+            <a href="./CUSTOM/custom.html" class="block px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">Customisation</a>
+            <a href="#" class="block px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">Track Order</a>
+            <a href="/contact.html" class="block px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">Contact Us</a>
+            <a href="/about.html" class="block px-4 py-3 text-sm sm:text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg">About Us</a>
+            
+            <div class="flex items-center justify-around pt-4 border-t border-gray-100 mt-4">
+                <a href="wishlist.html" class="flex flex-col items-center p-3 text-gray-700 hover:text-primary">
+                    <i class="fas fa-heart text-lg"></i>
+                    <span class="text-xs mt-1">Wishlist</span>
+                </a>
+                <a href="cart.html" class="flex flex-col items-center p-3 text-gray-700 hover:text-primary">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span class="text-xs mt-1">Cart</span>
+                </a>
+                <a href="login.html" class="flex flex-col items-center p-3 text-gray-700 hover:text-primary">
+                    <i class="fas fa-user text-lg"></i>
+                    <span class="text-xs mt-1">Login</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Delivery Location Modal -->
+<div id="deliveryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-base sm:text-lg font-semibold text-gray-800">Choose Delivery Location</h3>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="mb-4">
+            <div class="relative">
+                <i class="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                <input type="text" id="locationInput" placeholder="Enter your area, city or pincode" class="w-full pl-10 pr-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+            </div>
+            <div id="locationError" class="text-red-500 text-xs sm:text-sm mt-1 hidden"></div>
+            <div id="locationSuccess" class="text-green-500 text-xs sm:text-sm mt-1 hidden"></div>
+        </div>
+
+        <div class="mb-4">
+            <h4 class="text-xs sm:text-sm font-medium text-gray-700 mb-2">Popular Areas in Pune</h4>
+            <div class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto">
+                <button class="location-option text-left p-2 rounded-lg hover:bg-gray-100 transition-colors text-xs sm:text-sm">
+                    <i class="fas fa-map-pin text-primary mr-2"></i>Koregaon Park
+                </button>
+                <button class="location-option text-left p-2 rounded-lg hover:bg-gray-100 transition-colors text-xs sm:text-sm">
+                    <i class="fas fa-map-pin text-primary mr-2"></i>Baner
+                </button>
+                <button class="location-option text-left p-2 rounded-lg hover:bg-gray-100 transition-colors text-xs sm:text-sm">
+                    <i class="fas fa-map-pin text-primary mr-2"></i>Wakad
+                </button>
+                <button class="location-option text-left p-2 rounded-lg hover:bg-gray-100 transition-colors text-xs sm:text-sm">
+                    <i class="fas fa-map-pin text-primary mr-2"></i>Hinjewadi
+                </button>
+            </div>
+        </div>
+
+        <button id="confirmLocation" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-lg text-sm sm:text-base font-medium hover:from-secondary hover:to-primary transition-all duration-300 disabled:opacity-50" disabled>
+            Confirm Location
+        </button>
+    </div>
 </div>
 
+<!-- Horizontal Scroll Section -->
+<section class="px-2 py-4 sm:py-6 max-w-9xl mx-auto relative mt-2">
+    <!-- Prev Button -->
+    <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-1.5 sm:p-2 rounded-full shadow-lg">
+        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
 
-      <!-- Card 1 - Cakes and Pastries -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[200px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <video autoplay muted loop class="w-full h-full object-cover">
-          <source src="https://v1.pinimg.com/videos/mc/720p/4a/e2/0a/4ae20a4041f75ccaf21643adc75c8278.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-Croissant Coming Soon
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-            Buttery, flaky croissants are on their way!
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-            NOTIFY ME
-          </button>
-        </div>
-      </div>
+    <!-- Next Button -->
+    <button id="nextBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-1.5 sm:p-2 rounded-full shadow-lg">
+        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
 
+    <!-- Scroll Container -->
+    <div id="scrollContainer" class="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
 
-      <!-- Card 3 - Cheesecakes -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[200px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <video autoplay muted loop class="w-full h-full object-cover">
-          <source src="https://v1.pinimg.com/videos/mc/720p/e4/4e/0b/e44e0b6567237c5c8fc0cdcb7e343896.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-            Cheesecakes
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-            Creamy, rich cheesecakes in various flavors
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-            EXPLORE
-          </button>
-        </div>
-      </div>
-
-
-
-
-      <!-- Card 4 - Muffins -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <img src="https://i.pinimg.com/originals/8b/b7/38/8bb73899cd626a2ab1ac9c0a2ead2599.gif" 
-             alt="Fresh Muffins" 
-             class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-            Muffins
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-            Freshly baked muffins with premium ingredients
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-            SHOP NOW
-          </button>
-        </div>
-      </div>
-
-
-
-      
-      <!-- Card 5 - Customise Your Own -->
-      <div class="relative overflow-hidden shadow-lg group min-w-[85%] md:min-w-[440px] h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
-        <video autoplay muted loop class="w-full h-full object-cover">
-          <source src="https://v1.pinimg.com/videos/mc/720p/e6/2e/f7/e62ef72f55017d273496ff05f48aaca9.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
-          <h2 class="text-2xl md:text-3xl font-extrabold mb-2">
-             Bombolonis
-          </h2>
-          <p class="text-base md:text-lg mb-4 max-w-[80%]">
-            Italian filled donuts with delicious cream centers
-          </p>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">
-             TRY NOW
-          </button>
-        </div>
-      </div>
-
-
-    </div>
-  </section>
-
-  <script>
-    const scrollContainer = document.getElementById('scrollContainer');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let currentIndex = 0;
-    let autoScrollInterval;
-    let isUserInteracting = false;
-    let isScrolling = false;
-
-    // Get card width including gap
-    function getCardWidth() {
-      const firstCard = scrollContainer.children[0];
-      const cardWidth = firstCard.offsetWidth;
-      const gap = 24; // 6 * 4px (gap-6 in Tailwind)
-      return cardWidth + gap;
-    }
-
-    // Get current card index based on scroll position
-    function getCurrentCardIndex() {
-      const cardWidth = getCardWidth();
-      const scrollLeft = scrollContainer.scrollLeft;
-      return Math.round(scrollLeft / cardWidth);
-    }
-
-    // Scroll to specific card with perfect alignment
-    function scrollToCard(index) {
-      if (isScrolling) return;
-      
-      isScrolling = true;
-      const cardWidth = getCardWidth();
-      const scrollPosition = index * cardWidth;
-      
-      scrollContainer.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
-
-      // Wait for scroll to complete
-      setTimeout(() => {
-        isScrolling = false;
-        currentIndex = index;
-      }, 600);
-    }
-
-    // Next card functionality
-    function nextCard() {
-      if (isScrolling) return;
-      
-      const totalCards = scrollContainer.children.length;
-      const nextIndex = (currentIndex + 1) % totalCards;
-      scrollToCard(nextIndex);
-    }
-
-    // Previous card functionality  
-    function prevCard() {
-      if (isScrolling) return;
-      
-      const totalCards = scrollContainer.children.length;
-      const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
-      scrollToCard(prevIndex);
-    }
-
-    // Start auto-scroll
-    function startAutoScroll() {
-      if (!isUserInteracting && !isScrolling) {
-        autoScrollInterval = setInterval(() => {
-          nextCard();
-        }, 6000); // Auto-scroll every 6 seconds
-      }
-    }
-
-    // Stop auto-scroll
-    function stopAutoScroll() {
-      if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = null;
-      }
-    }
-
-    // Update current index when manually scrolling
-    function updateCurrentIndex() {
-      if (!isScrolling) {
-        currentIndex = getCurrentCardIndex();
-      }
-    }
-
-    // Event listeners for arrows
-    nextBtn.addEventListener('click', () => {
-      isUserInteracting = true;
-      stopAutoScroll();
-      nextCard();
-      
-      // Resume auto-scroll after 6 seconds of inactivity
-      setTimeout(() => {
-        isUserInteracting = false;
-        startAutoScroll();
-      }, 6000);
-    });
-
-    prevBtn.addEventListener('click', () => {
-      isUserInteracting = true;
-      stopAutoScroll();
-      prevCard();
-      
-      // Resume auto-scroll after 6 seconds of inactivity
-      setTimeout(() => {
-        isUserInteracting = false;
-        startAutoScroll();
-      }, 6000);
-    });
-
-    // Pause auto-scroll on hover
-    scrollContainer.addEventListener('mouseenter', () => {
-      stopAutoScroll();
-    });
-
-    scrollContainer.addEventListener('mouseleave', () => {
-      if (!isUserInteracting) {
-        startAutoScroll();
-      }
-    });
-
-    // Handle manual scrolling with debounce
-    let scrollTimeout;
-    scrollContainer.addEventListener('scroll', () => {
-      isUserInteracting = true;
-      stopAutoScroll();
-      
-      // Clear existing timeout
-      clearTimeout(scrollTimeout);
-      
-      // Update current index after scroll ends
-      scrollTimeout = setTimeout(() => {
-        updateCurrentIndex();
-        isUserInteracting = false;
-        startAutoScroll();
-      }, 1500);
-    });
-
-    // Initialize on page load
-    window.addEventListener('load', () => {
-      currentIndex = 0;
-      scrollToCard(0);
-      setTimeout(() => {
-        startAutoScroll();
-      }, 1000);
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      setTimeout(() => {
-        scrollToCard(currentIndex);
-      }, 100);
-    });
-  </script>
-
-
-
-<!-- Product Categories Section -->
-<section class="py-1 bg-white">
-    <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-1">
-        <!-- Category Grid -->
-        <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-
-            <!-- PREMIUM CAKES -->
-            <a href="premium-cakes.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/premium.jpg" alt="Premium Cakes" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">PREMIUM CAKES</h3>
-                </div>
-            </a>
-
-            <!-- COLD COFFEE -->
-            <a href="cold-coffee.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/cold-coffee.jpg" alt="Cold Coffee" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">COLD COFFEE</h3>
-                </div>
-            </a>
-
-            <!-- FRENCH FRIES -->
-            <a href="french-fries.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/french-fries.jpg" alt="French Fries" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">FRENCH FRIES</h3>
-                </div>
-            </a>
-
-            <!-- TEA TIMES CAKES -->
-            <a href="tea-time-cakes.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/tea-time.jpg" alt="Tea Time Cakes" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">TEA TIMES CAKES</h3>
-                </div>
-            </a>
-
-            <!-- CAKESICLES -->
-            <a href="cakesicles.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/cakesicles.jpg" alt="Cakesicles" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">CAKESICLES</h3>
-                </div>
-            </a>
-
-            <!-- COOKIES -->
-            <a href="cookies.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl">
-                    <img src="IMG/cookies.jpg" alt="Cookies" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-3 text-center">
-                    <h3 class="font-medium text-gray-900">COOKIES</h3>
-                </div>
-            </a>
-
-        </div>
-    </div>
-</section>
-<div class="max-w-7xl mx-auto px-1 py-8">
-    <!-- Header -->
-    <div class="text-center mb-12">
-        <h1 class="text-xxl md:text-3xl font-bold text-[#5a0a0a] mb-2">
-            Bring A Box Of Happiness Today
-        </h1>
-    </div>
-
-    <!-- Main Content Grid -->
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
         <!-- Card 1 -->
-        <div class="flex flex-col items-center">
-            <div class="h-96 w-full bg-[#5a0a0a] bg-cover bg-no-repeat bg-center rounded-3xl border-4 border-[#5a0a0a]"
-                style="background-image: url('IMG/bakery 1st banner.jpg');">
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <img src="https://i.pinimg.com/originals/e3/8b/65/e38b65897bc08b931b873c26a8b49738.gif" alt="Cakes and Pastries" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-4 sm:px-6 md:px-8">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold mb-1 sm:mb-2">Cakes and Pastries</h2>
+                <p class="text-xs sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 max-w-[85%]">Our signature cakes & delicate pastries</p>
+                <button onclick="window.location.href='CAKES/allcakes.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2 rounded-full text-xs sm:text-sm md:text-base shadow-md w-fit">ORDER NOW</button>
             </div>
-            <a href="./cakes/Allcakes.html" class="mt-4 bg-[#5a0a0a] hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-full transition-colors text-lg text-center inline-block">
-                Order Online
-            </a>
         </div>
 
         <!-- Card 2 -->
-        <div class="flex flex-col items-center">
-            <div class="h-96 w-full bg-[#5a0a0a] bg-cover bg-no-repeat bg-center rounded-3xl border-4 border-[#5a0a0a]"
-                style="background-image: url('IMG/bakery 2nd banner.jpg');">
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://v1.pinimg.com/videos/mc/720p/11/89/87/118987931a0f57dd984c2926091d32cc.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-4 sm:px-6 md:px-8">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold mb-1 sm:mb-2">Customise Your Own</h2>
+                <p class="text-xs sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 max-w-[85%]">Flavours, colours, and themes the way you love them</p>
+                <button onclick="window.location.href='CUSTOM/custom.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2 rounded-full text-xs sm:text-sm md:text-base shadow-md w-fit">START NOW</button>
             </div>
-            <a href="https://www.google.com/maps/place/Kunash+Media+Solution/@18.64312,73.7703967,17z/data=!4m14!1m7!3m6!1s0x3bc2b9a033d099e1:0x7a4c9dfa99aff084!2sKunash+Media+Solution!8m2!3d18.64312!4d73.772977!16s%2Fg%2F11vw_c0_57!3m5!1s0x3bc2b9a033d099e1:0x7a4c9dfa99aff084!8m2!3d18.64312!4d73.772977!16s%2Fg%2F11vw_c0_57?entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="mt-4 bg-[#5a0a0a] hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-full transition-colors text-lg text-center inline-block">
-                Visit Our Store
+        </div>
+
+        <!-- Card 3 -->
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://v1.pinimg.com/videos/mc/720p/e4/4e/0b/e44e0b6567237c5c8fc0cdcb7e343896.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-4 sm:px-6 md:px-8">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold mb-1 sm:mb-2">Cheesecakes</h2>
+                <p class="text-xs sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 max-w-[85%]">Creamy, rich cheesecakes in various flavors</p>
+                <button onclick="window.location.href='SIDEBY/sideby.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2 rounded-full text-xs sm:text-sm md:text-base shadow-md w-fit">EXPLORE</button>
+            </div>
+        </div>
+
+        <!-- Croissant -->
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://v1.pinimg.com/videos/mc/720p/4a/e2/0a/4ae20a4041f75ccaf21643adc75c8278.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-2">Croissant Coming Soon</h2>
+                <p class="text-base md:text-lg mb-4 max-w-[80%]">Buttery, flaky croissants are on their way!</p>
+                <button onclick="window.location.href='SIDEBY/sideby.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">NOTIFY ME</button>
+            </div>
+        </div>
+
+        <!-- Card 4 - Muffins -->
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <img src="https://i.pinimg.com/originals/8b/b7/38/8bb73899cd626a2ab1ac9c0a2ead2599.gif" alt="Fresh Muffins" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-left text-white px-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-2">Muffins</h2>
+                <p class="text-base md:text-lg mb-4 max-w-[80%]">Freshly baked muffins with premium ingredients</p>
+                <button onclick="window.location.href='SIDEBY/sideby.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">SHOP NOW</button>
+            </div>
+        </div>
+
+        <!-- Card 5 - Bombolonis -->
+        <div class="relative overflow-hidden shadow-lg group min-w-[90%] sm:min-w-[85%] md:min-w-[440px] h-[180px] sm:h-[220px] md:h-[270px] snap-start flex-shrink-0 rounded-xl">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://v1.pinimg.com/videos/mc/720p/e6/2e/f7/e62ef72f55017d273496ff05f48aaca9.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/35 flex flex-col justify-center text-left text-white px-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-2">Bombolonis</h2>
+                <p class="text-base md:text-lg mb-4 max-w-[80%]">Italian filled donuts with delicious cream centers</p>
+                <button onclick="window.location.href='SIDEBY/sideby.html'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-md w-fit">TRY NOW</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Product Categories Section -->
+<section class="py-6 sm:py-8 md:py-12 bg-white">
+    <div class="max-w-9xl mx-auto px-2 sm:px-4 lg:px-6">
+        <div class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:grid-cols-6">
+            <!-- Category Card 1 -->
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/premium.jpg" alt="Premium Cakes" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">PREMIUM CAKES</h3>
+                </div>
+            </a>
+
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/cold-coffee.jpg" alt="Cold Coffee" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">COLD COFFEE</h3>
+                </div>
+            </a>
+
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/french-fries.jpg" alt="French Fries" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">FRENCH FRIES</h3>
+                </div>
+            </a>
+
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/tea-time.jpg" alt="Tea Time Cakes" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">TEA TIME CAKES</h3>
+                </div>
+            </a>
+
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/cakesicles.jpg" alt="Cakesicles" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">CAKESICLES</h3>
+                </div>
+            </a>
+
+            <a href="./SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="w-full overflow-hidden rounded-t-xl">
+                    <img src="IMG/cookies.jpg" alt="Cookies" class="w-full h-24 sm:h-28 md:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-2 sm:p-3 text-center">
+                    <h3 class="font-medium text-gray-900 text-xs sm:text-sm md:text-base">COOKIES</h3>
+                </div>
             </a>
         </div>
     </div>
-</div>
+</section>
 
-
-<!-- Cakes & Pastries -->
-<section class="py-2 bg-white">
-    <div class="max-w-8xl px-1 mx-auto">
+<!-- Cakes & Pastries Section -->
+<section class="py-4 sm:py-6 md:py-8 bg-white">
+    <div class="max-w-8xl px-2 sm:px-4 mx-auto">
         <!-- Notification -->
         <div id="notification" class="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg hidden transition-opacity duration-300 z-50">
             <span id="notification-text"></span>
         </div>
 
         <!-- Cakes Section -->
-        <div class="mb-16">
+        <div class="mb-10 sm:mb-12 md:mb-16">
             <div class="text-center">
-                <h2 class="section-title text-3xl font-bold text-gray-800">Our Signature Cakes</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-3">Handcrafted cakes made with premium ingredients and artistic designs</p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Our Signature Cakes</h2>
+                <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mt-2 sm:mt-3 px-4">Handcrafted cakes made with premium ingredients and artistic designs</p>
             </div>
             
-            <div class="grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 mt-6 sm:mt-8 md:mt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <!-- Cake 1 -->
                 <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-                    <div class="overflow-hidden h-60 relative">
-                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" 
-                             alt="Chocolate Fudge Cake" 
-                             class="object-cover w-full h-full card-image">
-                        <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                                onclick="toggleWishlist(this, 'chocolate-fudge-cake', 'Chocolate Fudge Cake', '₹2,499', 'Rich chocolate layers with creamy fudge', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop')">
-                            <i class="fas fa-heart text-xl"></i>
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Chocolate Fudge Cake" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'chocolate-fudge-cake', 'Chocolate Fudge Cake', '₹2,499', 'Rich chocolate layers', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
                         </button>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold">Chocolate Fudge Cake</h3>
-                        <p class="mt-2 text-gray-600">Rich chocolate layers with creamy fudge</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-xl font-bold text-primary">₹2,499</span>
-                            <a href="product-details.html?id=chocolate-fudge-cake" 
-                               class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">
-                                <span>View Details</span>
-                                <i class="fas fa-arrow-right"></i>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Chocolate Fudge Cake</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Rich chocolate layers with creamy fudge</p><br>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹2,499</span>
+                            <a href="product-details.html?id=chocolate-fudge-cake" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                         </div>
                     </div>
@@ -512,74 +545,62 @@ Croissant Coming Soon
                 
                 <!-- Cake 2 -->
                 <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-                    <div class="overflow-hidden h-60 relative">
-                        <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400&h=300&fit=crop" 
-                             alt="Red Velvet Dream" 
-                             class="object-cover w-full h-full card-image">
-                        <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                                onclick="toggleWishlist(this, 'red-velvet-dream', 'Red Velvet Dream', '₹2,799', 'Classic velvet cake with cream cheese frosting', 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400&h=300&fit=crop')">
-                            <i class="fas fa-heart text-xl"></i>
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400&h=300&fit=crop" alt="Red Velvet Dream" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'red-velvet-dream', 'Red Velvet Dream', '₹2,799', 'Classic velvet cake', 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
                         </button>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold">Red Velvet Dream</h3>
-                        <p class="mt-2 text-gray-600">Classic velvet cake with cream cheese frosting</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-xl font-bold text-primary">₹2,799</span>
-                            <a href="product-details.html?id=red-velvet-dream" 
-                               class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">
-                                <span>View Details</span>
-                                <i class="fas fa-arrow-right"></i>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Red Velvet Dream</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Classic velvet cake with cream cheese frosting</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹2,799</span>
+                            <a href="product-details.html?id=red-velvet-dream" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Cake 3 -->
                 <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-                    <div class="overflow-hidden h-60 relative">
-                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop" 
-                             alt="Berry Cheesecake" 
-                             class="object-cover w-full h-full card-image">
-                        <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                                onclick="toggleWishlist(this, 'berry-cheesecake', 'Berry Cheesecake', '₹2,999', 'Creamy cheesecake topped with fresh berries', 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop')">
-                            <i class="fas fa-heart text-xl"></i>
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop" alt="Berry Cheesecake" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'berry-cheesecake', 'Berry Cheesecake', '₹2,999', 'Creamy cheesecake', 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
                         </button>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold">Berry Cheesecake</h3>
-                        <p class="mt-2 text-gray-600">Creamy cheesecake topped with fresh berries</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-xl font-bold text-primary">₹2,999</span>
-                            <a href="product-details.html?id=berry-cheesecake" 
-                               class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">
-                                <span>View Details</span>
-                                <i class="fas fa-arrow-right"></i>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Berry Cheesecake</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Creamy cheesecake topped with fresh berries</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹2,999</span>
+                            <a href="product-details.html?id=berry-cheesecake" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Cake 4 -->
                 <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-                    <div class="overflow-hidden h-60 relative">
-                        <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400&h=300&fit=crop" 
-                             alt="Lemon Meringue" 
-                             class="object-cover w-full h-full card-image">
-                        <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                                onclick="toggleWishlist(this, 'lemon-meringue', 'Lemon Meringue', '₹2,599', 'Tangy lemon cake with fluffy meringue', 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400&h=300&fit=crop')">
-                            <i class="fas fa-heart text-xl"></i>
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400&h=300&fit=crop" alt="Lemon Meringue" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'lemon-meringue', 'Lemon Meringue', '₹2,599', 'Tangy lemon cake', 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
                         </button>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold">Lemon Meringue</h3>
-                        <p class="mt-2 text-gray-600">Tangy lemon cake with fluffy meringue</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-xl font-bold text-primary">₹2,599</span>
-                            <a href="product-details.html?id=lemon-meringue" 
-                               class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">
-                                <span>View Details</span>
-                                <i class="fas fa-arrow-right"></i>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Lemon Meringue</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Tangy lemon cake with fluffy meringue</p><br>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹2,599</span>
+                            <a href="product-details.html?id=lemon-meringue" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                         </div>
                     </div>
@@ -587,820 +608,333 @@ Croissant Coming Soon
             </div>
         </div>
         
-     <!-- Pastries Section -->
-<div>
-    <div class="text-center">
-        <h2 class="section-title text-3xl font-bold text-gray-800">Trending Pastries of 2025</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto mt-3">Indulge in the finest bakery-style pastries with an Indian twist</p>
-    </div>
-    
-    <div class="grid grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <!-- Pastry 1 -->
-        <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-            <div class="overflow-hidden h-60 relative">
-                <img src="IMG/Mango Saffron Pastry.jpg" 
-                     alt="Mango Saffron Pastry" 
-                     class="object-cover w-full h-full card-image">
-                <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                        onclick="toggleWishlist(this, 'mango-saffron-pastry', 'Mango Saffron Pastry', '₹499', 'Light sponge with mango cream and saffron glaze', 'https://images.unsplash.com/photo-1621300748246-2b3b4d2e5f6b?w=400&h=300&fit=crop')">
-                    <i class="fas fa-heart text-xl"></i>
-                </button>
+        <!-- Pastries Section -->
+        <div>
+            <div class="text-center">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Trending Pastries of 2025</h2>
+                <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mt-2 sm:mt-3 px-4">Indulge in the finest bakery-style pastries with an Indian twist</p>
             </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold">Mango Saffron Pastry</h3>
-                <p class="mt-2 text-gray-600">Light sponge with mango cream and saffron glaze</p>
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="text-xl font-bold text-primary">₹499</span>
-                    <a href="product-details.html?id=mango-saffron-pastry" 
- class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">                        <span>View Details</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+            
+            <div class="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 mt-6 sm:mt-8 md:mt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <!-- Pastry 1 -->
+                <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="IMG/Mango Saffron Pastry.jpg" alt="Mango Saffron Pastry" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'mango-saffron-pastry', 'Mango Saffron Pastry', '₹499', 'Light sponge', 'IMG/Mango Saffron Pastry.jpg')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Mango Saffron Pastry</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Mango cream and saffron glaze</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹499</span>
+                            <a href="product-details.html?id=mango-saffron-pastry" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastry 2 -->
+                <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="IMG/Masala Chai Puff.jpg" alt="Masala Chai Puff" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'masala-chai-puff', 'Masala Chai Puff', '₹299', 'Flaky puff pastry', 'IMG/Masala Chai Puff.jpg')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Masala Chai Puff</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Flaky puff pastry with spiced chai filling</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹299</span>
+                            <a href="product-details.html?id=masala-chai-puff" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastry 3 -->
+                <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="IMG/Rose Gulab Jamun Tart.jpg" alt="Rose Gulab Jamun Tart" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'rose-gulab-jamun-tart', 'Rose Gulab Jamun Cheesecake', '₹550', 'Gulab jamun tart', 'IMG/Rose Gulab Jamun Tart.jpg')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Rose Gulab Jamun Cheesecake</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Gulab jamun in buttery tart with rose glaze</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹550</span>
+                            <a href="product-details.html?id=rose-gulab-jamun-tart" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastry 4 -->
+                <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
+                    <div class="overflow-hidden h-48 sm:h-52 md:h-60 relative">
+                        <img src="IMG/Pista Kulfi Pastry.jpg" alt="Pista Kulfi Pastry" class="object-cover w-full h-full">
+                        <button class="absolute top-2 sm:top-3 right-2 sm:right-3 text-gray-400 hover:text-red-500" onclick="toggleWishlist(this, 'pista-kulfi-pastry', 'Pistachio Cheesecake Cups', '₹450', 'Creamy pistachio', 'IMG/Pista Kulfi Pastry.jpg')">
+                            <i class="fas fa-heart text-lg sm:text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 sm:p-4 md:p-5">
+                        <h3 class="text-base sm:text-lg font-semibold">Pistachio Cheesecake Cups</h3>
+                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600">Creamy pistachio kulfi layered in soft pastry</p>
+                        <div class="mt-3 sm:mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-xl font-bold text-primary">₹450</span>
+                            <a href="product-details.html?id=pista-kulfi-pastry" class="bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2">
+                                <span>View</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Pastry 2 -->
-        <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-            <div class="overflow-hidden h-60 relative">
-                <img src="IMG/Masala Chai Puff.jpg" 
-                     alt="Masala Chai Puff" 
-                     class="object-cover w-full h-full card-image">
-                <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                        onclick="toggleWishlist(this, 'masala-chai-puff', 'Masala Chai Puff', '₹299', 'Flaky puff pastry with spiced chai filling', 'https://images.unsplash.com/photo-1603533792097-3a13950ebb47?w=400&h=300&fit=crop')">
-                    <i class="fas fa-heart text-xl"></i>
-                </button>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold">Masala Chai Puff</h3>
-                <p class="mt-2 text-gray-600">Flaky puff pastry with spiced chai filling</p>
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="text-xl font-bold text-primary">₹299</span>
-                    <a href="product-details.html?id=masala-chai-puff" 
- class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">                        <span>View Details</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pastry 3 -->
-        <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-            <div class="overflow-hidden h-60 relative">
-                <img src="IMG/Rose Gulab Jamun Tart.jpg" 
-                     alt="Rose Gulab Jamun Tart" 
-                     class="object-cover w-full h-full card-image">
-                <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                        onclick="toggleWishlist(this, 'rose-gulab-jamun-tart', 'Rose Gulab Jamun Tart', '₹550', 'Gulab jamun in a buttery tart with rose glaze', 'https://images.unsplash.com/photo-1599782934733-9e77306d37b3?w=400&h=300&fit=crop')">
-                    <i class="fas fa-heart text-xl"></i>
-                </button>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold">Rose Gulab Jamun Cheesecake</h3>
-                <p class="mt-2 text-gray-600">Gulab jamun in a buttery tart with rose glaze</p>
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="text-xl font-bold text-primary">₹550</span>
-                    <a href="product-details.html?id=rose-gulab-jamun-tart" 
- class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">                        <span>View Details</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pastry 4 -->
-        <div class="overflow-hidden transition-all duration-300 bg-white rounded-xl shadow-card hover:shadow-xl relative">
-            <div class="overflow-hidden h-60 relative">
-                <img src="IMG/Pista Kulfi Pastry.jpg" 
-                     alt="Pista Kulfi Pastry" 
-                     class="object-cover w-full h-full card-image">
-                <button class="absolute top-3 right-3 wishlist-icon text-gray-400 hover:text-red-500" 
-                        onclick="toggleWishlist(this, 'pista-kulfi-pastry', 'Pista Kulfi Pastry', '₹450', 'Creamy pistachio kulfi layered in soft pastry', 'https://images.unsplash.com/photo-1625840704098-a33c55c61bca?w=400&h=300&fit=crop')">
-                    <i class="fas fa-heart text-xl"></i>
-                </button>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold"> Pistachio Cheesecake Cups</h3>
-                <p class="mt-2 text-gray-600">Creamy pistachio kulfi layered in soft pastry</p>
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="text-xl font-bold text-primary">₹450</span>
-                    <a href="product-details.html?id=pista-kulfi-pastry" 
- class="view-details-btn bg-primary text-white px-4 py-2 rounded-lg  flex items-center space-x-2">                        <span>View Details</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
     </div>
 </section>
 
-<script>
-    // Initialize wishlist
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    let wishlistDetails = JSON.parse(localStorage.getItem('wishlistDetails')) || [];
-
-    // Toggle wishlist
-    function toggleWishlist(element, id, name, price, description, image) {
-        const isInWishlist = wishlist.includes(id);
-        if (isInWishlist) {
-            wishlist = wishlist.filter(item => item !== id);
-            wishlistDetails = wishlistDetails.filter(item => item.id !== id);
-            element.classList.remove('active');
-            element.style.color = '#9ca3af';
-            showNotification('Removed from wishlist');
-        } else {
-            wishlist.push(id);
-            wishlistDetails.push({ id, name, price, description, image });
-            element.classList.add('active');
-            element.style.color = '#ef4444';
-            showNotification('Added to wishlist');
-        }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        localStorage.setItem('wishlistDetails', JSON.stringify(wishlistDetails));
-        updateWishlistCount();
-    }
-
-    // Update wishlist count
-    function updateWishlistCount() {
-        const wishlistCount = document.getElementById('wishlist-count');
-        if (wishlistCount) {
-            wishlistCount.textContent = wishlist.length;
-            wishlistCount.classList.toggle('hidden', wishlist.length === 0);
-        }
-    }
-
-    // Show notification
-    function showNotification(message) {
-        const notification = document.getElementById('notification');
-        const notificationText = document.getElementById('notification-text');
-        if (notification && notificationText) {
-            notificationText.textContent = message;
-            notification.classList.remove('hidden');
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-                notification.classList.add('hidden');
-            }, 3000);
-        }
-    }
-
-    // Initialize counters when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        updateWishlistCount();
-    });
-</script>
-
-<!-- Updated Banner Section -->
-<section class="relative w-full h-64 md:h-76 lg:h-[500px] overflow-hidden">
-    <!-- Background Image -->
-    <img 
-        src="/IMG/MAIN BANNER 6.jpg" 
-        alt="Banner Image"
-        class="w-full h-full object-cover object-center"
-    >
-    
-    <!-- Optional Overlay -->
+<!-- Main Banner -->
+<section class="relative w-full h-48 sm:h-64 md:h-80 lg:h-[500px] overflow-hidden">
+    <img src="/IMG/MAIN BANNER 6.jpg" alt="Banner" class="w-full h-full object-cover object-center">
     <div class="absolute inset-0 bg-black/30"></div>
-    
-    <!-- Content (optional) -->
     <div class="absolute inset-0 flex items-center justify-center text-center px-4">
-        <h1 class="text-xl sm:text-2xl md:text-4xl font-bold text-white drop-shadow-lg px-4">
-           "Freshly Baked Happiness – Just a Click Away!"
+        <h1 class="text-base sm:text-xl md:text-2xl lg:text-4xl font-bold text-white drop-shadow-lg">
+            "Freshly Baked Happiness – Just a Click Away!"
         </h1>
     </div>
 </section>
 
-
 <!-- Category Cards Section -->
-<section class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-    
-    <!-- Cakes Card -->
-    <a href="cakes1.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
-        <img src="/IMG/cakes.jpg" alt="Assortment of delicious cakes including chocolate, vanilla and fruit cakes" 
-             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6 w-full sm:w-1/2 flex flex-col justify-center">
-        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Cakes</h3>
-        <p class="text-gray-600 mb-3">Celebrate every moment with our freshly baked cakes, crafted to perfection for every occasion.</p>
-        <ul class="text-gray-700 space-y-1 text-sm">
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Chocolate Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Vanilla Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Fruit Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Red Velvet
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Layer Cakes
-          </li>
-        </ul>
-      </div>
-    </a>
+<section class="bg-gray-100 py-6 sm:py-8 md:py-12 px-2 sm:px-4 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <!-- Cakes Card -->
+        <a href="/CAKES/allcakes.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-auto sm:h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
+                <img src="/IMG/cakes.jpg" alt="Cakes" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-4 sm:p-5 md:p-6 w-full sm:w-1/2 flex flex-col justify-center">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Cakes</h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-3">Celebrate every moment with our freshly baked cakes, crafted to perfection</p>
+                <ul class="text-gray-700 space-y-1 text-xs sm:text-sm">
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Chocolate Cakes</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Vanilla Cakes</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Fruit Cakes</li>
+                </ul>
+            </div>
+        </a>
 
-    <!-- Pastries Card -->
-    <a href="pastries.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
-        <img src="/IMG/pastries.jpg" alt="Variety of pastries including chocolate, fruit tarts and cream rolls" 
-             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6 w-full sm:w-1/2 flex flex-col justify-center">
-        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Pastries</h3>
-        <p class="text-gray-600 mb-3">Delicate, delightful, and delicious — our pastries are the perfect bite-sized treats to satisfy your cravings.</p>
-        <ul class="text-gray-700 space-y-1 text-sm">
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Chocolate Pastries
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Strawberry Swirls
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Fruit Tarts
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Cream Rolls
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Mini Pastries
-          </li>
-        </ul>
-      </div>
-    </a>
+        <!-- Pastries Card -->
+        <a href="/PASTRIES/chocopastry.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-auto sm:h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
+                <img src="/IMG/pastries.jpg" alt="Pastries" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-4 sm:p-5 md:p-6 w-full sm:w-1/2 flex flex-col justify-center">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Pastries</h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-3">Delicate, delightful pastries — perfect bite-sized treats</p>
+                <ul class="text-gray-700 space-y-1 text-xs sm:text-sm">
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Chocolate Pastries</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Strawberry Swirls</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Fruit Tarts</li>
+                </ul>
+            </div>
+        </a>
 
-    <!-- Custom Card -->
-    <a href="custom.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
-        <img src="/IMG/custom.jpg" alt="Custom designed cakes including photo cakes and themed decorations" 
-             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6 w-full sm:w-1/2 flex flex-col justify-center">
-        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Custom Cakes</h3>
-        <p class="text-gray-600 mb-3">Make it personal with custom cakes tailored to your theme, design, and sweet message.</p>
-        <ul class="text-gray-700 space-y-1 text-sm">
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Photo Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Theme Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Cartoon Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Fondant Art
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Message Cakes
-          </li>
-        </ul>
-      </div>
-    </a>
+        <!-- Custom Card -->
+        <a href="/CUSTOM/custom.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-auto sm:h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
+                <img src="/IMG/custom.jpg" alt="Custom Cakes" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-4 sm:p-5 md:p-6 w-full sm:w-1/2 flex flex-col justify-center">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Custom Cakes</h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-3">Make it personal with custom cakes tailored to your theme</p>
+                <ul class="text-gray-700 space-y-1 text-xs sm:text-sm">
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Photo Cakes</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Theme Cakes</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Cartoon Cakes</li>
+                </ul>
+            </div>
+        </a>
 
-    <!-- Trending Card -->
-    <a href="trending.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
-        <img src="/IMG/trend.jpg" alt="Trending cake designs including tall cakes and minimalist styles" 
-             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6 w-full sm:w-1/2 flex flex-col justify-center">
-        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Trending Now</h3>
-        <p class="text-gray-600 mb-3">Discover the latest cake trends that are taking celebrations by storm with bold flavors and stylish looks.</p>
-        <ul class="text-gray-700 space-y-1 text-sm">
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Tall Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Minimalist Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Pinata Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Pull Me Up Cakes
-          </li>
-          <li class="flex items-center">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
-            Viral Designs
-          </li>
-        </ul>
-      </div>
-    </a>
-
-  </div>
+        <!-- Trending Card -->
+        <a href="/SIDEBY/sideby.html" class="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row h-auto sm:h-80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div class="w-full sm:w-1/2 h-48 sm:h-full overflow-hidden">
+                <img src="/IMG/premium.jpg" alt="Trending" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-4 sm:p-5 md:p-6 w-full sm:w-1/2 flex flex-col justify-center">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-primary">Premium Cakes</h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-3"></p>
+                <ul class="text-gray-700 space-y-1 text-xs sm:text-sm">
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Paan Gulkand Cake</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Red Velvet Cake</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>Gulab Jamun Cake</li>
+                </ul>
+            </div>
+        </a>
+    </div>
 </section>
 
-
-<!-- TESTIMONIAL -->
-<style>
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-    .floating {
-        animation: float 6s ease-in-out infinite;
-    }
-    .delay-1 { animation-delay: 0.5s; }
-    .delay-2 { animation-delay: 1s; }
-    .delay-3 { animation-delay: 1.5s; }
-    .delay-4 { animation-delay: 2s; }
-</style>
-
-<section class="relative py-16 overflow-hidden bg-light">
-    <!-- Animated Background Elements -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <!-- Floating cakes and pastries -->
+<!-- Testimonials -->
+<section class="relative py-8 sm:py-12 md:py-6 overflow-hidden bg-light">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <div class="absolute top-1/4 left-10 floating delay-1">
-            <div class="w-16 h-16 rounded-full" style="background-color:#f4c2ab;"></div>
-            <div class="w-16 h-8 rounded-b-full -mt-4" style="background-color:#f6d1c0;"></div>
+            <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-full" style="background-color:#f4c2ab;"></div>
+            <div class="w-12 sm:w-16 h-6 sm:h-8 rounded-b-full -mt-3 sm:-mt-4" style="background-color:#f6d1c0;"></div>
         </div>
-        
         <div class="absolute top-1/3 right-20 floating delay-2">
-            <div class="w-12 h-12 bg-white rounded-full"></div>
-            <div class="w-12 h-6 rounded-b-full -mt-3" style="background-color:#f9e1da;"></div>
-            <div class="w-3 h-3 rounded-full absolute top-2 left-3" style="background-color:#f6d1c0;"></div>
-            <div class="w-3 h-3 rounded-full absolute top-2 right-3" style="background-color:#f6d1c0;"></div>
-        </div>
-        
-        <div class="absolute bottom-1/4 left-1/4 floating delay-3">
-            <div class="w-14 h-8 rounded-t-full" style="background-color:#f4c2ab;"></div>
-            <div class="w-14 h-14 rounded-b-full -mt-2" style="background-color:#f9e1da;"></div>
-        </div>
-        
-        <div class="absolute top-1/2 right-1/3 floating delay-4">
-            <div class="w-10 h-16 rounded-t-full" style="background-color:#f4c2ab;"></div>
-            <div class="w-10 h-10 rounded-b-full -mt-2" style="background-color:#f9e1da;"></div>
+            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-white rounded-full"></div>
+            <div class="w-10 sm:w-12 h-5 sm:h-6 rounded-b-full -mt-2 sm:-mt-3" style="background-color:#f9e1da;"></div>
         </div>
     </div>
     
-    <!-- Testimonial Content -->
     <div class="container mx-auto px-4 relative z-10">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-2" style="color:#954C2E;">Sweet Words From Our Customers</h2>
-        <p class="text-center mb-12" style="color:#4E1F00;">What people say about our delicious treats</p>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-2" style="color:#954C2E;">Sweet Words From Our Customers</h2>
+        <p class="text-center mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base" style="color:#4E1F00;">What people say about our delicious treats</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             <!-- Testimonial 1 -->
-            <div class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" style="background-color:white;">
+            <div class="p-4 sm:p-5 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white">
                 <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold" style="background-color:#f9e1da; color:#954C2E;">JD</div>
-                    <div class="ml-4">
-                        <h4 class="font-semibold" style="color:#333333;">Jane Doe</h4>
-                        <p class="text-sm" style="color:#4E1F00;">Pastry Lover</p>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base" style="background-color:#f9e1da; color:#954C2E;">JD</div>
+                    <div class="ml-3 sm:ml-4">
+                        <h4 class="font-semibold text-sm sm:text-base" style="color:#333333;">Jane Doe</h4>
+                        <p class="text-xs sm:text-sm" style="color:#4E1F00;">Pastry Lover</p>
                     </div>
                 </div>
-                <p class="mb-4" style="color:#333333;">"The chocolate croissants are to die for! Flaky, buttery, and just the right amount of chocolate. I order them every weekend!"</p>
-                <div class="flex" style="color:#954C2E;">★ ★ ★ ★ ★</div>
+                <p class="mb-3 sm:mb-4 text-xs sm:text-sm" style="color:#333333;">"The chocolate croissants are to die for! Flaky, buttery, and just the right amount of chocolate."</p>
+                <div class="flex text-sm sm:text-base" style="color:#954C2E;">★ ★ ★ ★ ★</div>
             </div>
             
             <!-- Testimonial 2 -->
-            <div class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" style="background-color:white;">
+            <div class="p-4 sm:p-5 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white">
                 <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold" style="background-color:#f9e1da; color:#954C2E;">JS</div>
-                    <div class="ml-4">
-                        <h4 class="font-semibold" style="color:#333333;">John Smith</h4>
-                        <p class="text-sm" style="color:#4E1F00;">Cake Enthusiast</p>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base" style="background-color:#f9e1da; color:#954C2E;">JS</div>
+                    <div class="ml-3 sm:ml-4">
+                        <h4 class="font-semibold text-sm sm:text-base" style="color:#333333;">John Smith</h4>
+                        <p class="text-xs sm:text-sm" style="color:#4E1F00;">Cake Enthusiast</p>
                     </div>
                 </div>
-                <p class="mb-4" style="color:#333333;">"Ordered a birthday cake for my wife and it was perfect! The decoration was beautiful and it tasted even better than it looked."</p>
-                <div class="flex" style="color:#954C2E;">★ ★ ★ ★ ★</div>
+                <p class="mb-3 sm:mb-4 text-xs sm:text-sm" style="color:#333333;">"Ordered a birthday cake for my wife and it was perfect! Beautiful decoration and amazing taste."</p>
+                <div class="flex text-sm sm:text-base" style="color:#954C2E;">★ ★ ★ ★ ★</div>
             </div>
             
             <!-- Testimonial 3 -->
-            <div class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" style="background-color:white;">
+            <div class="p-4 sm:p-5 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white">
                 <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold" style="background-color:#f9e1da; color:#954C2E;">AM</div>
-                    <div class="ml-4">
-                        <h4 class="font-semibold" style="color:#333333;">Alice Miller</h4>
-                        <p class="text-sm" style="color:#4E1F00;">Regular Customer</p>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base" style="background-color:#f9e1da; color:#954C2E;">AM</div>
+                    <div class="ml-3 sm:ml-4">
+                        <h4 class="font-semibold text-sm sm:text-base" style="color:#333333;">Alice Miller</h4>
+                        <p class="text-xs sm:text-sm" style="color:#4E1F00;">Regular Customer</p>
                     </div>
                 </div>
-                <p class="mb-4" style="color:#333333;">"I've tried almost everything in their menu and never been disappointed. The macarons are my absolute favorite!"</p>
-                <div class="flex" style="color:#954C2E;">★ ★ ★ ★ ★</div>
+                <p class="mb-3 sm:mb-4 text-xs sm:text-sm" style="color:#333333;">"I've tried almost everything and never been disappointed. The macarons are my absolute favorite!"</p>
+                <div class="flex text-sm sm:text-base" style="color:#954C2E;">★ ★ ★ ★ ★</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Updated Banner Section -->
-<section class="relative w-full h-64 md:h-96 lg:h-[300px] overflow-hidden">
-    <!-- Background Image -->
-    <img 
-        src="https://i.pinimg.com/1200x/d0/c7/88/d0c78852742fd66d89181eebc4e15ca4.jpg" 
-        alt="Banner Image"
-        class="w-full h-full object-cover object-center"
-    >
-    
-    <!-- Optional Overlay -->
+<!-- Bottom Banner -->
+<section class="relative w-full h-48 sm:h-64 md:h-80 lg:h-[300px] overflow-hidden">
+    <img src="https://i.pinimg.com/1200x/d0/c7/88/d0c78852742fd66d89181eebc4e15ca4.jpg" alt="Banner" class="w-full h-full object-cover object-center">
     <div class="absolute inset-0 bg-black/30"></div>
-    
-    <!-- Content (optional) -->
     <div class="absolute inset-0 flex items-center justify-center text-center px-4">
-        <h1 class="text-xl sm:text-2xl md:text-4xl font-bold text-white drop-shadow-lg px-4">
-           "Freshly Baked Happiness – Just a Click Away!"
+        <h1 class="text-base sm:text-xl md:text-2xl lg:text-4xl font-bold text-white drop-shadow-lg">
+            "Freshly Baked Happiness – Just a Click Away!"
         </h1>
     </div>
 </section>
 
-<!-- Updated Footer Section -->
-<footer class="bg-white text-light py-8 sm:py-12 px-4">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-            <!-- About Us -->
-            <div class="col-span-2 md:col-span-1">
-                <h3 class="text-primary font-bold text-lg sm:text-xl mb-3 sm:mb-4">The Home Bakery</h3>
-                <p class="text-black text-sm sm:text-base"> We bake happiness into every product.</p>
-            </div>
+<!-- Footer -->
+<footer class="bg-white text-light py-14 sm:py-12 md:py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center sm:text-left">
+      
+      <!-- About Us -->
+      <div class="col-span-1">
+        <h3 class="text-primary font-bold text-base sm:text-lg md:text-xl mb-2 sm:mb-3 md:mb-4">
+          The Home Bakery
+        </h3>
+        <p class="text-black text-xs sm:text-sm md:text-base">
+          We bake happiness into every product.
+        </p>
+      </div>
 
-            <!-- Quick Links -->
-            <div>
-                <h3 class="text-primary font-bold text-lg sm:text-xl mb-3 sm:mb-4">Quick Links</h3>
-                <ul class="space-y-1 sm:space-y-2">
-                    <li><a href="#" class="text-black text-sm sm:text-base hover:text-primary transition-colors">Home</a></li>
-                    <li><a href="#" class="text-black text-sm sm:text-base hover:text-primary transition-colors">Our Menu</a></li>
-                    <li><a href="#" class="text-black text-sm sm:text-base hover:text-primary transition-colors">Special Offers</a></li>
-                    <li><a href="#" class="text-black text-sm sm:text-base hover:text-primary transition-colors">Track Order</a></li>
-                    <li><a href="#" class="text-black text-sm sm:text-base hover:text-primary transition-colors">Contact Us</a></li>
-                </ul>
-            </div>
+      <!-- Quick Links (hidden on small screens) -->
+      <div class="hidden sm:block">
+        <h3 class="text-primary font-bold text-base sm:text-lg md:text-xl mb-2 sm:mb-3 md:mb-4">
+          Quick Links
+        </h3>
+        <ul class="space-y-1 sm:space-y-2">
+          <li><a href="/index.html" class="text-black text-xs sm:text-sm md:text-base hover:text-primary transition-colors">Home</a></li>
+          <li><a href="/CAKES/allcakes.html" class="text-black text-xs sm:text-sm md:text-base hover:text-primary transition-colors">Cakes</a></li>
+          <li><a href="/PASTRIES/chocopastry.html" class="text-black text-xs sm:text-sm md:text-base hover:text-primary transition-colors">Pastries</a></li>
+          <li><a href="/CUSTOM/custom.html" class="text-black text-xs sm:text-sm md:text-base hover:text-primary transition-colors">Customise</a></li>
+          <li><a href="/SIDEBY/sideby.html" class="text-black text-xs sm:text-sm md:text-base hover:text-primary transition-colors">Special Offers</a></li>
+        </ul>
+      </div>
 
-            <!-- Contact Info -->
-            <div class="col-span-2 md:col-span-1">
-                <h3 class="text-primary font-bold text-lg sm:text-xl mb-3 sm:mb-4">Contact Us</h3>
-                <ul class="space-y-1 sm:space-y-2 text-black">
-                    <li class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-2 sm:mr-3 text-primary text-sm sm:text-base"></i>
-                        <span class="text-sm sm:text-base">123 Bakery Street, Pune</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-phone-alt mr-2 sm:mr-3 text-primary text-sm sm:text-base"></i>
-                        <span class="text-sm sm:text-base">+91 9876543210</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-envelope mr-2 sm:mr-3 text-primary text-sm sm:text-base"></i>
-                        <span class="text-sm sm:text-base">hello@artisanbakery.com</span>
-                    </li>
-                </ul>
-            </div>
+      <!-- Contact Info -->
+      <div class="col-span-1 sm:col-span-2 md:col-span-1">
+        <h3 class="text-primary font-bold text-base sm:text-lg md:text-xl mb-2 sm:mb-3 md:mb-4">
+          Contact Us
+        </h3>
+        <ul class="space-y-1 sm:space-y-2 text-black flex flex-col items-center sm:items-start">
+          <li class="flex items-start justify-center sm:justify-start">
+            <i class="fas fa-map-marker-alt mt-0.5 sm:mt-1 mr-2 sm:mr-3 text-primary text-xs sm:text-sm md:text-base"></i>
+            <span class="text-xs sm:text-sm md:text-base">G - 004, ALDEA ESPANOLA PHASE,<br> 6 & 7, opp. Orchid Hotel, Mahalunge, Pune Maharashtra 411045</span>
+          </li>
+          <li class="flex items-center justify-center sm:justify-start">
+            <i class="fas fa-phone-alt mr-2 sm:mr-3 text-primary text-xs sm:text-sm md:text-base"></i>
+            <span class="text-xs sm:text-sm md:text-base">+91 95034 64162</span>
+          </li>
+          <li class="flex items-center justify-center sm:justify-start">
+            <i class="fas fa-envelope mr-2 sm:mr-3 text-primary text-xs sm:text-sm md:text-base"></i>
+            <span class="text-xs sm:text-sm md:text-base">hello@homebakery.com</span>
+          </li>
+        </ul>
+      </div>
 
-            <!-- Social Media -->
-            <div class="col-span-2 md:col-span-1">
-                <h3 class="text-primary font-bold text-lg sm:text-xl mb-3 sm:mb-4 text-center md:text-left">Follow Us</h3>
-                <div class="flex justify-center md:justify-start space-x-3 sm:space-x-4">
-                    <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
-                        <i class="fab fa-facebook-f text-sm sm:text-base"></i>
-                    </a>
-                    <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
-                        <i class="fab fa-instagram text-sm sm:text-base"></i>
-                    </a>
-                    <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
-                        <i class="fab fa-twitter text-sm sm:text-base"></i>
-                    </a>
-                    <a href="#" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
-                        <i class="fab fa-pinterest-p text-sm sm:text-base"></i>
-                    </a>
-                </div>
-            </div>
+      <!-- Social Media -->
+      <div class="col-span-1">
+        <h3 class="text-primary font-bold text-base sm:text-lg md:text-xl mb-2 sm:mb-3 md:mb-4 text-center md:text-left">
+          Follow Us
+        </h3>
+        <div class="flex justify-center md:justify-start space-x-2 sm:space-x-3 md:space-x-4">
+          <a href="#" class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors">
+            <i class="fab fa-facebook-f text-xs sm:text-sm md:text-base"></i>
+          </a>
+          <a href="#" class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors">
+            <i class="fab fa-instagram text-xs sm:text-sm md:text-base"></i>
+          </a>
+          <a href="#" class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors">
+            <i class="fab fa-twitter text-xs sm:text-sm md:text-base"></i>
+          </a>
+          <a href="#" class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors">
+            <i class="fab fa-pinterest-p text-xs sm:text-sm md:text-base"></i>
+          </a>
         </div>
-
-        <!-- Copyright -->
-        <div class="border-t border-gray-300 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center text-black text-xs sm:text-sm">
-            <p>© 2025 The Home Bakery . All rights reserved.</p>
-        </div>
+      </div>
     </div>
+
+ <!-- Bottom -->
+<div class="border-t border-gray-300 py-0.5 text-center flex justify-center items-center text-black text-xs sm:text-sm mt-1">
+  <p class="m-0 leading-tight text-center">© 2025 The Home Bakery. All rights reserved.</p>
+</div>
 </footer>
 
- 
-<script>
-    // Load header content and initialize functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Load header HTML
-        fetch('Mainheader.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('header-container').innerHTML = html;
-                
-                // Initialize all header functionality
-                initializeHeader();
-            })
-            .catch(error => console.error('Error loading header:', error));
 
-        function initializeHeader() {
-            // ==================== DELIVERY LOCATION ====================
-            const puneDeliveryAreas = [
-                'Koregaon Park', 'Baner', 'Wakad', 'Hinjewadi', 'FC Road', 'Viman Nagar',
-                'Kothrud', 'Aundh', 'Shivaji Nagar', 'Camp', 'Deccan', 'Karve Nagar',
-                'Pune Station', 'Swargate', 'Katraj', 'Kondhwa', 'Bibwewadi', 'Fursungi',
-                'Magarpatta', 'Hadapsar', 'Kharadi', 'Wagholi', 'Chinchwad', 'Pimpri',
-                'Warje', 'Bavdhan', 'Pashan', 'Sus', 'Balewadi', 'Nigdi', 'Akurdi',
-                'Ravet', 'Tathawade', 'Vishrantwadi', 'Yerawada', 'Kalyani Nagar',
-                'Nagar Road', 'Dhanori', 'Lohegaon', 'Mundwa', 'Ghorpadi', 'Wanowrie',
-                'Fatima Nagar', 'Salisbury Park', 'Parvati', 'Dhankawadi', 'Balaji Nagar',
-                'Bhavani Peth', 'Budhwar Peth', 'Kasba Peth', 'Rasta Peth', 'Sadashiv Peth'
-            ];
+<script src="index.js"></script>
 
-            const punePincodes = [
-                '411001', '411002', '411003', '411004', '411005', '411006', '411007', '411008', 
-                '411009', '411010', '411011', '411012', '411013', '411014', '411015', '411016'
-            ];
-
-            // Get all elements
-            const modal = document.getElementById('deliveryModal');
-            const deliveryLocationBtn = document.getElementById('deliveryLocationBtn');
-            const mobileDeliveryBtn = document.getElementById('mobileDeliveryBtn');
-            const closeModal = document.getElementById('closeModal');
-            const locationInput = document.getElementById('locationInput');
-            const confirmLocationBtn = document.getElementById('confirmLocation');
-            const useCurrentLocationBtn = document.getElementById('useCurrentLocation');
-            const locationOptions = document.querySelectorAll('.location-option');
-            const selectedLocationSpan = document.getElementById('selectedLocation');
-            const mobileSelectedLocationSpan = document.getElementById('mobileSelectedLocation');
-            const locationError = document.getElementById('locationError');
-            const locationSuccess = document.getElementById('locationSuccess');
-
-            let selectedLocation = '';
-            let isValidLocation = false;
-
-            // Delivery location functions
-            function openModal() {
-                if (modal) modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModalFunc() {
-                if (modal) modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-
-            function validateLocation(location) {
-                const isAreaValid = puneDeliveryAreas.some(area => 
-                    area.toLowerCase().includes(location.toLowerCase())
-                );
-                const isPincodeValid = punePincodes.includes(location);
-                return isAreaValid || isPincodeValid;
-            }
-
-            function updateLocationUI(isValid, location = '') {
-                if (isValid) {
-                    if (locationError) locationError.classList.add('hidden');
-                    if (locationSuccess) {
-                        locationSuccess.classList.remove('hidden');
-                        locationSuccess.textContent = `Great! We deliver to ${location}.`;
-                    }
-                    if (confirmLocationBtn) confirmLocationBtn.disabled = false;
-                    isValidLocation = true;
-                    selectedLocation = location;
-                } else {
-                    if (locationError) {
-                        locationError.classList.remove('hidden');
-                        locationError.textContent = location ? "We don't deliver to this location yet." : "Please enter a valid location.";
-                    }
-                    if (locationSuccess) locationSuccess.classList.add('hidden');
-                    if (confirmLocationBtn) confirmLocationBtn.disabled = true;
-                    isValidLocation = false;
-                }
-            }
-
-            function saveLocation(location) {
-                localStorage.setItem('deliveryLocation', location);
-            }
-
-            // Event listeners
-            if (deliveryLocationBtn) {
-                deliveryLocationBtn.addEventListener('click', openModal);
-            }
-
-            if (mobileDeliveryBtn) {
-                mobileDeliveryBtn.addEventListener('click', openModal);
-            }
-
-            if (closeModal) {
-                closeModal.addEventListener('click', closeModalFunc);
-            }
-
-            if (locationInput) {
-                locationInput.addEventListener('input', function(e) {
-                    const location = e.target.value.trim();
-                    if (location.length > 2) {
-                        updateLocationUI(validateLocation(location), location);
-                    } else {
-                        updateLocationUI(false);
-                    }
-                });
-            }
-
-            if (locationOptions) {
-                locationOptions.forEach(option => {
-                    option.addEventListener('click', function() {
-                        const location = this.textContent.trim().replace(/^.*?\s/, '').trim();
-                        if (locationInput) locationInput.value = location;
-                        updateLocationUI(true, location);
-                    });
-                });
-            }
-
-            if (confirmLocationBtn) {
-                confirmLocationBtn.addEventListener('click', function() {
-                    if (isValidLocation && selectedLocation) {
-                        if (selectedLocationSpan) selectedLocationSpan.textContent = selectedLocation;
-                        if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = selectedLocation;
-                        saveLocation(selectedLocation);
-                        closeModalFunc();
-                    }
-                });
-            }
-
-            if (useCurrentLocationBtn) {
-                useCurrentLocationBtn.addEventListener('click', function() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(
-                            function() {
-                                const demoLocation = "Koregaon Park";
-                                if (locationInput) locationInput.value = demoLocation;
-                                updateLocationUI(true, demoLocation);
-                            },
-                            function(error) {
-                                if (locationError) {
-                                    locationError.classList.remove('hidden');
-                                    locationError.textContent = "Unable to get your location. Please enter manually.";
-                                }
-                                console.error("Geolocation error:", error);
-                            }
-                        );
-                    } else if (locationError) {
-                        locationError.classList.remove('hidden');
-                        locationError.textContent = "Geolocation is not supported by your browser.";
-                    }
-                });
-            }
-
-            // ==================== MOBILE MENU ====================
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileMenu = document.getElementById('mobileMenu');
-            
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-
-            // ==================== SEARCH FUNCTIONALITY ====================
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchButton');
-            const suggestions = document.getElementById('suggestions');
-
-            if (searchInput && suggestions) {
-                const searchData = [
-                    // Cake Types
-                    'Chocolate Cake', 'Vanilla Cake', 'Cheesecake', 'Red Velvet Cake', 'Fruit Cake',
-                    'Mango Cake', 'Butterscotch Cake', 'Black Forest Cake', 'Pineapple Cake',
-                    'Strawberry Cake', 'Photo Cake', 'Bento Cake', 'Heart Shaped Cake',
-                    'Pull Me Up Cake', 'Pinata Cake', 'Bomb Cake', 'Fondant Cake', 'Multi Tier Cake',
-                    
-                    // Cake Occasions
-                    'Birthday Cake', 'Anniversary Cake', 'Wedding Cake', 'Graduation Cake',
-                    'Baby Shower Cake', 'Engagement Cake', 'Retirement Cake', 'Farewell Cake',
-                    
-                    // Kids Cakes
-                    'Barbie Cake', 'Car Theme Cake', 'Cartoon Cake', 'Spiderman Cake',
-                    'Superhero Cake', 'Cricket Cake',
-                    
-                    // Pastry Types
-                    'Cupcake', 'Muffin', 'Donut', 'Macaron', 'Croissant', 'Danish Pastry',
-                    
-                    // Pastry Flavors
-                    'Chocolate Pastry', 'Vanilla Pastry', 'Strawberry Pastry', 'Blueberry Pastry',
-                    'Lemon Pastry', 'Matcha Pastry',
-                    
-                    // Specialty Pastries
-                    'Gluten-Free Pastry', 'Sugar-Free Pastry', 'Vegan Pastry', 'Keto-Friendly Pastry',
-                    'Seasonal Special Pastry', 'Mini Pastry Box', 'Eggless Cake',
-                    
-                 
-                ];
-
-                // Show search suggestions
-                function showSuggestions(matches) {
-                    suggestions.innerHTML = '';
-                    
-                    if (matches.length === 0) {
-                        suggestions.classList.add('hidden');
-                        return;
-                    }
-                    
-                    matches.forEach(match => {
-                        const li = document.createElement('li');
-                        li.className = 'px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors text-sm';
-                        li.textContent = match;
-                        
-                        li.addEventListener('click', function() {
-                            searchInput.value = match;
-                            suggestions.classList.add('hidden');
-                            performSearch(match);
-                        });
-                        
-                        suggestions.appendChild(li);
-                    });
-                    
-                    suggestions.classList.remove('hidden');
-                }
-
-                // Get matching suggestions
-                function getSuggestions(input) {
-                    if (input.length < 2) return [];
-                    
-                    const inputLower = input.toLowerCase();
-                    return searchData.filter(item => 
-                        item.toLowerCase().includes(inputLower)
-                    ).slice(0, 8); // Limit to 8 suggestions
-                }
-
-                // Perform search (redirect to search page)
-                function performSearch(query) {
-                    // In a real implementation, this would redirect to a search results page
-                    console.log('Searching for:', query);
-                    // window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
-                }
-
-                // Event listeners for search
-                searchInput.addEventListener('input', function(e) {
-                    const input = e.target.value.trim();
-                    const matches = getSuggestions(input);
-                    showSuggestions(matches);
-                });
-                
-                searchInput.addEventListener('focus', function() {
-                    if (searchInput.value.trim().length > 1) {
-                        const matches = getSuggestions(searchInput.value.trim());
-                        showSuggestions(matches);
-                    }
-                });
-                
-                searchInput.addEventListener('blur', function() {
-                    // Hide suggestions after a small delay to allow click events to register
-                    setTimeout(() => {
-                        suggestions.classList.add('hidden');
-                    }, 200);
-                });
-
-                searchButton.addEventListener('click', function() {
-                    const query = searchInput.value.trim();
-                    if (query) {
-                        performSearch(query);
-                    }
-                });
-
-                // Handle Enter key press
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        const query = searchInput.value.trim();
-                        if (query) {
-                            performSearch(query);
-                        }
-                    }
-                });
-
-                // Close suggestions when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!searchInput.contains(e.target)) {
-                        suggestions.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Load saved location
-            const savedLocation = localStorage.getItem('deliveryLocation');
-            if (savedLocation) {
-                if (selectedLocationSpan) selectedLocationSpan.textContent = savedLocation;
-                if (mobileSelectedLocationSpan) mobileSelectedLocationSpan.textContent = savedLocation;
-                selectedLocation = savedLocation;
-            }
-        }
-    });
-</script>                   
 </body>
-</html>
+</html> 
